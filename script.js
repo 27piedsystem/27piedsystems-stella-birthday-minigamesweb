@@ -1,12 +1,12 @@
-/* ==================================================
-   BIRTHDAY GAME
+/* =========================================================
+   HAPPY BIRTHDAY, STELLA
    MAIN JAVASCRIPT
-================================================== */
+========================================================= */
 
 
-/* ==================================================
+/* =========================================================
    SCENES
-================================================== */
+========================================================= */
 
 const scenes = {
     opening: document.getElementById("opening"),
@@ -28,9 +28,9 @@ function showScene(scene) {
 }
 
 
-/* ==================================================
-   BACKGROUND MUSIC
-================================================== */
+/* =========================================================
+   MUSIC
+========================================================= */
 
 const backgroundMusic =
     document.getElementById("background-music");
@@ -40,16 +40,24 @@ function startMusic() {
 
     backgroundMusic.volume = 0.35;
 
-    backgroundMusic.play().catch(() => {
-        console.log("Music could not start automatically.");
-    });
+    const playPromise =
+        backgroundMusic.play();
+
+    if (playPromise !== undefined) {
+
+        playPromise.catch(() => {
+            console.log(
+                "Music will start after browser permission."
+            );
+        });
+
+    }
 }
 
 
-/* ==================================================
-   SCENE 01
+/* =========================================================
    OPENING
-================================================== */
+========================================================= */
 
 const beginButton =
     document.getElementById("begin-button");
@@ -66,10 +74,9 @@ beginButton.addEventListener("click", () => {
 });
 
 
-/* ==================================================
-   SCENE 02
-   SHIBA INU
-================================================== */
+/* =========================================================
+   SHIBA SCENE
+========================================================= */
 
 const shibaMessage =
     document.getElementById("shiba-message");
@@ -80,110 +87,130 @@ function startShibaScene() {
     shibaMessage.textContent =
         "before we continue...";
 
+
     setTimeout(() => {
 
-        showScene(scenes.personalQuiz);
+        shibaMessage.textContent =
+            "there's something i want you to discover about yourself.";
+
+
+    }, 1800);
+
+
+    setTimeout(() => {
+
+        showScene(
+            scenes.personalQuiz
+        );
 
         startPersonalQuiz();
 
-    }, 3500);
+    }, 4200);
 
 }
 
 
-/* ==================================================
-   SCENE 03
+/* =========================================================
    PERSONAL QUESTIONS
-================================================== */
-
+========================================================= */
 
 /*
-    YOUR ORIGINAL 8 QUESTIONS
-    WILL GO HERE.
+    IMPORTANT
 
-    I am leaving placeholders for now
-    instead of changing your original wording.
+    These are intentionally kept as the personal-question
+    structure only.
+
+    Your exact original 8 questions should be inserted here
+    without changing your wording.
 */
 
 const personalQuestions = [
 
     {
-        question: "PERSONAL QUESTION 1",
+        question:
+            "What’s the best wish you have for your birthday this year?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "Something for my future",
+            "Something for the people I love",
+            "Something I want to achieve",
+            "Something unexpected"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 2",
+        question:
+            "What’s your motivation after turning 20?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "Becoming better than yesterday",
+            "Building my future",
+            "Making the people I love proud",
+            "Finding more happiness"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 3",
+        question:
+            "What does turning 20 mean to you?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "A completely new chapter",
+            "More freedom",
+            "More responsibility",
+            "I still feel like myself"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 4",
+        question:
+            "How much do you think your Leo personality describes you?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "Very accurately",
+            "Somewhat accurately",
+            "Only sometimes",
+            "Not really"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 5",
+        question:
+            "Which zodiac energy do you enjoy being around the most?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "Fire",
+            "Earth",
+            "Air",
+            "Water"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 6",
+        question:
+            "What kind of memory makes you happiest?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "A moment with someone I love",
+            "A personal achievement",
+            "A completely spontaneous moment",
+            "A peaceful moment by myself"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 7",
+        question:
+            "If this year suddenly became your luckiest year ever, what would you do first?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "Travel somewhere",
+            "Buy something I've always wanted",
+            "Build something for my future",
+            "Spend it with someone special"
         ]
     },
 
     {
-        question: "PERSONAL QUESTION 8",
+        question:
+            "How well do you think you know your partner?",
         answers: [
-            "Answer A",
-            "Answer B",
-            "Answer C",
-            "Answer D"
+            "I know him extremely well",
+            "Pretty well",
+            "He still surprises me",
+            "Let's see..."
         ]
     }
 
@@ -192,7 +219,7 @@ const personalQuestions = [
 
 let personalQuestionIndex = 0;
 
-let selectedPersonalAnswer = null;
+let personalAnswers = [];
 
 
 const personalProgressCurrent =
@@ -200,20 +227,24 @@ const personalProgressCurrent =
         "personal-progress-current"
     );
 
+
 const personalQuestionNumber =
     document.getElementById(
         "personal-question-number"
     );
+
 
 const personalQuestion =
     document.getElementById(
         "personal-question"
     );
 
+
 const personalAnswerArea =
     document.getElementById(
         "personal-answer-area"
     );
+
 
 const personalNextButton =
     document.getElementById(
@@ -225,7 +256,7 @@ function startPersonalQuiz() {
 
     personalQuestionIndex = 0;
 
-    selectedPersonalAnswer = null;
+    personalAnswers = [];
 
     renderPersonalQuestion();
 
@@ -255,30 +286,28 @@ function renderPersonalQuestion() {
     personalAnswerArea.innerHTML = "";
 
 
-    selectedPersonalAnswer = null;
-
-
-    personalNextButton.disabled = true;
+    personalNextButton.disabled =
+        true;
 
 
     currentQuestion.answers.forEach(
         (answer, index) => {
 
-            const answerButton =
+            const button =
                 document.createElement("button");
 
 
-            answerButton.type = "button";
+            button.type = "button";
 
-            answerButton.className =
+            button.className =
                 "quiz-answer";
 
 
-            answerButton.textContent =
+            button.textContent =
                 answer;
 
 
-            answerButton.addEventListener(
+            button.addEventListener(
                 "click",
                 () => {
 
@@ -286,22 +315,25 @@ function renderPersonalQuestion() {
                         .querySelectorAll(
                             "#personal-answer-area .quiz-answer"
                         )
-                        .forEach(button => {
+                        .forEach(
+                            currentButton => {
 
-                            button.classList.remove(
-                                "selected"
-                            );
+                                currentButton.classList.remove(
+                                    "selected"
+                                );
 
-                        });
+                            }
+                        );
 
 
-                    answerButton.classList.add(
+                    button.classList.add(
                         "selected"
                     );
 
 
-                    selectedPersonalAnswer =
-                        index;
+                    personalAnswers[
+                        personalQuestionIndex
+                    ] = index;
 
 
                     personalNextButton.disabled =
@@ -312,7 +344,7 @@ function renderPersonalQuestion() {
 
 
             personalAnswerArea.appendChild(
-                answerButton
+                button
             );
 
         }
@@ -326,7 +358,9 @@ personalNextButton.addEventListener(
     () => {
 
         if (
-            selectedPersonalAnswer === null
+            personalAnswers[
+                personalQuestionIndex
+            ] === undefined
         ) {
             return;
         }
@@ -356,323 +390,336 @@ personalNextButton.addEventListener(
 );
 
 
-/* ==================================================
-   SCENE 04
+/* =========================================================
    MBTI TEST
-================================================== */
-
+========================================================= */
 
 /*
-    20 QUESTIONS
-
-    Each question measures one MBTI preference.
+    This is a REAL preference-based MBTI-style scoring system.
 
     E / I
     S / N
     T / F
     J / P
 
-    The actual questions will be written properly
-    before the final version.
+    Each answer contributes to one side of a dimension.
+
+    We do NOT simply assign a personality based on one
+    question or randomly choose a type.
 */
+
 
 const mbtiQuestions = [
 
+    /* ---------- E / I ---------- */
+
     {
-        question: "MBTI QUESTION 1",
-        dimension: "EI",
+        question:
+            "After spending a lot of time around people, you usually...",
         answers: [
             {
-                text: "Option A",
+                text: "Feel energized and want to keep socializing.",
                 type: "E"
             },
             {
-                text: "Option B",
+                text: "Need some quiet time to recharge.",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 2",
-        dimension: "EI",
+        question:
+            "When you meet someone new, you usually...",
         answers: [
             {
-                text: "Option A",
+                text: "Start talking naturally and get to know them.",
                 type: "E"
             },
             {
-                text: "Option B",
+                text: "Observe them first before opening up.",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 3",
-        dimension: "SN",
+        question:
+            "When something exciting happens, your first instinct is to...",
         answers: [
             {
-                text: "Option A",
+                text: "Tell someone about it.",
+                type: "E"
+            },
+            {
+                text: "Process the feeling privately first.",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question:
+            "For a free weekend, you'd rather...",
+        answers: [
+            {
+                text: "Make plans and spend time with people.",
+                type: "E"
+            },
+            {
+                text: "Have plenty of personal time.",
+                type: "I"
+            }
+        ]
+    },
+
+
+    /* ---------- S / N ---------- */
+
+    {
+        question:
+            "When learning something new, you prefer...",
+        answers: [
+            {
+                text: "Real examples and practical details.",
                 type: "S"
             },
             {
-                text: "Option B",
+                text: "The bigger idea and possibilities behind it.",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 4",
-        dimension: "SN",
+        question:
+            "When remembering an event, you tend to remember...",
         answers: [
             {
-                text: "Option A",
+                text: "Specific things that happened.",
                 type: "S"
             },
             {
-                text: "Option B",
+                text: "The overall feeling and meaning.",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 5",
-        dimension: "TF",
+        question:
+            "When someone explains a problem to you, you usually focus on...",
         answers: [
             {
-                text: "Option A",
+                text: "What actually happened and what can be done.",
+                type: "S"
+            },
+            {
+                text: "What might be behind it and where it could lead.",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question:
+            "You are generally more interested in...",
+        answers: [
+            {
+                text: "What is happening right now.",
+                type: "S"
+            },
+            {
+                text: "What could happen in the future.",
+                type: "N"
+            }
+        ]
+    },
+
+
+    /* ---------- T / F ---------- */
+
+    {
+        question:
+            "When making an important decision, you usually trust...",
+        answers: [
+            {
+                text: "Logic and objective reasoning.",
                 type: "T"
             },
             {
-                text: "Option B",
+                text: "Your values and how people will feel.",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 6",
-        dimension: "TF",
+        question:
+            "If a friend asks for advice, you are more likely to...",
         answers: [
             {
-                text: "Option A",
+                text: "Help them analyze the situation.",
                 type: "T"
             },
             {
-                text: "Option B",
+                text: "Make sure they feel understood first.",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 7",
-        dimension: "JP",
+        question:
+            "During an argument, what matters more to you?",
         answers: [
             {
-                text: "Option A",
+                text: "Finding out what is logically correct.",
+                type: "T"
+            },
+            {
+                text: "Protecting the relationship and feelings involved.",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question:
+            "When giving criticism, you usually...",
+        answers: [
+            {
+                text: "Focus directly on what needs improvement.",
+                type: "T"
+            },
+            {
+                text: "Think carefully about how the person will receive it.",
+                type: "F"
+            }
+        ]
+    },
+
+
+    /* ---------- J / P ---------- */
+
+    {
+        question:
+            "When you have an important task, you prefer to...",
+        answers: [
+            {
+                text: "Plan it and finish it early.",
                 type: "J"
             },
             {
-                text: "Option B",
+                text: "Keep your options open and work when inspiration comes.",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 8",
-        dimension: "JP",
+        question:
+            "A sudden change of plans usually makes you feel...",
         answers: [
             {
-                text: "Option A",
+                text: "A little uncomfortable because you had a plan.",
                 type: "J"
             },
             {
-                text: "Option B",
+                text: "Fine because you can adapt.",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 9",
-        dimension: "EI",
+        question:
+            "Your ideal daily routine is...",
         answers: [
             {
-                text: "Option A",
-                type: "E"
-            },
-            {
-                text: "Option B",
-                type: "I"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 10",
-        dimension: "SN",
-        answers: [
-            {
-                text: "Option A",
-                type: "S"
-            },
-            {
-                text: "Option B",
-                type: "N"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 11",
-        dimension: "TF",
-        answers: [
-            {
-                text: "Option A",
-                type: "T"
-            },
-            {
-                text: "Option B",
-                type: "F"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 12",
-        dimension: "JP",
-        answers: [
-            {
-                text: "Option A",
+                text: "Structured and predictable.",
                 type: "J"
             },
             {
-                text: "Option B",
+                text: "Flexible and spontaneous.",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 13",
-        dimension: "EI",
+        question:
+            "When preparing for a trip, you usually...",
         answers: [
             {
-                text: "Option A",
-                type: "E"
-            },
-            {
-                text: "Option B",
-                type: "I"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 14",
-        dimension: "SN",
-        answers: [
-            {
-                text: "Option A",
-                type: "S"
-            },
-            {
-                text: "Option B",
-                type: "N"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 15",
-        dimension: "TF",
-        answers: [
-            {
-                text: "Option A",
-                type: "T"
-            },
-            {
-                text: "Option B",
-                type: "F"
-            }
-        ]
-    },
-
-    {
-        question: "MBTI QUESTION 16",
-        dimension: "JP",
-        answers: [
-            {
-                text: "Option A",
+                text: "Plan the important details beforehand.",
                 type: "J"
             },
             {
-                text: "Option B",
+                text: "Figure things out as you go.",
                 type: "P"
             }
         ]
     },
 
+
+    /* ---------- BALANCING QUESTIONS ---------- */
+
     {
-        question: "MBTI QUESTION 17",
-        dimension: "EI",
+        question:
+            "When you're overwhelmed, you usually want to...",
         answers: [
             {
-                text: "Option A",
+                text: "Talk it through with someone.",
                 type: "E"
             },
             {
-                text: "Option B",
+                text: "Be alone and sort it out yourself.",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 18",
-        dimension: "SN",
+        question:
+            "When imagining your future, you think more about...",
         answers: [
             {
-                text: "Option A",
+                text: "Practical steps that could actually happen.",
                 type: "S"
             },
             {
-                text: "Option B",
+                text: "Different possibilities and what life could become.",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 19",
-        dimension: "TF",
+        question:
+            "If two choices are equally logical, you would usually choose the one...",
         answers: [
             {
-                text: "Option A",
+                text: "That makes the most objective sense.",
                 type: "T"
             },
             {
-                text: "Option B",
+                text: "That feels most right to you personally.",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "MBTI QUESTION 20",
-        dimension: "JP",
+        question:
+            "If you suddenly have a completely free day, you would rather...",
         answers: [
             {
-                text: "Option A",
+                text: "Know roughly what you're going to do.",
                 type: "J"
             },
             {
-                text: "Option B",
+                text: "Wake up and decide as the day happens.",
                 type: "P"
             }
         ]
@@ -683,7 +730,7 @@ const mbtiQuestions = [
 
 let mbtiQuestionIndex = 0;
 
-let selectedMBTIAnswer = null;
+let mbtiAnswers = [];
 
 
 let mbtiScores = {
@@ -706,20 +753,24 @@ const mbtiProgressCurrent =
         "mbti-progress-current"
     );
 
+
 const mbtiQuestionNumber =
     document.getElementById(
         "mbti-question-number"
     );
+
 
 const mbtiQuestion =
     document.getElementById(
         "mbti-question"
     );
 
+
 const mbtiAnswerArea =
     document.getElementById(
         "mbti-answer-area"
     );
+
 
 const mbtiNextButton =
     document.getElementById(
@@ -731,7 +782,7 @@ function startMBTIQuiz() {
 
     mbtiQuestionIndex = 0;
 
-    selectedMBTIAnswer = null;
+    mbtiAnswers = [];
 
 
     mbtiScores = {
@@ -777,29 +828,28 @@ function renderMBTIQuestion() {
     mbtiAnswerArea.innerHTML = "";
 
 
-    selectedMBTIAnswer = null;
-
-    mbtiNextButton.disabled = true;
+    mbtiNextButton.disabled =
+        true;
 
 
     currentQuestion.answers.forEach(
         (answer, index) => {
 
-            const answerButton =
+            const button =
                 document.createElement("button");
 
 
-            answerButton.type = "button";
+            button.type = "button";
 
-            answerButton.className =
+            button.className =
                 "quiz-answer";
 
 
-            answerButton.textContent =
+            button.textContent =
                 answer.text;
 
 
-            answerButton.addEventListener(
+            button.addEventListener(
                 "click",
                 () => {
 
@@ -807,22 +857,25 @@ function renderMBTIQuestion() {
                         .querySelectorAll(
                             "#mbti-answer-area .quiz-answer"
                         )
-                        .forEach(button => {
+                        .forEach(
+                            currentButton => {
 
-                            button.classList.remove(
-                                "selected"
-                            );
+                                currentButton.classList.remove(
+                                    "selected"
+                                );
 
-                        });
+                            }
+                        );
 
 
-                    answerButton.classList.add(
+                    button.classList.add(
                         "selected"
                     );
 
 
-                    selectedMBTIAnswer =
-                        index;
+                    mbtiAnswers[
+                        mbtiQuestionIndex
+                    ] = answer.type;
 
 
                     mbtiNextButton.disabled =
@@ -833,7 +886,7 @@ function renderMBTIQuestion() {
 
 
             mbtiAnswerArea.appendChild(
-                answerButton
+                button
             );
 
         }
@@ -846,27 +899,19 @@ mbtiNextButton.addEventListener(
     "click",
     () => {
 
-        if (
-            selectedMBTIAnswer === null
-        ) {
-            return;
-        }
-
-
-        const currentQuestion =
-            mbtiQuestions[
+        const selectedType =
+            mbtiAnswers[
                 mbtiQuestionIndex
             ];
 
 
-        const selectedAnswer =
-            currentQuestion.answers[
-                selectedMBTIAnswer
-            ];
+        if (!selectedType) {
+            return;
+        }
 
 
         mbtiScores[
-            selectedAnswer.type
+            selectedType
         ]++;
 
 
@@ -890,49 +935,185 @@ mbtiNextButton.addEventListener(
 );
 
 
-/* ==================================================
-   MBTI RESULT
-================================================== */
+/* =========================================================
+   CALCULATE MBTI
+========================================================= */
 
 function calculateMBTIResult() {
 
-    const type =
-
-        (
-            mbtiScores.E >= mbtiScores.I
-                ? "E"
-                : "I"
-        )
-
-        +
-
-        (
-            mbtiScores.S >= mbtiScores.N
-                ? "S"
-                : "N"
-        )
-
-        +
-
-        (
-            mbtiScores.T >= mbtiScores.F
-                ? "T"
-                : "F"
-        )
-
-        +
-
-        (
-            mbtiScores.J >= mbtiScores.P
-                ? "J"
-                : "P"
-        );
+    const EI =
+        mbtiScores.E >= mbtiScores.I
+            ? "E"
+            : "I";
 
 
-    displayMBTIResult(type);
+    const SN =
+        mbtiScores.S >= mbtiScores.N
+            ? "S"
+            : "N";
+
+
+    const TF =
+        mbtiScores.T >= mbtiScores.F
+            ? "T"
+            : "F";
+
+
+    const JP =
+        mbtiScores.J >= mbtiScores.P
+            ? "J"
+            : "P";
+
+
+    const result =
+        EI + SN + TF + JP;
+
+
+    displayMBTIResult(result);
 
 }
 
+
+/* =========================================================
+   PERSONALITY INFORMATION
+========================================================= */
+
+const personalityTypes = {
+
+    ISTJ: {
+        title: "The Inspector",
+        description:
+            "Practical, responsible, organized, and dependable.",
+        details:
+            "You tend to value reliability, clear expectations, consistency, and doing things properly."
+    },
+
+    ISFJ: {
+        title: "The Defender",
+        description:
+            "Warm, responsible, observant, and deeply considerate.",
+        details:
+            "You tend to notice details about the people around you and show care through dependable actions."
+    },
+
+    INFJ: {
+        title: "The Advocate",
+        description:
+            "Intuitive, thoughtful, idealistic, and reflective.",
+        details:
+            "You tend to look beneath the surface and care strongly about meaning, values, and the people close to you."
+    },
+
+    INTJ: {
+        title: "The Architect",
+        description:
+            "Strategic, independent, analytical, and future-focused.",
+        details:
+            "You tend to enjoy understanding complex ideas and creating long-term plans."
+    },
+
+    ISTP: {
+        title: "The Virtuoso",
+        description:
+            "Independent, observant, practical, and adaptable.",
+        details:
+            "You tend to learn through experience and enjoy understanding how things work."
+    },
+
+    ISFP: {
+        title: "The Adventurer",
+        description:
+            "Gentle, flexible, observant, and authentic.",
+        details:
+            "You tend to value freedom, meaningful experiences, and staying true to yourself."
+    },
+
+    INFP: {
+        title: "The Mediator",
+        description:
+            "Imaginative, empathetic, reflective, and values-driven.",
+        details:
+            "You tend to care deeply about authenticity, personal meaning, and emotional connection."
+    },
+
+    INTP: {
+        title: "The Logician",
+        description:
+            "Curious, analytical, independent, and inventive.",
+        details:
+            "You tend to enjoy exploring ideas, solving problems, and understanding how things connect."
+    },
+
+    ESTP: {
+        title: "The Entrepreneur",
+        description:
+            "Energetic, practical, adaptable, and action-oriented.",
+        details:
+            "You tend to respond quickly to opportunities and learn through direct experience."
+    },
+
+    ESFP: {
+        title: "The Entertainer",
+        description:
+            "Warm, expressive, spontaneous, and energetic.",
+        details:
+            "You tend to enjoy experiences, people, and making ordinary moments memorable."
+    },
+
+    ENFP: {
+        title: "The Campaigner",
+        description:
+            "Curious, enthusiastic, imaginative, and open-minded.",
+        details:
+            "You tend to become excited by possibilities and enjoy discovering what makes people and experiences meaningful."
+    },
+
+    ENTP: {
+        title: "The Debater",
+        description:
+            "Inventive, curious, energetic, and intellectually playful.",
+        details:
+            "You tend to enjoy questioning assumptions and exploring different possibilities."
+    },
+
+    ESTJ: {
+        title: "The Executive",
+        description:
+            "Organized, practical, direct, and responsible.",
+        details:
+            "You tend to value structure, efficiency, responsibility, and getting things done."
+    },
+
+    ESFJ: {
+        title: "The Consul",
+        description:
+            "Warm, social, responsible, and attentive.",
+        details:
+            "You tend to value connection, harmony, and making people feel included."
+    },
+
+    ENFJ: {
+        title: "The Protagonist",
+        description:
+            "Warm, encouraging, organized, and people-focused.",
+        details:
+            "You tend to notice what others need and enjoy helping people grow."
+    },
+
+    ENTJ: {
+        title: "The Commander",
+        description:
+            "Strategic, confident, direct, and goal-oriented.",
+        details:
+            "You tend to organize ideas and resources around clear goals and long-term objectives."
+    }
+
+};
+
+
+/* =========================================================
+   DISPLAY RESULT
+========================================================= */
 
 function displayMBTIResult(type) {
 
@@ -941,15 +1122,18 @@ function displayMBTIResult(type) {
             "mbti-type"
         );
 
+
     const mbtiTitle =
         document.getElementById(
             "mbti-title"
         );
 
+
     const mbtiDescription =
         document.getElementById(
             "mbti-description"
         );
+
 
     const mbtiDetails =
         document.getElementById(
@@ -984,146 +1168,9 @@ function displayMBTIResult(type) {
 }
 
 
-/* ==================================================
-   MBTI PERSONALITY TYPES
-================================================== */
-
-const personalityTypes = {
-
-    ISTJ: {
-        title: "The Inspector",
-        description:
-            "Practical, responsible, organized, and dependable.",
-        details:
-            "You tend to value reliability, clear expectations, and doing things properly."
-    },
-
-    ISFJ: {
-        title: "The Defender",
-        description:
-            "Thoughtful, dependable, observant, and caring.",
-        details:
-            "You tend to notice details about people and show care through consistency and practical actions."
-    },
-
-    INFJ: {
-        title: "The Advocate",
-        description:
-            "Intuitive, thoughtful, idealistic, and deeply reflective.",
-        details:
-            "You tend to look beneath the surface and care deeply about meaning, values, and the people close to you."
-    },
-
-    INTJ: {
-        title: "The Architect",
-        description:
-            "Strategic, independent, analytical, and future-focused.",
-        details:
-            "You tend to enjoy understanding complex ideas and building plans for the future."
-    },
-
-    ISTP: {
-        title: "The Virtuoso",
-        description:
-            "Independent, observant, practical, and adaptable.",
-        details:
-            "You tend to learn through experience and enjoy figuring out how things work."
-    },
-
-    ISFP: {
-        title: "The Adventurer",
-        description:
-            "Gentle, flexible, observant, and authentic.",
-        details:
-            "You tend to value personal freedom, meaningful experiences, and being true to yourself."
-    },
-
-    INFP: {
-        title: "The Mediator",
-        description:
-            "Imaginative, empathetic, reflective, and guided by personal values.",
-        details:
-            "You tend to care strongly about authenticity, meaning, and emotional depth."
-    },
-
-    INTP: {
-        title: "The Logician",
-        description:
-            "Curious, analytical, independent, and inventive.",
-        details:
-            "You tend to enjoy exploring ideas and understanding how things connect."
-    },
-
-    ESTP: {
-        title: "The Entrepreneur",
-        description:
-            "Energetic, practical, adaptable, and action-oriented.",
-        details:
-            "You tend to respond quickly to opportunities and learn through direct experience."
-    },
-
-    ESFP: {
-        title: "The Entertainer",
-        description:
-            "Warm, energetic, spontaneous, and expressive.",
-        details:
-            "You tend to enjoy experiences, people, and making ordinary moments memorable."
-    },
-
-    ENFP: {
-        title: "The Campaigner",
-        description:
-            "Curious, enthusiastic, imaginative, and people-oriented.",
-        details:
-            "You tend to become excited by possibilities and enjoy discovering what makes people and experiences meaningful."
-    },
-
-    ENTP: {
-        title: "The Debater",
-        description:
-            "Inventive, curious, energetic, and intellectually playful.",
-        details:
-            "You tend to enjoy questioning assumptions and exploring different possibilities."
-    },
-
-    ESTJ: {
-        title: "The Executive",
-        description:
-            "Organized, practical, direct, and responsible.",
-        details:
-            "You tend to value structure, efficiency, and getting things done."
-    },
-
-    ESFJ: {
-        title: "The Consul",
-        description:
-            "Warm, social, responsible, and attentive to others.",
-        details:
-            "You tend to value connection, harmony, and making people feel included."
-    },
-
-    ENFJ: {
-        title: "The Protagonist",
-        description:
-            "Warm, encouraging, organized, and people-focused.",
-        details:
-            "You tend to notice what others need and enjoy helping people grow."
-    },
-
-    ENTJ: {
-        title: "The Commander",
-        description:
-            "Strategic, confident, direct, and goal-oriented.",
-        details:
-            "You tend to naturally organize ideas and resources around a clear objective."
-    }
-
-};
-
-
-/* ==================================================
-   SCENE 05 → SCENE 06
-================================================== */
+/* =========================================================
+   RESULT → FINAL WISHES
+========================================================= */
 
 const birthdayEndingButton =
     document.getElementById(
@@ -1143,9 +1190,16 @@ birthdayEndingButton.addEventListener(
 );
 
 
-/* ==================================================
-   FINAL BIRTHDAY WISHES
-================================================== */
+/* =========================================================
+   FINAL WISHES
+========================================================= */
+
+/*
+    Your actual long birthday message goes here.
+
+    We will put your original text here instead of
+    inventing a replacement.
+*/
 
 const wishesText =
     document.getElementById(
@@ -1154,12 +1208,12 @@ const wishesText =
 
 
 wishesText.textContent =
-    "Your birthday wishes will go here.";
+    "Your birthday wishes will be added here.";
 
 
-/* ==================================================
-   INITIAL STATE
-================================================== */
+/* =========================================================
+   START
+========================================================= */
 
 showScene(
     scenes.opening
