@@ -11,29 +11,20 @@ body {
 }
 
 body {
+    font-family: "Quicksand", sans-serif;
     overflow: hidden;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    color: white;
-    background: #050d1d;
+    background: #07152f;
+    color: #f8f7ff;
 }
 
 
-/* =====================================================
+/* =========================
    SCENES
-===================================================== */
+========================= */
 
 .scene {
     position: fixed;
-
     inset: 0;
-
-    width: 100%;
-    height: 100%;
 
     display: flex;
     align-items: center;
@@ -45,114 +36,499 @@ body {
     pointer-events: none;
 
     transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+        opacity 0.9s ease,
+        visibility 0.9s ease;
+
+    overflow-y: auto;
 }
 
 .scene.active {
     opacity: 1;
     visibility: visible;
-
     pointer-events: auto;
 }
 
 
-/* =====================================================
-   BLUE NIGHT SKY
-===================================================== */
+/* =========================
+   INTRODUCTION
+========================= */
 
-.night-scene {
-    overflow: hidden;
-
+#opening {
     background:
         radial-gradient(
-            ellipse at 50% 20%,
-            #315d96 0%,
-            #193b69 30%,
-            #0b2446 58%,
-            #06152e 82%,
-            #020814 100%
+            circle at 50% 30%,
+            rgba(74, 105, 180, 0.35),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #07152f 0%,
+            #0b2047 50%,
+            #102b59 100%
         );
 }
 
-
-/* STARS */
-
-.stars,
-.final-stars {
+.stars {
     position: absolute;
-
     inset: 0;
 
-    pointer-events: none;
-
     background-image:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.9) 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.55) 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.75) 1px,
-            transparent 1.5px
-        );
+        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
 
     background-size:
-        120px 140px,
-        190px 180px,
-        260px 230px;
+        90px 90px,
+        150px 150px;
 
     background-position:
-        20px 30px,
-        70px 90px,
-        140px 20px;
+        10px 20px,
+        60px 80px;
 
-    opacity: 0.55;
-
-    animation:
-        starsMove 12s linear infinite;
+    opacity: 0.45;
 }
-
-@keyframes starsMove {
-
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(20px);
-    }
-
-}
-
-
-/* =====================================================
-   OPENING
-===================================================== */
 
 .opening-content {
     position: relative;
-
     z-index: 2;
 
-    width: min(90%, 650px);
+    width: min(90%, 480px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-align: center;
 
-    animation:
-        openingAppear 1.8s ease forwards;
+    animation: openingAppear 1.5s ease forwards;
 }
 
 @keyframes openingAppear {
 
     from {
         opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stella-photo {
+    width: min(72vw, 300px);
+    height: min(72vw, 300px);
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid rgba(255,255,255,0.75);
+
+    box-shadow:
+        0 0 30px rgba(166, 190, 255, 0.45);
+
+    margin-bottom: 28px;
+}
+
+.small-intro {
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    opacity: 0.75;
+
+    margin-bottom: 8px;
+}
+
+.opening-content h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(2.5rem, 9vw, 4rem);
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+.age {
+    margin-top: 10px;
+
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+
+    opacity: 0.8;
+}
+
+.opening-message {
+    margin-top: 28px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 1.25rem;
+    line-height: 1.7;
+}
+
+#begin-button {
+    margin-top: 34px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    border: none;
+
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    color: #142342;
+
+    background: #f7f4ff;
+
+    padding: 13px 27px;
+
+    border-radius: 999px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.2);
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+#personal-quiz,
+#mbti-quiz {
+    background:
+        linear-gradient(
+            145deg,
+            #101d42,
+            #1d315d
+        );
+}
+
+.quiz-container {
+    width: min(90%, 600px);
+
+    padding: 35px 0;
+}
+
+.question-label {
+    text-align: center;
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    opacity: 0.65;
+}
+
+.question-progress {
+    width: 100%;
+    height: 3px;
+
+    background: rgba(255,255,255,0.15);
+
+    margin-top: 15px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+
+    background: #ffffff;
+
+    transition: width 0.3s ease;
+}
+
+.progress-number {
+    text-align: center;
+
+    margin-top: 8px;
+
+    font-size: 0.75rem;
+
+    opacity: 0.5;
+}
+
+.quiz-container h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-weight: 400;
+
+    font-size: clamp(1.7rem, 6vw, 2.5rem);
+
+    line-height: 1.25;
+
+    text-align: center;
+
+    margin: 35px 0;
+}
+
+#personal-answer-area,
+#mbti-answer-area {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.quiz-answer {
+    width: 100%;
+
+    text-align: left;
+
+    background: rgba(255,255,255,0.08);
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 15px;
+
+    padding: 17px 18px;
+
+    font-weight: 500;
+
+    box-shadow: none;
+}
+
+.quiz-answer:hover {
+    background: rgba(255,255,255,0.14);
+}
+
+.quiz-answer.selected {
+    background: rgba(255,255,255,0.2);
+
+    border-color: rgba(255,255,255,0.65);
+}
+
+.next-button {
+    display: block;
+
+    margin: 28px auto 0;
+}
+
+
+/* =========================
+   PHOTO 2
+========================= */
+
+#second-photo {
+    background:
+        linear-gradient(
+            180deg,
+            #101d42,
+            #172d55
+        );
+}
+
+.photo-scene {
+    width: min(90%, 520px);
+
+    text-align: center;
+}
+
+.second-stella-photo {
+    width: min(82vw, 350px);
+    max-height: 65vh;
+
+    object-fit: cover;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+    margin-bottom: 25px;
+}
+
+.photo-scene p {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 1.35rem;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   MBTI RESULT
+========================= */
+
+#mbti-result {
+    background:
+        linear-gradient(
+            145deg,
+            #16284e,
+            #273e6d
+        );
+}
+
+.result-container {
+    width: min(90%, 600px);
+
+    text-align: center;
+}
+
+.result-small {
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+
+    font-size: 0.8rem;
+
+    opacity: 0.6;
+}
+
+#mbti-type {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(4rem, 18vw, 7rem);
+
+    font-weight: 400;
+
+    margin: 8px 0;
+}
+
+#mbti-title {
+    font-family: "DM Serif Display", serif;
+
+    font-weight: 400;
+
+    font-size: 2rem;
+
+    margin-bottom: 20px;
+}
+
+#mbti-description,
+#mbti-details {
+    line-height: 1.7;
+
+    opacity: 0.85;
+
+    margin-bottom: 15px;
+}
+
+#result-continue-button {
+    margin-top: 20px;
+}
+
+
+/* =========================
+   SHIBAINU
+========================= */
+
+#shiba-scene {
+    background:
+        linear-gradient(
+            180deg,
+            #102348,
+            #263c62
+        );
+}
+
+.shiba-container {
+    width: min(90%, 500px);
+
+    text-align: center;
+}
+
+.shiba-image {
+    width: min(75vw, 330px);
+
+    max-height: 55vh;
+
+    object-fit: contain;
+
+    margin-bottom: 25px;
+}
+
+.shiba-container h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 2.3rem;
+
+    font-weight: 400;
+
+    margin-bottom: 8px;
+}
+
+.shiba-container p {
+    opacity: 0.7;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FINAL WISHES
+========================= */
+
+#birthday-wishes {
+    background:
+        linear-gradient(
+            180deg,
+            #07152f,
+            #102448
+        );
+
+    align-items: flex-start;
+}
+
+.wishes-container {
+    width: min(90%, 720px);
+
+    padding: 70px 0;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+
+    font-size: 1rem;
+}
+
+#wishes-text {
+    animation: wishesAppear 1.2s ease forwards;
+}
+
+@keyframes wishesAppear {
+
+    from {
+        opacity: 0;
         transform: translateY(20px);
     }
 
@@ -160,656 +536,33 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-
-}
-
-.opening-small {
-    margin-bottom: 22px;
-
-    font-size: 0.82rem;
-
-    letter-spacing: 0.18em;
-
-    text-transform: lowercase;
-
-    opacity: 0.65;
 }
 
 
-/* =====================================================
-   PORTRAIT
-===================================================== */
-
-.portrait-frame {
-    position: relative;
-
-    width: min(58vw, 260px);
-
-    margin: 0 auto 28px;
-
-    padding: 6px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255, 255, 255, 0.12);
-
-    box-shadow:
-        0 0 35px
-        rgba(145, 190, 255, 0.28),
-
-        0 20px 50px
-        rgba(0, 0, 0, 0.35);
-
-    animation:
-        portraitGlow 3s ease-in-out infinite;
-}
-
-.portrait-frame::before {
-    content: "";
-
-    position: absolute;
-
-    inset: -8px;
-
-    border-radius: 22px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.18);
-
-    pointer-events: none;
-}
-
-.opening-photo {
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 3 / 4;
-
-    object-fit: cover;
-
-    border-radius: 13px;
-}
-
-@keyframes portraitGlow {
-
-    0%,
-    100% {
-        box-shadow:
-            0 0 30px
-            rgba(145, 190, 255, 0.22),
-
-            0 20px 50px
-            rgba(0, 0, 0, 0.35);
-    }
-
-    50% {
-        box-shadow:
-            0 0 50px
-            rgba(145, 190, 255, 0.42),
-
-            0 20px 50px
-            rgba(0, 0, 0, 0.35);
-    }
-
-}
-
-
-/* =====================================================
-   OPENING TEXT
-===================================================== */
-
-.opening-content h1 {
-    font-size:
-        clamp(
-            2.2rem,
-            8vw,
-            4.5rem
-        );
-
-    font-weight: 400;
-
-    letter-spacing: 0.03em;
-}
-
-.opening-content h2 {
-    margin-top: 5px;
-
-    font-size:
-        clamp(
-            1.2rem,
-            4vw,
-            1.8rem
-        );
-
-    font-weight: 400;
-
-    opacity: 0.9;
-}
-
-.opening-age {
-    margin-top: 8px;
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.18em;
-
-    opacity: 0.6;
-}
-
-.opening-message {
-    margin-top: 28px;
-
-    line-height: 1.8;
-
-    font-size: 1rem;
-
-    opacity: 0.78;
-}
-
-
-/* =====================================================
-   BUTTON
-===================================================== */
-
-.main-button {
-    margin-top: 30px;
-
-    padding: 14px 30px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.35);
-
-    border-radius: 999px;
-
-    background:
-        rgba(255, 255, 255, 0.07);
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 0.95rem;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.3s ease;
-}
-
-.main-button:hover {
-    background:
-        rgba(255, 255, 255, 0.14);
-
-    border-color:
-        rgba(255, 255, 255, 0.65);
-
-    transform: translateY(-2px);
-}
-
-.main-button:disabled {
-    opacity: 0.3;
-
-    cursor: default;
-
-    transform: none;
-}
-
-
-/* =====================================================
-   QUIZ
-===================================================== */
-
-.quiz-scene {
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            #234b79,
-            #102b50 45%,
-            #06152d 100%
-        );
-}
-
-.quiz-container {
-    width: min(90%, 650px);
-
-    text-align: center;
-}
-
-.quiz-label {
-    margin-bottom: 18px;
-
-    font-size: 0.78rem;
-
-    letter-spacing: 0.16em;
-
-    text-transform: lowercase;
-
-    opacity: 0.55;
-}
-
-.question-number {
-    font-size: 0.82rem;
-
-    opacity: 0.65;
-}
-
-.progress {
-    margin-top: 7px;
-
-    font-size: 0.75rem;
-
-    opacity: 0.4;
-}
-
-.quiz-question {
-    margin-top: 35px;
-
-    font-size:
-        clamp(
-            1.35rem,
-            4vw,
-            2rem
-        );
-
-    line-height: 1.55;
-
-    font-weight: 400;
-}
-
-.answer-area {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 11px;
-
-    margin-top: 32px;
-}
-
-.quiz-answer {
-    width: 100%;
-
-    padding: 15px 18px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.17);
-
-    border-radius: 12px;
-
-    background:
-        rgba(255, 255, 255, 0.045);
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 0.96rem;
-
-    line-height: 1.45;
-
-    cursor: pointer;
-
-    transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
-}
-
-.quiz-answer:hover {
-    background:
-        rgba(255, 255, 255, 0.09);
-
-    transform: translateY(-1px);
-}
-
-.quiz-answer.selected {
-    background:
-        rgba(255, 255, 255, 0.16);
-
-    border-color:
-        rgba(255, 255, 255, 0.7);
-}
-
-
-/* =====================================================
-   SECOND PHOTO
-===================================================== */
-
-.photo-scene {
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 25%,
-            #315d96,
-            #193b69 40%,
-            #06152e 100%
-        );
-}
-
-.photo-scene-content {
-    width: min(90%, 650px);
-
-    text-align: center;
-
-    animation:
-        secondPhotoAppear 1.4s ease forwards;
-}
-
-.second-frame {
-    width: min(65vw, 310px);
-
-    margin-bottom: 32px;
-}
-
-.second-photo {
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 3 / 4;
-
-    object-fit: cover;
-
-    border-radius: 13px;
-}
-
-@keyframes secondPhotoAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(0.94);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
-
-.photo-message {
-    max-width: 450px;
-
-    margin: 0 auto;
-
-    font-size: 1.05rem;
-
-    line-height: 1.8;
-
-    opacity: 0.8;
-}
-
-
-/* =====================================================
-   MBTI RESULT
-===================================================== */
-
-.result-scene {
-    background:
-        radial-gradient(
-            circle at center,
-            #2c527e,
-            #0d2648 45%,
-            #06152e 100%
-        );
-}
-
-.result-container {
-    width: min(90%, 650px);
-
-    text-align: center;
-}
-
-.mbti-type {
-    margin-top: 15px;
-
-    font-family: Arial, sans-serif;
-
-    font-size:
-        clamp(
-            4rem,
-            15vw,
-            7.5rem
-        );
-
-    font-weight: 700;
-
-    letter-spacing: 0.08em;
-
-    text-shadow:
-        0 0 30px
-        rgba(180, 215, 255, 0.3);
-}
-
-.result-title {
-    margin-top: 5px;
-
-    font-size: 1.8rem;
-
-    font-weight: 400;
-}
-
-.result-description {
-    margin-top: 20px;
-
-    font-size: 1.08rem;
-
-    line-height: 1.7;
-}
-
-.result-details {
-    margin-top: 14px;
-
-    font-size: 0.92rem;
-
-    line-height: 1.7;
-
-    opacity: 0.65;
-}
-
-
-/* =====================================================
-   SHIBA
-===================================================== */
-
-.shiba-scene {
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            #315d96,
-            #193b69 45%,
-            #06152e 100%
-        );
-}
-
-.shiba-content {
-    width: min(90%, 650px);
-
-    text-align: center;
-}
-
-.shiba-picture-wrap {
-    animation:
-        shibaAppear 1.5s ease forwards;
-}
-
-.shiba-image {
-    display: block;
-
-    width: min(70vw, 360px);
-
-    max-height: 52vh;
-
-    object-fit: contain;
-
-    margin: 0 auto;
-
-    filter:
-        drop-shadow(
-            0 18px 35px
-            rgba(0, 0, 0, 0.42)
-        );
-}
-
-@keyframes shibaAppear {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(25px)
-            scale(0.92);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-.shiba-message {
-    margin-top: 30px;
-
-    font-size: 1.1rem;
-
-    letter-spacing: 0.05em;
-
-    opacity: 0.9;
-}
-
-.shiba-love {
-    margin-top: 12px;
-
-    font-size: 0.95rem;
-
-    opacity: 0.65;
-}
-
-
-/* =====================================================
-   FINAL WISHES
-===================================================== */
-
-.wishes-scene {
-    overflow-y: auto;
-
-    align-items: flex-start;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 0%,
-            #18375e,
-            #07152e 45%,
-            #020814 100%
-        );
-}
-
-.wishes-container {
-    position: relative;
-
-    width: min(90%, 760px);
-
-    padding:
-        75px 0 110px;
-}
-
-.wishes-container h2 {
-    position: relative;
-
-    z-index: 2;
-
-    margin-bottom: 50px;
-
-    font-size:
-        clamp(
-            2rem,
-            7vw,
-            3.6rem
-        );
-
-    font-weight: 400;
-
-    text-align: center;
-}
-
-.wishes-text {
-    position: relative;
-
-    z-index: 2;
-
-    white-space: pre-line;
-
-    font-size:
-        clamp(
-            1rem,
-            2.5vw,
-            1.12rem
-        );
-
-    line-height: 2;
-
-    opacity: 0.88;
-}
-
-
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
 @media (max-width: 600px) {
 
-    .opening-content {
-        padding: 18px;
-    }
-
-    .portrait-frame {
-        width: min(58vw, 230px);
+    .opening-content h1 {
+        font-size: 2.8rem;
     }
 
     .opening-message {
-        margin-top: 20px;
-    }
-
-    .main-button {
-        padding:
-            13px 25px;
+        font-size: 1.15rem;
     }
 
     .quiz-container {
-        padding: 18px;
+        padding: 30px 0;
     }
 
-    .quiz-question {
-        margin-top: 25px;
-    }
-
-    .answer-area {
-        margin-top: 25px;
-    }
-
-    .second-frame {
-        width: min(65vw, 260px);
-    }
-
-    .shiba-image {
-        width: 68vw;
+    .quiz-container h2 {
+        margin: 25px 0;
     }
 
     .wishes-container {
-        padding:
-            60px 12px 100px;
+        padding: 50px 0;
+        font-size: 0.96rem;
     }
-
 }
