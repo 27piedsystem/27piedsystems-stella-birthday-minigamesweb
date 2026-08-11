@@ -1,45 +1,101 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================================
-     SCENES
-     ========================================= */
-
-  const scenes = document.querySelectorAll(".scene");
-
-  function showScene(id) {
-
-    scenes.forEach(function (scene) {
-      scene.classList.add("hidden");
-      scene.classList.remove("active");
-    });
-
-    const scene = document.getElementById(id);
-
-    if (scene) {
-      scene.classList.remove("hidden");
-      scene.classList.add("active");
-      window.scrollTo(0, 0);
-    }
-  }
-
 
   /* =========================================
      MUSIC
      ========================================= */
 
-  const music =
+  const backgroundMusic =
     document.getElementById("backgroundMusic");
+
 
   function startMusic() {
 
-    if (!music) return;
+    if (!backgroundMusic) {
+      return;
+    }
 
-    music.volume = 0.35;
+    backgroundMusic.volume = 0.55;
 
-    music.play().catch(function () {
-      console.log("Music will start after another interaction.");
-    });
+    const playPromise =
+      backgroundMusic.play();
+
+    if (playPromise !== undefined) {
+
+      playPromise.catch(function () {
+
+        console.log(
+          "Music will start after another user interaction."
+        );
+
+      });
+
+    }
+
   }
+
+
+
+  /* =========================================
+     SCENE SYSTEM
+     ========================================= */
+
+  const scenes = {
+
+    opening:
+      document.getElementById("scene-opening"),
+
+    introduction:
+      document.getElementById("scene-introduction"),
+
+    photo:
+      document.getElementById("scene-photo"),
+
+    platformGame:
+      document.getElementById("scene-platform-game"),
+
+    cake:
+      document.getElementById("scene-cake"),
+
+    message:
+      document.getElementById("scene-message"),
+
+    bible:
+      document.getElementById("scene-bible"),
+
+    final:
+      document.getElementById("scene-final")
+
+  };
+
+
+  function showScene(sceneName) {
+
+    Object.keys(scenes).forEach(function (name) {
+
+      if (!scenes[name]) {
+        return;
+      }
+
+      scenes[name].classList.add("hidden");
+      scenes[name].classList.remove("active");
+
+    });
+
+
+    const selectedScene =
+      scenes[sceneName];
+
+    if (!selectedScene) {
+      return;
+    }
+
+
+    selectedScene.classList.remove("hidden");
+    selectedScene.classList.add("active");
+
+  }
+
 
 
   /* =========================================
@@ -47,19 +103,26 @@ document.addEventListener("DOMContentLoaded", function () {
      ========================================= */
 
   const startAdventureButton =
-    document.getElementById("startAdventureButton");
+    document.getElementById(
+      "startAdventureButton"
+    );
+
 
   if (startAdventureButton) {
 
-    startAdventureButton.addEventListener("click", function () {
+    startAdventureButton.addEventListener(
+      "click",
+      function () {
 
-      startMusic();
+        startMusic();
 
-      showScene("scene-introduction");
+        showScene("introduction");
 
-    });
+      }
+    );
 
   }
+
 
 
   /* =========================================
@@ -67,17 +130,24 @@ document.addEventListener("DOMContentLoaded", function () {
      ========================================= */
 
   const introductionContinueButton =
-    document.getElementById("introductionContinueButton");
+    document.getElementById(
+      "introductionContinueButton"
+    );
+
 
   if (introductionContinueButton) {
 
-    introductionContinueButton.addEventListener("click", function () {
+    introductionContinueButton.addEventListener(
+      "click",
+      function () {
 
-      showScene("scene-photo");
+        showScene("photo");
 
-    });
+      }
+    );
 
   }
+
 
 
   /* =========================================
@@ -85,102 +155,47 @@ document.addEventListener("DOMContentLoaded", function () {
      ========================================= */
 
   const photoContinueButton =
-    document.getElementById("photoContinueButton");
+    document.getElementById(
+      "photoContinueButton"
+    );
+
 
   if (photoContinueButton) {
 
-    photoContinueButton.addEventListener("click", function () {
+    photoContinueButton.addEventListener(
+      "click",
+      function () {
 
-      showScene("scene-platform-game");
+        showScene("platformGame");
 
-      startGame();
+        startPlatformGame();
 
-    });
+      }
+    );
 
   }
+
 
 
   /* =========================================
      PLATFORM GAME
      ========================================= */
 
-  const game =
-    document.getElementById("platformGame");
-
-  const world =
+  const gameWorld =
     document.getElementById("gameWorld");
 
   const chihuahua =
     document.getElementById("chihuahua");
 
-  const mushroom =
-    document.getElementById("magicMushroom");
-
   const shibainu =
     document.getElementById("shibainu");
-
-  const cake =
-    document.getElementById("birthdayCake");
 
   const gameMessage =
     document.getElementById("gameMessage");
 
-  const starsDisplay =
-    document.getElementById("gameStars");
+  const gameScore =
+    document.getElementById("gameScore");
 
-
-  /* =========================================
-     GAME VARIABLES
-     ========================================= */
-
-  let playerX = 120;
-  let playerY = 28;
-
-  let velocityX = 0;
-  let velocityY = 0;
-
-  let movingLeft = false;
-  let movingRight = false;
-
-  let jumping = false;
-
-  let gameStarted = false;
-  let gameFinished = false;
-
-  let mushroomCollected = false;
-
-  let starsCollected = 0;
-
-  let cameraX = 0;
-
-  let animationFrame;
-
-
-  const gravity = 0.75;
-
-  const moveSpeed = 4.5;
-
-  const jumpPower = 13;
-
-
-  /* =========================================
-     PLAYER SIZE
-     ========================================= */
-
-  const playerWidth = 55;
-  const playerHeight = 65;
-
-
-  /* =========================================
-     GROUND
-     ========================================= */
-
-  const groundY = 28;
-
-
-  /* =========================================
-     CONTROLS
-     ========================================= */
 
   const leftButton =
     document.getElementById("leftButton");
@@ -192,157 +207,278 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("jumpButton");
 
 
-  function pressLeft(event) {
 
-    event.preventDefault();
+  /* =========================================
+     GAME SETTINGS
+     ========================================= */
 
-    movingLeft = true;
+  const WORLD_WIDTH = 5000;
 
-  }
+  const GRAVITY = 0.65;
 
+  const MOVE_SPEED = 5.2;
 
-  function releaseLeft(event) {
-
-    event.preventDefault();
-
-    movingLeft = false;
-
-  }
+  const JUMP_POWER = 13.5;
 
 
-  function pressRight(event) {
+  let playerX = 120;
 
-    event.preventDefault();
+  let playerY = 28;
 
-    movingRight = true;
+  let velocityY = 0;
 
-  }
+  let cameraX = 0;
 
+  let movingLeft = false;
 
-  function releaseRight(event) {
+  let movingRight = false;
 
-    event.preventDefault();
+  let jumping = false;
 
-    movingRight = false;
+  let gameStarted = false;
 
-  }
+  let gameFinished = false;
 
+  let animationFrame;
 
-  function pressJump(event) {
-
-    event.preventDefault();
-
-    jump();
-
-  }
-
-
-  if (leftButton) {
-
-    leftButton.addEventListener(
-      "touchstart",
-      pressLeft,
-      { passive: false }
-    );
-
-    leftButton.addEventListener(
-      "touchend",
-      releaseLeft,
-      { passive: false }
-    );
-
-    leftButton.addEventListener(
-      "mousedown",
-      pressLeft
-    );
-
-    leftButton.addEventListener(
-      "mouseup",
-      releaseLeft
-    );
-
-  }
-
-
-  if (rightButton) {
-
-    rightButton.addEventListener(
-      "touchstart",
-      pressRight,
-      { passive: false }
-    );
-
-    rightButton.addEventListener(
-      "touchend",
-      releaseRight,
-      { passive: false }
-    );
-
-    rightButton.addEventListener(
-      "mousedown",
-      pressRight
-    );
-
-    rightButton.addEventListener(
-      "mouseup",
-      releaseRight
-    );
-
-  }
-
-
-  if (jumpButton) {
-
-    jumpButton.addEventListener(
-      "touchstart",
-      pressJump,
-      { passive: false }
-    );
-
-    jumpButton.addEventListener(
-      "click",
-      pressJump
-    );
-
-  }
 
 
   /* =========================================
-     KEYBOARD
+     SCORE
      ========================================= */
 
-  document.addEventListener("keydown", function (event) {
+  function updateScore() {
 
-    if (event.key === "ArrowLeft") {
-      movingLeft = true;
+    if (gameScore) {
+
+      gameScore.textContent =
+        "200.806";
+
     }
 
-    if (event.key === "ArrowRight") {
-      movingRight = true;
+  }
+
+
+
+  /* =========================================
+     START GAME
+     ========================================= */
+
+  function startPlatformGame() {
+
+    if (gameStarted) {
+      return;
     }
 
-    if (
-      event.key === "ArrowUp" ||
-      event.key === " " ||
-      event.key === "w"
-    ) {
-      jump();
+    gameStarted = true;
+
+    gameFinished = false;
+
+    playerX = 120;
+
+    playerY = 28;
+
+    velocityY = 0;
+
+    cameraX = 0;
+
+
+    if (gameMessage) {
+
+      gameMessage.textContent =
+        "Walk right ➡ and jump over the platforms.";
+
     }
 
-  });
+
+    updateScore();
+
+    positionPlayer();
+
+    gameLoop();
+
+  }
 
 
-  document.addEventListener("keyup", function (event) {
 
-    if (event.key === "ArrowLeft") {
-      movingLeft = false;
+  /* =========================================
+     PLAYER POSITION
+     ========================================= */
+
+  function positionPlayer() {
+
+    if (!chihuahua) {
+      return;
     }
 
-    if (event.key === "ArrowRight") {
-      movingRight = false;
+
+    chihuahua.style.left =
+      playerX + "px";
+
+    chihuahua.style.bottom =
+      playerY + "px";
+
+
+    if (shibainu) {
+
+      shibainu.style.bottom =
+        "28px";
+
     }
 
-  });
+  }
+
+
+
+  /* =========================================
+     CAMERA
+     ========================================= */
+
+  function updateCamera() {
+
+    const screenWidth =
+      window.innerWidth;
+
+
+    const targetCamera =
+      playerX -
+      screenWidth * 0.35;
+
+
+    cameraX =
+      Math.max(
+        0,
+        Math.min(
+          targetCamera,
+          WORLD_WIDTH - screenWidth
+        )
+      );
+
+
+    if (gameWorld) {
+
+      gameWorld.style.transform =
+        "translateX(" +
+        (-cameraX) +
+        "px)";
+
+    }
+
+  }
+
+
+
+  /* =========================================
+     PLATFORM COLLISION
+     ========================================= */
+
+  function getPlatforms() {
+
+    if (!gameWorld) {
+      return [];
+    }
+
+    return Array.from(
+      gameWorld.querySelectorAll(
+        ".platform"
+      )
+    );
+
+  }
+
+
+
+  function checkGroundCollision() {
+
+    const playerWidth = 55;
+
+    const playerLeft =
+      playerX;
+
+    const playerRight =
+      playerX + playerWidth;
+
+
+    let landed = false;
+
+
+    getPlatforms().forEach(
+      function (platform) {
+
+        const platformLeft =
+          parseFloat(
+            platform.style.left
+          ) || 0;
+
+
+        const platformBottom =
+          parseFloat(
+            platform.style.bottom
+          ) || 0;
+
+
+        const platformWidth =
+          parseFloat(
+            platform.style.width
+          ) || platform.offsetWidth;
+
+
+        const platformTop =
+          platformBottom +
+          28;
+
+
+        const platformRight =
+          platformLeft +
+          platformWidth;
+
+
+        const playerBottom =
+          playerY;
+
+
+        const playerTop =
+          playerY + 65;
+
+
+        const horizontalCollision =
+          playerRight > platformLeft &&
+          playerLeft < platformRight;
+
+
+        const falling =
+          velocityY <= 0;
+
+
+        const verticalCollision =
+          playerBottom <= platformTop &&
+          playerBottom >=
+            platformTop - 20;
+
+
+        if (
+          horizontalCollision &&
+          falling &&
+          verticalCollision
+        ) {
+
+          playerY =
+            platformTop;
+
+          velocityY = 0;
+
+          landed = true;
+
+        }
+
+      }
+    );
+
+
+    return landed;
+
+  }
+
 
 
   /* =========================================
@@ -351,116 +487,91 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function jump() {
 
-    if (!gameStarted) return;
+    if (!gameStarted || gameFinished) {
+      return;
+    }
 
-    if (gameFinished) return;
 
-    if (!jumping) {
+    const onGround =
+      playerY <= 30;
 
-      velocityY = jumpPower;
 
-      jumping = true;
+    if (!onGround) {
+      return;
+    }
+
+
+    velocityY =
+      JUMP_POWER;
+
+    jumping = true;
+
+  }
+
+
+
+  /* =========================================
+     MOVEMENT
+     ========================================= */
+
+  function movePlayer() {
+
+    if (movingLeft) {
+
+      playerX -=
+        MOVE_SPEED;
 
     }
 
+
+    if (movingRight) {
+
+      playerX +=
+        MOVE_SPEED;
+
+    }
+
+
+    playerX =
+      Math.max(
+        0,
+        Math.min(
+          playerX,
+          WORLD_WIDTH - 80
+        )
+      );
+
   }
+
 
 
   /* =========================================
-     COLLISION HELPERS
+     GRAVITY
      ========================================= */
 
-  function touching(
-    x1,
-    y1,
-    w1,
-    h1,
-    x2,
-    y2,
-    w2,
-    h2
-  ) {
+  function applyGravity() {
 
-    return (
-      x1 < x2 + w2 &&
-      x1 + w1 > x2 &&
-      y1 < y2 + h2 &&
-      y1 + h1 > y2
-    );
+    velocityY -= GRAVITY;
 
-  }
+    playerY += velocityY;
 
 
-  /* =========================================
-     PLATFORMS
-     ========================================= */
-
-  function getPlatforms() {
-
-    return document.querySelectorAll(
-      ".platform"
-    );
-
-  }
+    const landed =
+      checkGroundCollision();
 
 
-  function checkPlatforms() {
+    if (!landed && playerY < 28) {
 
-    const platforms =
-      getPlatforms();
-
-    let landed = false;
-
-    platforms.forEach(function (platform) {
-
-      const platformLeft =
-        platform.offsetLeft;
-
-      const platformTop =
-        platform.offsetTop;
-
-      const platformWidth =
-        platform.offsetWidth;
-
-      const platformHeight =
-        platform.offsetHeight;
-
-
-      const playerBottom =
-        playerY + playerHeight;
-
-
-      const previousBottom =
-        playerBottom - velocityY;
-
-
-      if (
-        playerX + playerWidth > platformLeft &&
-        playerX < platformLeft + platformWidth &&
-        playerBottom >= platformTop &&
-        previousBottom <= platformTop &&
-        velocityY <= 0
-      ) {
-
-        playerY =
-          platformTop - playerHeight;
-
-        velocityY = 0;
-
-        jumping = false;
-
-        landed = true;
-
-      }
-
-    });
-
-
-    if (!landed && playerY <= groundY) {
-
-      playerY = groundY;
+      playerY = 28;
 
       velocityY = 0;
+
+      jumping = false;
+
+    }
+
+
+    if (landed) {
 
       jumping = false;
 
@@ -469,153 +580,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     MUSHROOM
-     ========================================= */
-
-  function checkMushroom() {
-
-    if (mushroomCollected) return;
-
-    if (!mushroom) return;
-
-
-    const mushroomX =
-      mushroom.offsetLeft;
-
-    const mushroomY =
-      mushroom.offsetTop;
-
-
-    if (
-      touching(
-        playerX,
-        playerY,
-        playerWidth,
-        playerHeight,
-        mushroomX,
-        mushroomY,
-        60,
-        60
-      )
-    ) {
-
-      mushroomCollected = true;
-
-      mushroom.style.display = "none";
-
-      gameMessage.textContent =
-        "the mushroom knows the way. keep going.";
-
-    }
-
-  }
-
-
-  /* =========================================
-     STARS
-     ========================================= */
-
-  function checkStars() {
-
-    const collectibles =
-      document.querySelectorAll(
-        ".collectible"
-      );
-
-
-    collectibles.forEach(function (star) {
-
-      if (star.dataset.collected === "true") {
-        return;
-      }
-
-
-      const starX =
-        star.offsetLeft;
-
-      const starY =
-        star.offsetTop;
-
-
-      if (
-        touching(
-          playerX,
-          playerY,
-          playerWidth,
-          playerHeight,
-          starX,
-          starY,
-          40,
-          40
-        )
-      ) {
-
-        star.dataset.collected = "true";
-
-        star.style.display = "none";
-
-        starsCollected++;
-
-        starsDisplay.textContent =
-          "★ " + starsCollected;
-
-      }
-
-    });
-
-  }
-
-
-  /* =========================================
-     CACTUS COLLISION
-     ========================================= */
-
-  function checkObstacles() {
-
-    const obstacles =
-      document.querySelectorAll(
-        ".game-obstacle"
-      );
-
-
-    obstacles.forEach(function (obstacle) {
-
-      const obstacleX =
-        obstacle.offsetLeft;
-
-      const obstacleY =
-        obstacle.offsetTop;
-
-
-      if (
-        touching(
-          playerX,
-          playerY,
-          playerWidth,
-          playerHeight,
-          obstacleX,
-          obstacleY,
-          50,
-          60
-        )
-      ) {
-
-        if (!jumping) {
-
-          playerX -= 80;
-
-          gameMessage.textContent =
-            "careful, chihuahua. jump over it!";
-
-        }
-
-      }
-
-    });
-
-  }
-
 
   /* =========================================
      REACH SHIBAINU
@@ -623,15 +587,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function checkFinish() {
 
-    if (gameFinished) return;
+    if (!shibainu) {
+      return;
+    }
 
-    const shibaX =
-      shibainu.offsetLeft;
+
+    const shibainuX =
+      parseFloat(
+        shibainu.style.left
+      ) || 4500;
+
+
+    const distance =
+      Math.abs(
+        playerX - shibainuX
+      );
 
 
     if (
-      mushroomCollected &&
-      playerX > shibaX - 130
+      distance < 85 &&
+      !gameFinished
     ) {
 
       finishGame();
@@ -641,9 +616,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     FINISH
-     ========================================= */
 
   function finishGame() {
 
@@ -653,129 +625,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     movingRight = false;
 
-    gameMessage.textContent =
-      "you found me, chihuahua.";
+
+    if (gameMessage) {
+
+      gameMessage.textContent =
+        "You found Shibainu.";
+
+    }
 
 
-    setTimeout(function () {
+    setTimeout(
+      function () {
 
-      showScene("scene-cake");
+        showScene("cake");
 
-    }, 1800);
+      },
+      900
+    );
 
   }
 
-
-  /* =========================================
-     CAMERA
-     ========================================= */
-
-  function updateCamera() {
-
-    if (!game) return;
-
-    const screenWidth =
-      game.clientWidth;
-
-    const targetCamera =
-      playerX - screenWidth * 0.35;
-
-
-    cameraX =
-      Math.max(
-        0,
-        Math.min(
-          targetCamera,
-          5000 - screenWidth
-        )
-      );
-
-
-    world.style.transform =
-      "translateX(" +
-      (-cameraX) +
-      "px)";
-
-  }
-
-
-  /* =========================================
-     PLAYER
-     ========================================= */
-
-  function updatePlayer() {
-
-    if (!gameStarted) return;
-
-    if (gameFinished) return;
-
-
-    velocityX = 0;
-
-
-    if (movingLeft) {
-      velocityX = -moveSpeed;
-    }
-
-
-    if (movingRight) {
-      velocityX = moveSpeed;
-    }
-
-
-    playerX += velocityX;
-
-
-    if (playerX < 0) {
-      playerX = 0;
-    }
-
-
-    if (playerX > 4600) {
-      playerX = 4600;
-    }
-
-
-    velocityY -= gravity;
-
-    playerY += velocityY;
-
-
-    checkPlatforms();
-
-
-    chihuahua.style.left =
-      playerX + "px";
-
-
-    chihuahua.style.bottom =
-      playerY + "px";
-
-
-    if (velocityX !== 0) {
-
-      if (velocityX > 0) {
-        chihuahua.style.transform =
-          "scaleX(1)";
-      } else {
-        chihuahua.style.transform =
-          "scaleX(-1)";
-      }
-
-    }
-
-
-    updateCamera();
-
-    checkMushroom();
-
-    checkStars();
-
-    checkObstacles();
-
-    checkFinish();
-
-  }
 
 
   /* =========================================
@@ -784,89 +653,279 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function gameLoop() {
 
-    updatePlayer();
+    if (!gameStarted) {
+      return;
+    }
+
+
+    if (!gameFinished) {
+
+      movePlayer();
+
+      applyGravity();
+
+      updateCamera();
+
+      positionPlayer();
+
+      checkFinish();
+
+    }
+
 
     animationFrame =
-      requestAnimationFrame(gameLoop);
+      requestAnimationFrame(
+        gameLoop
+      );
 
   }
 
 
+
   /* =========================================
-     START GAME
+     KEYBOARD CONTROLS
      ========================================= */
 
-  function startGame() {
+  document.addEventListener(
+    "keydown",
+    function (event) {
 
-    if (gameStarted) return;
-
-    gameStarted = true;
-
-    gameFinished = false;
-
-    playerX = 120;
-
-    playerY = groundY;
-
-    velocityX = 0;
-
-    velocityY = 0;
-
-    jumping = false;
-
-    mushroomCollected = false;
-
-    starsCollected = 0;
-
-    cameraX = 0;
+      if (!gameStarted || gameFinished) {
+        return;
+      }
 
 
-    if (mushroom) {
-      mushroom.style.display = "flex";
-    }
+      if (
+        event.key === "ArrowLeft" ||
+        event.key.toLowerCase() === "a"
+      ) {
+
+        movingLeft = true;
+
+      }
 
 
-    document
-      .querySelectorAll(".collectible")
-      .forEach(function (star) {
+      if (
+        event.key === "ArrowRight" ||
+        event.key.toLowerCase() === "d"
+      ) {
 
-        star.dataset.collected = "false";
+        movingRight = true;
 
-        star.style.display = "block";
-
-      });
+      }
 
 
-    if (starsDisplay) {
+      if (
+        event.key === "ArrowUp" ||
+        event.key === " " ||
+        event.key.toLowerCase() === "w"
+      ) {
 
-      starsDisplay.textContent =
-        "★ 0";
+        event.preventDefault();
+
+        jump();
+
+      }
 
     }
+  );
 
 
-    if (gameMessage) {
 
-      gameMessage.textContent =
-        "move with ◀ ▶ and jump with JUMP. find the mushroom.";
+  document.addEventListener(
+    "keyup",
+    function (event) {
+
+      if (
+        event.key === "ArrowLeft" ||
+        event.key.toLowerCase() === "a"
+      ) {
+
+        movingLeft = false;
+
+      }
+
+
+      if (
+        event.key === "ArrowRight" ||
+        event.key.toLowerCase() === "d"
+      ) {
+
+        movingRight = false;
+
+      }
 
     }
+  );
 
 
-    chihuahua.style.left =
-      playerX + "px";
 
-    chihuahua.style.bottom =
-      playerY + "px";
+  /* =========================================
+     MOBILE LEFT BUTTON
+     ========================================= */
 
+  function startMovingLeft(event) {
 
-    gameLoop();
+    event.preventDefault();
+
+    movingLeft = true;
 
   }
 
 
+  function stopMovingLeft(event) {
+
+    event.preventDefault();
+
+    movingLeft = false;
+
+  }
+
+
+  if (leftButton) {
+
+    leftButton.addEventListener(
+      "touchstart",
+      startMovingLeft,
+      { passive: false }
+    );
+
+
+    leftButton.addEventListener(
+      "touchend",
+      stopMovingLeft,
+      { passive: false }
+    );
+
+
+    leftButton.addEventListener(
+      "touchcancel",
+      stopMovingLeft,
+      { passive: false }
+    );
+
+
+    leftButton.addEventListener(
+      "mousedown",
+      startMovingLeft
+    );
+
+
+    leftButton.addEventListener(
+      "mouseup",
+      stopMovingLeft
+    );
+
+
+    leftButton.addEventListener(
+      "mouseleave",
+      stopMovingLeft
+    );
+
+  }
+
+
+
   /* =========================================
-     CAKE → BIRTHDAY MESSAGE
+     MOBILE RIGHT BUTTON
+     ========================================= */
+
+  function startMovingRight(event) {
+
+    event.preventDefault();
+
+    movingRight = true;
+
+  }
+
+
+  function stopMovingRight(event) {
+
+    event.preventDefault();
+
+    movingRight = false;
+
+  }
+
+
+  if (rightButton) {
+
+    rightButton.addEventListener(
+      "touchstart",
+      startMovingRight,
+      { passive: false }
+    );
+
+
+    rightButton.addEventListener(
+      "touchend",
+      stopMovingRight,
+      { passive: false }
+    );
+
+
+    rightButton.addEventListener(
+      "touchcancel",
+      stopMovingRight,
+      { passive: false }
+    );
+
+
+    rightButton.addEventListener(
+      "mousedown",
+      startMovingRight
+    );
+
+
+    rightButton.addEventListener(
+      "mouseup",
+      stopMovingRight
+    );
+
+
+    rightButton.addEventListener(
+      "mouseleave",
+      stopMovingRight
+    );
+
+  }
+
+
+
+  /* =========================================
+     JUMP BUTTON
+     ========================================= */
+
+  if (jumpButton) {
+
+    jumpButton.addEventListener(
+      "touchstart",
+      function (event) {
+
+        event.preventDefault();
+
+        jump();
+
+      },
+      { passive: false }
+    );
+
+
+    jumpButton.addEventListener(
+      "click",
+      function () {
+
+        jump();
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================
+     CAKE → MESSAGE
      ========================================= */
 
   const birthdayMessageButton =
@@ -881,12 +940,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "click",
       function () {
 
-        showScene("scene-message");
+        showScene("message");
 
       }
     );
 
   }
+
 
 
   /* =========================================
@@ -905,12 +965,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "click",
       function () {
 
-        showScene("scene-bible");
+        showScene("bible");
 
       }
     );
 
   }
+
 
 
   /* =========================================
@@ -929,7 +990,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "click",
       function () {
 
-        showScene("scene-final");
+        showScene("final");
 
       }
     );
@@ -937,10 +998,34 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+
   /* =========================================
-     INITIAL SCENE
+     KEEP MUSIC PLAYING
      ========================================= */
 
-  showScene("scene-opening");
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (
+        document.visibilityState ===
+        "visible"
+      ) {
+
+        if (
+          backgroundMusic &&
+          backgroundMusic.paused
+        ) {
+
+          backgroundMusic.play()
+            .catch(function () {});
+
+        }
+
+      }
+
+    }
+  );
+
 
 });
