@@ -1,1001 +1,559 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  width: 100%;
-  min-height: 100%;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #07111f;
+    color: #ffffff;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #75b9e6;
-  color: #ffffff;
-  overflow-x: hidden;
+    overflow: hidden;
 }
 
 button {
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+    font: inherit;
+    border: none;
+    cursor: pointer;
 }
 
-button:active {
-  transform: scale(0.95);
+#birthday-app {
+    width: 100%;
+    min-height: 100vh;
 }
-
-
-/* =========================================
-   SCENES
-   ========================================= */
 
 .scene {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
+    position: fixed;
+    inset: 0;
 
-.scene.hidden {
-  display: none !important;
+    width: 100%;
+    min-height: 100vh;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
 .scene.active {
-  display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 
 /* =========================================
-   OPENING
-   ========================================= */
+   SCENE 1 — OPENING
+========================================= */
 
-#scene-opening {
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(
-      to bottom,
-      #152b59 0%,
-      #315d96 48%,
-      #75b9e6 100%
-    );
+#opening {
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(46, 86, 145, 0.35),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #071a35 0%,
+            #081a32 45%,
+            #040b16 100%
+        );
 }
 
 .night-sky {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
 }
 
 .stars {
-  position: absolute;
-  inset: 0;
-  opacity: 0.55;
+    position: absolute;
+    inset: 0;
 
-  background-image:
-    radial-gradient(
-      circle,
-      #ffffff 1px,
-      transparent 1px
-    );
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
 
-  background-size: 85px 85px;
+    background-size:
+        110px 110px,
+        170px 170px;
+
+    background-position:
+        10px 20px,
+        60px 80px;
+
+    opacity: 0.45;
+
+    animation: stars-drift 18s linear infinite;
+}
+
+@keyframes stars-drift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(25px);
+    }
 }
 
 .opening-content {
-  position: relative;
-  z-index: 5;
+    position: relative;
+    z-index: 2;
 
-  width: min(92%, 600px);
+    width: min(90%, 520px);
 
-  padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  text-align: center;
+    text-align: center;
+
+    padding: 30px 20px;
 }
 
-.portrait-frame {
-  width: min(78vw, 340px);
+.photo-frame {
+    width: min(78vw, 330px);
+    aspect-ratio: 1 / 1;
 
-  margin: 0 auto 25px;
+    padding: 7px;
 
-  padding: 8px;
+    border-radius: 50%;
 
-  border-radius: 24px;
+    background: rgba(255, 255, 255, 0.15);
 
-  background: rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 0 25px rgba(150, 200, 255, 0.35),
+        0 0 70px rgba(80, 140, 220, 0.15);
 
-  box-shadow:
-    0 0 30px rgba(255, 255, 255, 0.45),
-    0 18px 45px rgba(0, 0, 0, 0.25);
+    animation: photo-glow 4s ease-in-out infinite;
 }
 
-.portrait-frame img {
-  display: block;
+.photo-frame img {
+    width: 100%;
+    height: 100%;
 
-  width: 100%;
-  height: auto;
+    display: block;
 
-  max-height: 62vh;
+    object-fit: cover;
 
-  object-fit: contain;
-
-  border-radius: 17px;
+    border-radius: 50%;
 }
 
-.date-text {
-  margin-bottom: 12px;
+@keyframes photo-glow {
+    0%,
+    100% {
+        box-shadow:
+            0 0 25px rgba(150, 200, 255, 0.3),
+            0 0 70px rgba(80, 140, 220, 0.1);
+    }
 
-  font-size: 12px;
-
-  letter-spacing: 3px;
-
-  opacity: 0.8;
+    50% {
+        box-shadow:
+            0 0 35px rgba(180, 220, 255, 0.55),
+            0 0 90px rgba(80, 140, 220, 0.25);
+    }
 }
 
-.opening-content h1 {
-  margin-bottom: 8px;
-
-  font-size:
-    clamp(32px, 8vw, 58px);
-
-  line-height: 1.05;
-}
-
-.opening-content h2 {
-  margin-bottom: 14px;
-
-  font-size:
-    clamp(20px, 5vw, 30px);
-
-  font-weight: normal;
-}
-
-.age-text {
-  margin-bottom: 28px;
-
-  font-size: 18px;
-}
-
-.opening-content button,
-.story-card button,
-.message-container button,
-.cake-scene button {
-  padding: 15px 26px;
-
-  border-radius: 999px;
-
-  background: #ffffff;
-
-  color: #315d96;
-
-  font-size: 16px;
-
-  font-weight: bold;
-
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-
-/* =========================================
-   INTRODUCTION
-   ========================================= */
-
-#scene-introduction {
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #315d96,
-      #75b9e6
-    );
-}
-
-.story-card {
-  position: relative;
-  z-index: 5;
-
-  width: min(90%, 700px);
-
-  padding: 45px 25px;
-
-  text-align: center;
-}
-
-.story-card h1 {
-  margin-bottom: 25px;
-
-  font-size:
-    clamp(30px, 7vw, 50px);
-}
-
-.story-card p {
-  margin-bottom: 18px;
-
-  font-size: 17px;
-
-  line-height: 1.7;
+.opening-text {
+    margin-top: 28px;
 }
 
 .small-title {
-  margin-bottom: 15px;
+    font-size: 0.9rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
 
-  font-size: 12px;
+    opacity: 0.75;
 
-  letter-spacing: 3px;
+    margin-bottom: 8px;
+}
 
-  opacity: 0.75;
+.opening-text h1 {
+    font-size: clamp(2rem, 8vw, 3.6rem);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+
+.age {
+    margin-top: 4px;
+
+    font-size: clamp(3rem, 12vw, 5rem);
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+#begin-button {
+    margin-top: 35px;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+        0 0 20px rgba(120, 180, 255, 0.15);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#begin-button:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 0 30px rgba(120, 180, 255, 0.3);
 }
 
 
 /* =========================================
-   PHOTO SCENE
-   ========================================= */
+   SCENE 2 — SHIBA INU
+========================================= */
 
-#scene-photo {
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #75b9e6,
-      #c9eafa
-    );
-
-  color: #18304f;
+#shiba-scene {
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(80, 125, 190, 0.22),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #081a32,
+            #06101e
+        );
 }
 
-.story-card .large {
-  width: min(82vw, 430px);
+.shiba-container {
+    position: relative;
 
-  margin-bottom: 25px;
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
 }
 
-.story-card .large img {
-  max-height: 58vh;
+#shiba-character {
+    width: min(75vw, 360px);
+    height: 280px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.story-card h1 {
-  margin-bottom: 18px;
+.cake-container {
+    position: absolute;
+
+    bottom: 18%;
+
+    width: 180px;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.story-card button {
-  margin-top: 10px;
+.scene-text {
+    position: absolute;
+
+    bottom: 8%;
+
+    width: min(90%, 500px);
+
+    text-align: center;
 }
 
+#shiba-message {
+    font-size: 1.15rem;
+    line-height: 1.7;
 
-/* =========================================
-   CLOUDS
-   ========================================= */
-
-.cloud {
-  position: absolute;
-
-  width: 150px;
-  height: 55px;
-
-  background: rgba(255, 255, 255, 0.25);
-
-  border-radius: 50px;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-
-  position: absolute;
-
-  background: inherit;
-
-  border-radius: 50%;
-}
-
-.cloud::before {
-  width: 75px;
-  height: 75px;
-
-  left: 25px;
-  bottom: 15px;
-}
-
-.cloud::after {
-  width: 60px;
-  height: 60px;
-
-  right: 20px;
-  bottom: 12px;
+    opacity: 0.9;
 }
 
 
 /* =========================================
-   PLATFORM GAME
-   ========================================= */
+   QUIZ SHARED STYLES
+========================================= */
 
-#scene-platform-game {
-  display: block;
+.quiz-container,
+.result-container,
+.wishes-container {
+    width: min(90%, 620px);
 
-  min-height: 100vh;
+    margin: auto;
 
-  background: #75b9e6;
+    text-align: center;
 }
 
-.game-wrapper {
-  position: relative;
+#personal-quiz,
+#mbti-quiz,
+#mbti-result,
+#birthday-wishes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 100%;
-
-  min-height: 100vh;
-
-  overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(60, 105, 170, 0.2),
+            transparent 50%
+        ),
+        #07111f;
 }
 
-.game-header {
-  position: absolute;
+.quiz-label,
+.result-label,
+.wishes-label {
+    margin-bottom: 18px;
 
-  z-index: 100;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 
-  top: 15px;
-  left: 15px;
-  right: 15px;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  font-size: 10px;
-
-  font-weight: bold;
-
-  letter-spacing: 1px;
-
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.4);
+    opacity: 0.55;
 }
 
+.quiz-container h2,
+.result-container h2,
+.wishes-container h2 {
+    font-size: clamp(1.7rem, 6vw, 2.8rem);
 
-/* =========================================
-   GAME SKY
-   ========================================= */
+    font-weight: 400;
 
-.platform-game {
-  position: relative;
+    line-height: 1.3;
 
-  width: 100%;
-
-  height: calc(100vh - 105px);
-
-  min-height: 420px;
-
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #65b4e5 0%,
-      #9ed7ee 65%,
-      #b9dfa7 100%
-    );
+    margin-bottom: 28px;
 }
 
-.sky-background {
-  position: absolute;
+#personal-question,
+#mbti-question {
+    font-size: clamp(1.1rem, 4vw, 1.45rem);
 
-  inset: 0;
+    line-height: 1.7;
 
-  pointer-events: none;
+    margin-bottom: 28px;
 }
 
+#personal-answer-area,
+#mbti-answer-area {
+    display: flex;
+    flex-direction: column;
 
-/* =========================================
-   GAME CLOUDS
-   ========================================= */
-
-.game-cloud {
-  position: absolute;
-
-  width: 130px;
-  height: 42px;
-
-  background: rgba(255, 255, 255, 0.75);
-
-  border-radius: 50px;
+    gap: 12px;
 }
 
-.game-cloud::before,
-.game-cloud::after {
-  content: "";
+.quiz-answer {
+    width: 100%;
 
-  position: absolute;
+    padding: 16px 20px;
 
-  background: inherit;
+    border-radius: 14px;
 
-  border-radius: 50%;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    text-align: left;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
-.game-cloud::before {
-  width: 65px;
-  height: 65px;
+.quiz-answer:hover {
+    transform: translateY(-2px);
 
-  left: 20px;
-  bottom: 10px;
+    background: rgba(255, 255, 255, 0.12);
+
+    border-color: rgba(255, 255, 255, 0.28);
 }
 
-.game-cloud::after {
-  width: 52px;
-  height: 52px;
+.quiz-answer.selected {
+    background: rgba(100, 155, 220, 0.25);
 
-  right: 15px;
-  bottom: 6px;
+    border-color: rgba(150, 200, 255, 0.6);
 }
 
-.cloud-game-one {
-  top: 16%;
-  left: 8%;
+#personal-next-button,
+#mbti-next-button,
+#birthday-ending-button {
+    margin-top: 25px;
+
+    padding: 13px 27px;
+
+    border-radius: 999px;
+
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    opacity: 0.5;
+
+    transition:
+        opacity 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
-.cloud-game-two {
-  top: 29%;
-  left: 55%;
-
-  transform: scale(0.75);
+#personal-next-button.enabled,
+#mbti-next-button.enabled,
+#birthday-ending-button {
+    opacity: 1;
 }
 
-.cloud-game-three {
-  top: 12%;
-  left: 88%;
+#personal-next-button.enabled:hover,
+#mbti-next-button.enabled:hover,
+#birthday-ending-button:hover {
+    transform: translateY(-2px);
 
-  transform: scale(0.6);
-}
-
-
-/* =========================================
-   HILLS
-   ========================================= */
-
-.hill {
-  position: absolute;
-
-  bottom: 0;
-
-  width: 520px;
-  height: 180px;
-
-  border-radius:
-    50% 50% 0 0;
-
-  background: #83c97a;
-
-  opacity: 0.8;
-}
-
-.hill-one {
-  left: 0;
-}
-
-.hill-two {
-  left: 600px;
+    background: rgba(255, 255, 255, 0.18);
 }
 
 
 /* =========================================
-   GAME WORLD
-   ========================================= */
+   MBTI RESULT
+========================================= */
 
-.game-world {
-  position: absolute;
+#mbti-type {
+    font-size: clamp(3.5rem, 15vw, 7rem);
 
-  left: 0;
-  bottom: 0;
+    letter-spacing: 0.08em;
 
-  width: 5000px;
-  height: 100%;
+    margin-bottom: 5px;
+}
 
-  transition:
-    transform 0.04s linear;
+#mbti-title {
+    font-size: 1.3rem;
+
+    font-weight: 400;
+
+    opacity: 0.8;
+
+    margin-bottom: 25px;
+}
+
+#mbti-description {
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+
+    opacity: 0.85;
+}
+
+#mbti-details {
+    margin-top: 25px;
+
+    line-height: 1.8;
+
+    opacity: 0.75;
 }
 
 
 /* =========================================
-   PLATFORMS
-   ========================================= */
+   BIRTHDAY WISHES
+========================================= */
 
-.platform {
-  position: absolute;
+#wishes-text {
+    max-height: 60vh;
 
-  height: 28px;
+    overflow-y: auto;
 
-  border-radius:
-    8px 8px 0 0;
+    padding: 0 8px;
 
-  background:
-    linear-gradient(
-      to bottom,
-      #5eb64d 0 35%,
-      #8b5a35 35% 100%
-    );
+    font-size: 1.05rem;
 
-  box-shadow:
-    0 5px 0 rgba(0, 0, 0, 0.12);
-}
+    line-height: 2;
 
+    text-align: left;
 
-/* =========================================
-   CHARACTERS
-   ========================================= */
+    white-space: pre-line;
 
-.character {
-  position: absolute;
-
-  z-index: 30;
-
-  width: 60px;
-  height: 70px;
-
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: center;
-
-  font-size: 52px;
-
-  line-height: 1;
-
-  user-select: none;
-
-  pointer-events: none;
-}
-
-.chihuahua {
-  left: 120px;
-  bottom: 28px;
-}
-
-.shibainu {
-  bottom: 28px;
-
-  transform:
-    scaleX(-1);
-}
-
-
-/* =========================================
-   MOBILE CONTROLS
-   ========================================= */
-
-.mobile-controls {
-  position: relative;
-
-  z-index: 200;
-
-  height: 105px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 18px;
-
-  background: #315d96;
-
-  padding:
-    10px 15px;
-
-  touch-action: manipulation;
-}
-
-.mobile-controls button {
-  width: 82px;
-  height: 62px;
-
-  border-radius: 18px;
-
-  background: rgba(255, 255, 255, 0.95);
-
-  color: #315d96;
-
-  font-size: 25px;
-
-  font-weight: bold;
-
-  box-shadow:
-    0 5px 12px rgba(0, 0, 0, 0.18);
-
-  touch-action: manipulation;
-}
-
-.mobile-controls #jumpButton {
-  width: 110px;
-
-  font-size: 15px;
-
-  letter-spacing: 1px;
-}
-
-
-/* =========================================
-   GAME MESSAGE
-   ========================================= */
-
-.game-message {
-  position: absolute;
-
-  z-index: 250;
-
-  left: 50%;
-
-  bottom: 118px;
-
-  transform:
-    translateX(-50%);
-
-  width: 90%;
-
-  text-align: center;
-
-  font-size: 13px;
-
-  font-weight: bold;
-
-  color: #ffffff;
-
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.5);
-
-  pointer-events: none;
-}
-
-
-/* =========================================
-   CAKE SCENE
-   ========================================= */
-
-#scene-cake {
-  align-items: center;
-  justify-content: center;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #4b76ad,
-      #172b59
-    );
-}
-
-.cake-scene {
-  width: min(94%, 760px);
-
-  padding: 40px 20px;
-
-  text-align: center;
-}
-
-.cake-scene h1 {
-  margin-bottom: 18px;
-
-  font-size:
-    clamp(30px, 8vw, 55px);
-}
-
-.cake-intro {
-  margin-bottom: 30px;
-
-  font-size: 17px;
-
-  line-height: 1.7;
-}
-
-.couple {
-  display: flex;
-
-  align-items: flex-end;
-
-  justify-content: center;
-
-  gap: 25px;
-
-  margin-bottom: 30px;
-}
-
-.ending-character {
-  font-size: 70px;
-
-  line-height: 1;
-}
-
-.cake-big {
-  position: relative;
-}
-
-.big-cake {
-  font-size: 105px;
-
-  line-height: 1;
-}
-
-.big-flame {
-  position: absolute;
-
-  left: 50%;
-
-  top: -22px;
-
-  transform:
-    translateX(-50%);
-
-  font-size: 34px;
-
-  animation:
-    flameFlicker 0.5s infinite alternate;
-}
-
-@keyframes flameFlicker {
-
-  from {
-    transform:
-      translateX(-50%)
-      scale(0.9);
-  }
-
-  to {
-    transform:
-      translateX(-50%)
-      scale(1.15);
-  }
-
-}
-
-
-/* =========================================
-   BIRTHDAY MESSAGE
-   ========================================= */
-
-#scene-message {
-  align-items: flex-start;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #172b59,
-      #315d96
-    );
-}
-
-.message-container {
-  position: relative;
-  z-index: 5;
-
-  width: min(92%, 780px);
-
-  padding:
-    55px 20px 70px;
-
-  text-align: center;
-}
-
-.message-container h1 {
-  margin-bottom: 8px;
-
-  font-size:
-    clamp(28px, 7vw, 48px);
-
-  line-height: 1.15;
-}
-
-.message-container h2 {
-  margin-bottom: 38px;
-
-  font-size: 22px;
-
-  font-weight: normal;
-}
-
-.birthday-letter {
-  text-align: left;
-
-  font-size: 16px;
-
-  line-height: 1.85;
-}
-
-.birthday-letter p {
-  margin-bottom: 28px;
-}
-
-.message-container button {
-  margin-top: 10px;
-}
-
-
-/* =========================================
-   BIBLE VERSE
-   ========================================= */
-
-#scene-bible {
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #315d96,
-      #172b59
-    );
-}
-
-#scene-bible .message-container {
-  text-align: center;
-}
-
-blockquote {
-  max-width: 650px;
-
-  margin:
-    30px auto;
-
-  font-size:
-    clamp(22px, 5vw, 34px);
-
-  line-height: 1.5;
-
-  font-style: italic;
-}
-
-
-/* =========================================
-   FINAL SCENE
-   ========================================= */
-
-#scene-final {
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #172b59,
-      #315d96
-    );
-}
-
-.final-content {
-  width: min(92%, 650px);
-
-  padding: 45px 20px;
-
-  text-align: center;
-
-  font-size: 17px;
-
-  line-height: 1.8;
-}
-
-.final-content h1 {
-  margin:
-    15px 0 8px;
-
-  font-size:
-    clamp(32px, 8vw, 55px);
-
-  line-height: 1.1;
-}
-
-.final-content h2 {
-  margin-bottom: 25px;
-
-  font-weight: normal;
-}
-
-.final-content p {
-  margin-bottom: 18px;
-}
-
-.final-portrait {
-  width: min(75vw, 300px);
-
-  margin-bottom: 25px;
+    scrollbar-width: thin;
 }
 
 
 /* =========================================
    MOBILE
-   ========================================= */
+========================================= */
 
 @media (max-width: 600px) {
 
-  .opening-content {
-    padding:
-      25px 15px;
-  }
+    .opening-content {
+        padding: 20px 15px;
+    }
 
-  .portrait-frame {
-    width: min(78vw, 310px);
-  }
+    .photo-frame {
+        width: min(72vw, 290px);
+    }
 
-  .story-card {
-    padding:
-      35px 20px;
-  }
+    .opening-text {
+        margin-top: 22px;
+    }
 
-  .story-card p {
-    font-size: 16px;
-  }
+    #begin-button {
+        margin-top: 28px;
+    }
 
-  .platform-game {
-    height: calc(100vh - 105px);
+    .shiba-container {
+        padding: 20px;
+    }
 
-    min-height: 360px;
-  }
+    #shiba-character {
+        width: 85vw;
+        height: 260px;
+    }
 
-  .game-header {
-    font-size: 9px;
-  }
+    .cake-container {
+        bottom: 20%;
+    }
 
-  .character {
-    font-size: 48px;
-  }
+    .quiz-container,
+    .result-container,
+    .wishes-container {
+        width: 88%;
+    }
 
-  .mobile-controls {
-    gap: 12px;
-  }
-
-  .mobile-controls button {
-    width: 75px;
-    height: 58px;
-  }
-
-  .mobile-controls #jumpButton {
-    width: 100px;
-  }
-
-  .birthday-letter {
-    font-size: 15px;
-
-    line-height: 1.8;
-  }
-
-  .couple {
-    gap: 12px;
-  }
-
-  .ending-character {
-    font-size: 58px;
-  }
-
-  .big-cake {
-    font-size: 85px;
-  }
-
-}
-
-
-/* =========================================
-   VERY SMALL PHONES
-   ========================================= */
-
-@media (max-width: 380px) {
-
-  .mobile-controls {
-    gap: 8px;
-  }
-
-  .mobile-controls button {
-    width: 68px;
-    height: 55px;
-  }
-
-  .mobile-controls #jumpButton {
-    width: 90px;
-  }
-
+    .quiz-answer {
+        padding: 14px 16px;
+    }
 }
