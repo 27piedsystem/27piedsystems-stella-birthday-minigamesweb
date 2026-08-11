@@ -1,142 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Chihuahua</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#071525"
+    >
+
+    <title>
+        Happy Birthday, Stella
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
+
     <main id="birthday-app">
-        <!-- ================================
-             SCENE 1 — OPENING
-        ================================= -->
-        <section id="opening" class="scene active">
+
+
+        <!-- ==================================================
+             SCENE 01
+             OPENING
+        =================================================== -->
+
+        <section
+            id="opening"
+            class="scene active"
+            aria-label="Birthday opening"
+        >
+
             <div class="night-sky">
-                <div class="stars"></div>
+
+                <div
+                    class="stars"
+                    aria-hidden="true"
+                ></div>
+
+
                 <div class="opening-content">
+
+
+                    <!-- PHOTO -->
+
                     <div class="photo-frame">
+
                         <img
                             src="stella-photo-1.jpeg"
-                            alt="Birthday photo"
+                            alt="Stella Halim"
                         >
+
                     </div>
+
+
+                    <!-- INTRODUCTION -->
+
                     <div class="opening-text">
-                        <p class="small-title">Happy Birthday</p>
-                        <h1>My Chihuahua</h1>
-                        <p class="age">20</p>
+
+                        <p class="opening-name">
+                            Stella Halim
+                        </p>
+
+                        <h1 class="opening-age">
+                            20 years old
+                        </h1>
+
+                        <p class="opening-message">
+                            dear my chihuahua,<br>
+                            here begin the adventure
+                        </p>
+
                     </div>
-                    <button id="begin-button">
+
+
+                    <!-- START -->
+
+                    <button
+                        id="begin-button"
+                        type="button"
+                    >
                         Begin the Adventure
                     </button>
+
+
                 </div>
+
             </div>
+
         </section>
-        <!-- ================================
-             SCENE 2 — SHIBA INU
-        ================================= -->
-        <section id="shiba-scene" class="scene">
+
+
+
+        <!-- ==================================================
+             SCENE 02
+             SHIBA INU + BIRTHDAY CAKE
+        =================================================== -->
+
+        <section
+            id="shiba-scene"
+            class="scene"
+            aria-label="Shiba Inu birthday scene"
+        >
+
             <div class="shiba-container">
-                <div id="shiba-character">
-                    <!-- Shiba Inu SVG will be added later -->
+
+
+                <!--
+                    The Shiba Inu will be created with SVG/code.
+                    No external Shiba image is required.
+                -->
+
+                <div
+                    id="shiba-character"
+                    aria-label="Shiba Inu character"
+                >
+
+                    <!-- SVG CHARACTER WILL GO HERE -->
+
                 </div>
-                <div class="cake-container">
-                    <!-- Birthday cake will be added later -->
+
+
+                <!--
+                    Birthday cake held by the Shiba Inu.
+                    The cake will also be created with code.
+                -->
+
+                <div
+                    id="birthday-cake"
+                    class="cake-container"
+                    aria-label="Birthday cake"
+                >
+
+                    <!-- CAKE WILL GO HERE -->
+
                 </div>
+
+
+                <!-- SCENE MESSAGE -->
+
                 <div class="scene-text">
+
                     <p id="shiba-message"></p>
+
                 </div>
+
+
             </div>
+
         </section>
-        <!-- ================================
-             SCENE 3 — PERSONAL QUESTIONS
-        ================================= -->
-        <section id="personal-quiz" class="scene">
+
+
+
+        <!-- ==================================================
+             SCENE 03
+             PERSONAL QUESTIONS
+             QUESTIONS 1–8
+        =================================================== -->
+
+        <section
+            id="personal-quiz"
+            class="scene"
+            aria-label="Personal birthday questions"
+        >
+
             <div class="quiz-container">
-                <p class="quiz-label">A little something about you</p>
-                <h2 id="personal-question-number">
-                    Question 1
-                </h2>
-                <div id="personal-question">
-                    <!-- Question will be inserted by JavaScript -->
+
+
+                <div class="quiz-header">
+
+                    <p class="quiz-label">
+                        A little something about you
+                    </p>
+
+                    <div
+                        id="personal-progress"
+                        class="quiz-progress"
+                    >
+
+                        <span
+                            id="personal-progress-current"
+                        >
+                            1
+                        </span>
+
+                        <span>
+                            /
+                        </span>
+
+                        <span>
+                            8
+                        </span>
+
+                    </div>
+
                 </div>
-                <div id="personal-answer-area">
-                    <!-- Answers will be inserted by JavaScript -->
+
+
+                <!-- QUESTION -->
+
+                <div class="question-area">
+
+                    <p
+                        id="personal-question-number"
+                        class="question-number"
+                    >
+                        Question 1
+                    </p>
+
+                    <h2
+                        id="personal-question"
+                        class="question-text"
+                    >
+                        <!-- Question inserted by JavaScript -->
+                    </h2>
+
                 </div>
-                <button id="personal-next-button">
+
+
+                <!-- ANSWERS -->
+
+                <div
+                    id="personal-answer-area"
+                    class="answer-area"
+                >
+
+                    <!-- Answers inserted by JavaScript -->
+
+                </div>
+
+
+                <!-- CONTINUE -->
+
+                <button
+                    id="personal-next-button"
+                    class="quiz-next-button"
+                    type="button"
+                    disabled
+                >
                     Continue
                 </button>
+
+
             </div>
+
         </section>
-        <!-- ================================
-             SCENE 4 — MBTI TEST
-        ================================= -->
-        <section id="mbti-quiz" class="scene">
+
+
+
+        <!-- ==================================================
+             SCENE 04
+             MBTI PERSONALITY TEST
+             QUESTIONS 9–28
+        =================================================== -->
+
+        <section
+            id="mbti-quiz"
+            class="scene"
+            aria-label="MBTI personality test"
+        >
+
             <div class="quiz-container">
-                <p class="quiz-label">A little more about your personality</p>
-                <h2 id="mbti-question-number">
-                    Question 1 of 20
-                </h2>
-                <div id="mbti-question">
-                    <!-- MBTI question will be inserted by JavaScript -->
+
+
+                <div class="quiz-header">
+
+                    <p class="quiz-label">
+                        Let's see how your mind works
+                    </p>
+
+                    <div
+                        id="mbti-progress"
+                        class="quiz-progress"
+                    >
+
+                        <span
+                            id="mbti-progress-current"
+                        >
+                            1
+                        </span>
+
+                        <span>
+                            /
+                        </span>
+
+                        <span>
+                            20
+                        </span>
+
+                    </div>
+
                 </div>
-                <div id="mbti-answer-area">
-                    <!-- MBTI answers will be inserted by JavaScript -->
+
+
+                <!-- QUESTION -->
+
+                <div class="question-area">
+
+                    <p
+                        id="mbti-question-number"
+                        class="question-number"
+                    >
+                        Question 1 of 20
+                    </p>
+
+                    <h2
+                        id="mbti-question"
+                        class="question-text"
+                    >
+                        <!-- MBTI question inserted by JavaScript -->
+                    </h2>
+
                 </div>
-                <button id="mbti-next-button">
+
+
+                <!-- ANSWERS -->
+
+                <div
+                    id="mbti-answer-area"
+                    class="answer-area"
+                >
+
+                    <!-- MBTI answers inserted by JavaScript -->
+
+                </div>
+
+
+                <!-- CONTINUE -->
+
+                <button
+                    id="mbti-next-button"
+                    class="quiz-next-button"
+                    type="button"
+                    disabled
+                >
                     Continue
                 </button>
+
+
             </div>
+
         </section>
-        <!-- ================================
-             SCENE 5 — MBTI RESULT
-        ================================= -->
-        <section id="mbti-result" class="scene">
+
+
+
+        <!-- ==================================================
+             SCENE 05
+             MBTI RESULT
+        =================================================== -->
+
+        <section
+            id="mbti-result"
+            class="scene"
+            aria-label="MBTI personality result"
+        >
+
             <div class="result-container">
+
+
                 <p class="result-label">
                     Your personality
                 </p>
-                <h2 id="mbti-type">
+
+
+                <p class="result-introduction">
+                    after all those questions...
+                </p>
+
+
+                <!-- FOUR LETTER TYPE -->
+
+                <h2
+                    id="mbti-type"
+                    class="mbti-type"
+                >
                     INFJ
                 </h2>
-                <h3 id="mbti-title">
-                    <!-- Personality title -->
+
+
+                <!-- TYPE NAME -->
+
+                <h3
+                    id="mbti-title"
+                    class="mbti-title"
+                >
+                    The Advocate
                 </h3>
-                <p id="mbti-description">
-                    <!-- Personality description -->
+
+
+                <!-- DESCRIPTION -->
+
+                <p
+                    id="mbti-description"
+                    class="mbti-description"
+                >
+                    <!-- Personality description inserted by JavaScript -->
                 </p>
-                <div id="mbti-details">
-                    <!-- Personality details -->
+
+
+                <!-- DETAILS -->
+
+                <div
+                    id="mbti-details"
+                    class="mbti-details"
+                >
+
+                    <!-- Personality details inserted by JavaScript -->
+
                 </div>
-                <button id="birthday-ending-button">
+
+
+                <!-- CONTINUE -->
+
+                <button
+                    id="birthday-ending-button"
+                    type="button"
+                >
                     Continue
                 </button>
+
+
             </div>
+
         </section>
-        <!-- ================================
-             SCENE 6 — BIRTHDAY WISHES
-        ================================= -->
-        <section id="birthday-wishes" class="scene">
+
+
+
+        <!-- ==================================================
+             SCENE 06
+             FINAL BIRTHDAY WISHES
+        =================================================== -->
+
+        <section
+            id="birthday-wishes"
+            class="scene"
+            aria-label="Birthday wishes"
+        >
+
             <div class="wishes-container">
+
+
                 <p class="wishes-label">
                     For you
                 </p>
-                <h2>
-                    Happy Birthday
+
+
+                <h2 class="wishes-title">
+                    Happy Birthday, Stella
                 </h2>
-                <div id="wishes-text">
-                    <!-- Your long birthday wishes will go here -->
+
+
+                <!--
+                    Your long birthday wishes will be inserted here.
+                    We will use the exact version you prepared.
+                -->
+
+                <div
+                    id="wishes-text"
+                    class="wishes-text"
+                >
+
+                    <!-- FINAL BIRTHDAY MESSAGE -->
+
                 </div>
+
+
             </div>
+
         </section>
+
+
     </main>
-    <!-- Background music -->
+
+
+
+    <!-- ==================================================
+         BACKGROUND MUSIC
+    =================================================== -->
+
     <audio
         id="background-music"
         src="birthday-music.mp3"
         loop
-        preload="auto">
-    </audio>
+        preload="auto"
+    ></audio>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    =================================================== -->
+
     <script src="script.js"></script>
+
+
 </body>
+
 </html>
