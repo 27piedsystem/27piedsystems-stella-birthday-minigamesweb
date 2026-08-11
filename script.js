@@ -8,46 +8,78 @@ const scenes = {
     wishes: document.getElementById("birthday-wishes")
 };
 
-function showScene(scene) {
-    Object.values(scenes).forEach(item => {
-        item.classList.remove("active");
-    });
 
-    scene.classList.add("active");
-}
-
-
-/* MUSIC */
+/* =========================
+   BACKGROUND MUSIC
+========================= */
 
 const music = document.getElementById("background-music");
 
 function startMusic() {
-    if (!music) return;
+
+    if (!music) {
+        return;
+    }
 
     music.volume = 0.35;
 
-    music.play().catch(() => {
-        console.log("Music could not autoplay.");
-    });
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+
+        playPromise.catch(() => {
+            console.log("Waiting for music permission.");
+        });
+
+    }
 }
 
 
-/* OPENING */
+/* =========================
+   SCENE CONTROL
+========================= */
 
-const beginButton = document.getElementById("begin-button");
+function showScene(scene) {
+
+    Object.values(scenes).forEach(currentScene => {
+
+        if (currentScene) {
+            currentScene.classList.remove("active");
+        }
+
+    });
+
+    if (scene) {
+        scene.classList.add("active");
+    }
+}
+
+
+/* =========================
+   OPENING
+========================= */
+
+const beginButton =
+    document.getElementById("begin-button");
+
 
 beginButton.addEventListener("click", () => {
+
     startMusic();
 
     showScene(scenes.personalQuiz);
 
     startPersonalQuiz();
+
 });
 
 
-/* PERSONAL QUESTIONS */
+/* =========================
+   PERSONAL QUESTIONS
+========================= */
 
 const personalQuestions = [
+
     {
         question: "what’s the best wish you have for your birthday this year?",
         answers: [
@@ -127,43 +159,68 @@ const personalQuestions = [
             "let's see what he thinks"
         ]
     }
+
 ];
 
+
 let personalIndex = 0;
+
 let personalAnswers = [];
+
 
 const personalQuestion =
     document.getElementById("personal-question");
 
 const personalQuestionNumber =
-    document.getElementById("personal-question-number");
+    document.getElementById(
+        "personal-question-number"
+    );
 
 const personalProgress =
-    document.getElementById("personal-progress-current");
+    document.getElementById(
+        "personal-progress-current"
+    );
+
+const personalProgressBar =
+    document.getElementById(
+        "personal-progress-bar"
+    );
 
 const personalAnswerArea =
-    document.getElementById("personal-answer-area");
+    document.getElementById(
+        "personal-answer-area"
+    );
 
 const personalNextButton =
-    document.getElementById("personal-next-button");
+    document.getElementById(
+        "personal-next-button"
+    );
 
 
 function startPersonalQuiz() {
+
     personalIndex = 0;
+
     personalAnswers = [];
 
     renderPersonalQuestion();
+
 }
 
 
 function renderPersonalQuestion() {
-    const current = personalQuestions[personalIndex];
+
+    const current =
+        personalQuestions[personalIndex];
 
     personalQuestionNumber.textContent =
-        `question ${personalIndex + 1}`;
+        `question ${personalIndex + 1} of ${personalQuestions.length}`;
 
     personalProgress.textContent =
         personalIndex + 1;
+
+    personalProgressBar.style.width =
+        `${((personalIndex + 1) / personalQuestions.length) * 100}%`;
 
     personalQuestion.textContent =
         current.question;
@@ -172,14 +229,18 @@ function renderPersonalQuestion() {
 
     personalNextButton.disabled = true;
 
+
     current.answers.forEach((answer, index) => {
 
         const button =
             document.createElement("button");
 
-        button.className = "quiz-answer";
         button.type = "button";
+
+        button.className = "quiz-answer";
+
         button.textContent = answer;
+
 
         button.addEventListener("click", () => {
 
@@ -188,327 +249,409 @@ function renderPersonalQuestion() {
                     "#personal-answer-area .quiz-answer"
                 )
                 .forEach(currentButton => {
-                    currentButton.classList.remove("selected");
+
+                    currentButton.classList.remove(
+                        "selected"
+                    );
+
                 });
+
 
             button.classList.add("selected");
 
-            personalAnswers[personalIndex] = index;
+            personalAnswers[personalIndex] =
+                index;
 
-            personalNextButton.disabled = false;
+            personalNextButton.disabled =
+                false;
+
         });
 
+
         personalAnswerArea.appendChild(button);
+
     });
+
 }
 
 
-personalNextButton.addEventListener("click", () => {
+personalNextButton.addEventListener(
+    "click",
+    () => {
 
-    if (
-        personalAnswers[personalIndex] === undefined
-    ) {
-        return;
+        if (
+            personalAnswers[personalIndex] ===
+            undefined
+        ) {
+            return;
+        }
+
+
+        personalIndex++;
+
+
+        if (
+            personalIndex <
+            personalQuestions.length
+        ) {
+
+            renderPersonalQuestion();
+
+        } else {
+
+            showScene(
+                scenes.mbtiQuiz
+            );
+
+            startMBTIQuiz();
+
+        }
+
     }
-
-    personalIndex++;
-
-    if (
-        personalIndex < personalQuestions.length
-    ) {
-
-        renderPersonalQuestion();
-
-    } else {
-
-        showScene(scenes.mbtiQuiz);
-
-        startMBTIQuiz();
-    }
-});
+);
 
 
-/* =====================================================
+/* =========================
    MBTI QUESTIONS
-===================================================== */
+========================= */
 
 const mbtiQuestions = [
 
     {
-        question: "after spending a lot of time around people, you usually...",
+        question:
+            "after spending a lot of time around people, you usually...",
         answers: [
             {
-                text: "feel energized and want to keep socializing",
+                text:
+                    "feel energized and want to keep socializing",
                 type: "E"
             },
             {
-                text: "need quiet time to recharge",
+                text:
+                    "need quiet time to recharge",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "when you meet someone new, you usually...",
+        question:
+            "when you meet someone new, you usually...",
         answers: [
             {
-                text: "start talking naturally",
+                text:
+                    "start talking naturally",
                 type: "E"
             },
             {
-                text: "observe them before opening up",
+                text:
+                    "observe them before opening up",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "when something exciting happens, you usually...",
+        question:
+            "when something exciting happens, you usually...",
         answers: [
             {
-                text: "tell someone about it immediately",
+                text:
+                    "tell someone about it immediately",
                 type: "E"
             },
             {
-                text: "process it privately first",
+                text:
+                    "process it privately first",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "your ideal weekend is usually...",
+        question:
+            "your ideal weekend is usually...",
         answers: [
             {
-                text: "making plans and being around people",
+                text:
+                    "making plans and being around people",
                 type: "E"
             },
             {
-                text: "having personal time and doing your own thing",
+                text:
+                    "having personal time and doing your own thing",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "when learning something new, you prefer...",
+        question:
+            "when learning something new, you prefer...",
         answers: [
             {
-                text: "real examples and practical details",
+                text:
+                    "real examples and practical details",
                 type: "S"
             },
             {
-                text: "the bigger idea and possibilities",
+                text:
+                    "the bigger idea and possibilities",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "when remembering an event, you usually remember...",
+        question:
+            "when remembering an event, you usually remember...",
         answers: [
             {
-                text: "specific details of what happened",
+                text:
+                    "specific details of what happened",
                 type: "S"
             },
             {
-                text: "the overall feeling and meaning",
+                text:
+                    "the overall feeling and meaning",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "when someone explains a problem, you focus more on...",
+        question:
+            "when someone explains a problem, you focus more on...",
         answers: [
             {
-                text: "what actually happened",
+                text:
+                    "what actually happened",
                 type: "S"
             },
             {
-                text: "what might be behind it",
+                text:
+                    "what might be behind it",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "you are generally more interested in...",
+        question:
+            "you are generally more interested in...",
         answers: [
             {
-                text: "what is happening right now",
+                text:
+                    "what is happening right now",
                 type: "S"
             },
             {
-                text: "what could happen in the future",
+                text:
+                    "what could happen in the future",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "when making an important decision, you usually trust...",
+        question:
+            "when making an important decision, you usually trust...",
         answers: [
             {
-                text: "logic and objective reasoning",
+                text:
+                    "logic and objective reasoning",
                 type: "T"
             },
             {
-                text: "your values and how people will feel",
+                text:
+                    "your values and how people will feel",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "when a friend asks for advice, you usually...",
+        question:
+            "when a friend asks for advice, you usually...",
         answers: [
             {
-                text: "help analyze the problem",
+                text:
+                    "help analyze the problem",
                 type: "T"
             },
             {
-                text: "make sure they feel understood first",
+                text:
+                    "make sure they feel understood first",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "during an argument, what matters more to you?",
+        question:
+            "during an argument, what matters more to you?",
         answers: [
             {
-                text: "finding what is logically correct",
+                text:
+                    "finding what is logically correct",
                 type: "T"
             },
             {
-                text: "protecting the relationship and feelings",
+                text:
+                    "protecting the relationship and feelings",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "when giving criticism, you usually...",
+        question:
+            "when giving criticism, you usually...",
         answers: [
             {
-                text: "focus directly on what needs improvement",
+                text:
+                    "focus directly on what needs improvement",
                 type: "T"
             },
             {
-                text: "think carefully about how they will receive it",
+                text:
+                    "think carefully about how they will receive it",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "when you have an important task, you prefer to...",
+        question:
+            "when you have an important task, you prefer to...",
         answers: [
             {
-                text: "plan it and finish it early",
+                text:
+                    "plan it and finish it early",
                 type: "J"
             },
             {
-                text: "keep your options open",
+                text:
+                    "keep your options open",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "a sudden change of plans usually makes you feel...",
+        question:
+            "a sudden change of plans usually makes you feel...",
         answers: [
             {
-                text: "uncomfortable because you had a plan",
+                text:
+                    "uncomfortable because you had a plan",
                 type: "J"
             },
             {
-                text: "fine because you can adapt",
+                text:
+                    "fine because you can adapt",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "your ideal daily routine is...",
+        question:
+            "your ideal daily routine is...",
         answers: [
             {
-                text: "structured and predictable",
+                text:
+                    "structured and predictable",
                 type: "J"
             },
             {
-                text: "flexible and spontaneous",
+                text:
+                    "flexible and spontaneous",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "when preparing for a trip, you usually...",
+        question:
+            "when preparing for a trip, you usually...",
         answers: [
             {
-                text: "plan important details beforehand",
+                text:
+                    "plan important details beforehand",
                 type: "J"
             },
             {
-                text: "figure things out as you go",
+                text:
+                    "figure things out as you go",
                 type: "P"
             }
         ]
     },
 
     {
-        question: "when you're overwhelmed, you usually want to...",
+        question:
+            "when you're overwhelmed, you usually want to...",
         answers: [
             {
-                text: "talk it through with someone",
+                text:
+                    "talk it through with someone",
                 type: "E"
             },
             {
-                text: "be alone and sort it out yourself",
+                text:
+                    "be alone and sort it out yourself",
                 type: "I"
             }
         ]
     },
 
     {
-        question: "when imagining your future, you think more about...",
+        question:
+            "when imagining your future, you think more about...",
         answers: [
             {
-                text: "practical steps that could happen",
+                text:
+                    "practical steps that could happen",
                 type: "S"
             },
             {
-                text: "different possibilities",
+                text:
+                    "different possibilities",
                 type: "N"
             }
         ]
     },
 
     {
-        question: "if two choices are equally logical, you would choose the one...",
+        question:
+            "if two choices are equally logical, you would choose the one...",
         answers: [
             {
-                text: "that makes the most objective sense",
+                text:
+                    "that makes the most objective sense",
                 type: "T"
             },
             {
-                text: "that feels most right personally",
+                text:
+                    "that feels most right personally",
                 type: "F"
             }
         ]
     },
 
     {
-        question: "if you suddenly have a completely free day, you would rather...",
+        question:
+            "if you suddenly have a completely free day, you would rather...",
         answers: [
             {
-                text: "know roughly what you're going to do",
+                text:
+                    "know roughly what you're going to do",
                 type: "J"
             },
             {
-                text: "decide as the day happens",
+                text:
+                    "decide as the day happens",
                 type: "P"
             }
         ]
@@ -518,6 +661,7 @@ const mbtiQuestions = [
 
 
 let mbtiIndex = 0;
+
 
 let mbtiScores = {
     E: 0,
@@ -532,19 +676,34 @@ let mbtiScores = {
 
 
 const mbtiQuestion =
-    document.getElementById("mbti-question");
+    document.getElementById(
+        "mbti-question"
+    );
 
 const mbtiQuestionNumber =
-    document.getElementById("mbti-question-number");
+    document.getElementById(
+        "mbti-question-number"
+    );
 
 const mbtiProgress =
-    document.getElementById("mbti-progress-current");
+    document.getElementById(
+        "mbti-progress-current"
+    );
+
+const mbtiProgressBar =
+    document.getElementById(
+        "mbti-progress-bar"
+    );
 
 const mbtiAnswerArea =
-    document.getElementById("mbti-answer-area");
+    document.getElementById(
+        "mbti-answer-area"
+    );
 
 const mbtiNextButton =
-    document.getElementById("mbti-next-button");
+    document.getElementById(
+        "mbti-next-button"
+    );
 
 
 function startMBTIQuiz() {
@@ -563,6 +722,7 @@ function startMBTIQuiz() {
     };
 
     renderMBTIQuestion();
+
 }
 
 
@@ -571,99 +731,138 @@ function renderMBTIQuestion() {
     const current =
         mbtiQuestions[mbtiIndex];
 
+
     mbtiQuestionNumber.textContent =
         `question ${mbtiIndex + 1} of 20`;
+
 
     mbtiProgress.textContent =
         mbtiIndex + 1;
 
+
+    mbtiProgressBar.style.width =
+        `${((mbtiIndex + 1) / 20) * 100}%`;
+
+
     mbtiQuestion.textContent =
         current.question;
 
+
     mbtiAnswerArea.innerHTML = "";
 
-    delete mbtiAnswerArea.dataset.selected;
+    mbtiAnswerArea.dataset.selected = "";
 
     mbtiNextButton.disabled = true;
+
 
     current.answers.forEach(answer => {
 
         const button =
             document.createElement("button");
 
-        button.className = "quiz-answer";
-
         button.type = "button";
+
+        button.className = "quiz-answer";
 
         button.textContent =
             answer.text;
 
-        button.addEventListener("click", () => {
 
-            document
-                .querySelectorAll(
-                    "#mbti-answer-area .quiz-answer"
-                )
-                .forEach(currentButton => {
+        button.addEventListener(
+            "click",
+            () => {
 
-                    currentButton.classList.remove(
-                        "selected"
-                    );
+                document
+                    .querySelectorAll(
+                        "#mbti-answer-area .quiz-answer"
+                    )
+                    .forEach(currentButton => {
 
-                });
+                        currentButton.classList.remove(
+                            "selected"
+                        );
 
-            button.classList.add("selected");
+                    });
 
-            mbtiAnswerArea.dataset.selected =
-                answer.type;
 
-            mbtiNextButton.disabled = false;
-        });
+                button.classList.add(
+                    "selected"
+                );
 
-        mbtiAnswerArea.appendChild(button);
+
+                mbtiAnswerArea.dataset.selected =
+                    answer.type;
+
+
+                mbtiNextButton.disabled =
+                    false;
+
+            }
+        );
+
+
+        mbtiAnswerArea.appendChild(
+            button
+        );
+
     });
+
 }
 
 
-mbtiNextButton.addEventListener("click", () => {
+mbtiNextButton.addEventListener(
+    "click",
+    () => {
 
-    const selected =
-        mbtiAnswerArea.dataset.selected;
+        const selected =
+            mbtiAnswerArea.dataset.selected;
 
-    if (!selected) {
-        return;
+
+        if (!selected) {
+            return;
+        }
+
+
+        mbtiScores[selected]++;
+
+
+        mbtiIndex++;
+
+
+        if (
+            mbtiIndex <
+            mbtiQuestions.length
+        ) {
+
+            renderMBTIQuestion();
+
+        } else {
+
+            /*
+                QUESTION 20 FINISHED
+
+                ↓
+
+                STELLA PHOTO 2
+
+                ↓
+
+                MBTI RESULT
+            */
+
+            showScene(
+                scenes.secondPhoto
+            );
+
+        }
+
     }
-
-    mbtiScores[selected]++;
-
-    mbtiIndex++;
-
-    /*
-       QUESTION 20 FINISHED
-       ↓
-       STELLA PHOTO 2
-       ↓
-       MBTI RESULT
-    */
-
-    if (
-        mbtiIndex < mbtiQuestions.length
-    ) {
-
-        renderMBTIQuestion();
-
-    } else {
-
-        showScene(
-            scenes.secondPhoto
-        );
-    }
-});
+);
 
 
-/* =====================================================
-   PHOTO 2 → MBTI RESULT
-===================================================== */
+/* =========================
+   PHOTO 2
+========================= */
 
 const photoContinueButton =
     document.getElementById(
@@ -681,6 +880,10 @@ photoContinueButton.addEventListener(
 );
 
 
+/* =========================
+   CALCULATE MBTI
+========================= */
+
 function calculateMBTI() {
 
     const first =
@@ -688,20 +891,24 @@ function calculateMBTI() {
             ? "E"
             : "I";
 
+
     const second =
         mbtiScores.S >= mbtiScores.N
             ? "S"
             : "N";
+
 
     const third =
         mbtiScores.T >= mbtiScores.F
             ? "T"
             : "F";
 
+
     const fourth =
         mbtiScores.J >= mbtiScores.P
             ? "J"
             : "P";
+
 
     const type =
         first +
@@ -709,13 +916,15 @@ function calculateMBTI() {
         third +
         fourth;
 
+
     showMBTIResult(type);
+
 }
 
 
-/* =====================================================
+/* =========================
    MBTI RESULTS
-===================================================== */
+========================= */
 
 const personalityTypes = {
 
@@ -855,34 +1064,40 @@ function showMBTIResult(type) {
     const personality =
         personalityTypes[type];
 
+
     document.getElementById(
         "mbti-type"
     ).textContent = type;
+
 
     document.getElementById(
         "mbti-title"
     ).textContent =
         personality.title;
 
+
     document.getElementById(
         "mbti-description"
     ).textContent =
         personality.description;
+
 
     document.getElementById(
         "mbti-details"
     ).textContent =
         personality.details;
 
+
     showScene(
         scenes.mbtiResult
     );
+
 }
 
 
-/* =====================================================
-   RESULT → SHIBA
-===================================================== */
+/* =========================
+   RESULT → SHIBAINU
+========================= */
 
 const resultContinueButton =
     document.getElementById(
@@ -902,9 +1117,9 @@ resultContinueButton.addEventListener(
 );
 
 
-/* =====================================================
-   SHIBA → WISHES
-===================================================== */
+/* =========================
+   SHIBAINU → WISHES
+========================= */
 
 const wishesButton =
     document.getElementById(
@@ -924,9 +1139,9 @@ wishesButton.addEventListener(
 );
 
 
-/* =====================================================
+/* =========================
    FINAL WISHES
-===================================================== */
+========================= */
 
 const wishesText =
     document.getElementById(
