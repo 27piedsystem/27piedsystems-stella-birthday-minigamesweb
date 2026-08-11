@@ -1,42 +1,64 @@
+/* ==================================================
+   GLOBAL RESET
+================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html,
-body {
+html {
     width: 100%;
-    min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #07111f;
-    color: #ffffff;
+    height: 100%;
 }
 
 body {
+    width: 100%;
+    min-height: 100%;
     overflow: hidden;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: #ffffff;
+    background: #071525;
 }
 
 button {
     font: inherit;
-    border: none;
-    cursor: pointer;
 }
 
+
+/* ==================================================
+   MAIN APP
+================================================== */
+
 #birthday-app {
+    position: relative;
+
     width: 100%;
     min-height: 100vh;
 }
+
+
+/* ==================================================
+   SCENE SYSTEM
+================================================== */
 
 .scene {
     position: fixed;
     inset: 0;
 
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
 
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
 
     transition:
@@ -47,26 +69,27 @@ button {
 .scene.active {
     opacity: 1;
     visibility: visible;
+
     pointer-events: auto;
 }
 
 
-/* =========================================
-   SCENE 1 — OPENING
-========================================= */
+/* ==================================================
+   SCENE 01 — OPENING
+================================================== */
 
 #opening {
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(46, 86, 145, 0.35),
-            transparent 45%
+            circle at 50% 25%,
+            rgba(70, 118, 185, 0.28),
+            transparent 42%
         ),
         linear-gradient(
             180deg,
-            #071a35 0%,
-            #081a32 45%,
-            #040b16 100%
+            #091d38 0%,
+            #07182d 45%,
+            #030a14 100%
         );
 }
 
@@ -74,7 +97,7 @@ button {
     position: relative;
 
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
 
     display: flex;
     align-items: center;
@@ -83,36 +106,67 @@ button {
     overflow: hidden;
 }
 
+
+/* ==================================================
+   STARS
+================================================== */
+
 .stars {
     position: absolute;
     inset: 0;
 
+    opacity: 0.55;
+
     background-image:
-        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.9) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(190, 220, 255, 0.65) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.45) 1px,
+            transparent 1.5px
+        );
 
     background-size:
-        110px 110px,
-        170px 170px;
+        95px 95px,
+        145px 145px,
+        210px 210px;
 
     background-position:
-        10px 20px,
-        60px 80px;
+        15px 20px,
+        60px 80px,
+        100px 40px;
 
-    opacity: 0.45;
-
-    animation: stars-drift 18s linear infinite;
+    animation:
+        stars-floating 20s linear infinite;
 }
 
-@keyframes stars-drift {
-    from {
+@keyframes stars-floating {
+
+    0% {
         transform: translateY(0);
     }
 
-    to {
-        transform: translateY(25px);
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }
+
+
+/* ==================================================
+   OPENING CONTENT
+================================================== */
 
 .opening-content {
     position: relative;
@@ -129,21 +183,48 @@ button {
     padding: 30px 20px;
 }
 
+
+/* ==================================================
+   PHOTO
+================================================== */
+
 .photo-frame {
-    width: min(78vw, 330px);
+    position: relative;
+
+    width: min(72vw, 310px);
     aspect-ratio: 1 / 1;
 
-    padding: 7px;
+    padding: 6px;
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.15);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.8),
+            rgba(130, 180, 235, 0.4)
+        );
 
     box-shadow:
-        0 0 25px rgba(150, 200, 255, 0.35),
-        0 0 70px rgba(80, 140, 220, 0.15);
+        0 0 25px rgba(130, 190, 255, 0.3),
+        0 0 70px rgba(60, 130, 220, 0.18);
 
-    animation: photo-glow 4s ease-in-out infinite;
+    animation:
+        photo-pulse 4s ease-in-out infinite;
+}
+
+.photo-frame::before {
+    content: "";
+
+    position: absolute;
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(180, 220, 255, 0.25);
+
+    animation:
+        frame-rotation 12s linear infinite;
 }
 
 .photo-frame img {
@@ -157,65 +238,101 @@ button {
     border-radius: 50%;
 }
 
-@keyframes photo-glow {
+@keyframes photo-pulse {
+
     0%,
     100% {
         box-shadow:
-            0 0 25px rgba(150, 200, 255, 0.3),
-            0 0 70px rgba(80, 140, 220, 0.1);
+            0 0 25px rgba(130, 190, 255, 0.25),
+            0 0 70px rgba(60, 130, 220, 0.12);
     }
 
     50% {
         box-shadow:
-            0 0 35px rgba(180, 220, 255, 0.55),
-            0 0 90px rgba(80, 140, 220, 0.25);
+            0 0 35px rgba(160, 210, 255, 0.5),
+            0 0 95px rgba(70, 145, 230, 0.22);
     }
 }
 
-.opening-text {
-    margin-top: 28px;
+@keyframes frame-rotation {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.small-title {
+
+/* ==================================================
+   OPENING TEXT
+================================================== */
+
+.opening-text {
+    margin-top: 30px;
+}
+
+.opening-name {
     font-size: 0.9rem;
+
     letter-spacing: 0.25em;
+
     text-transform: uppercase;
 
-    opacity: 0.75;
+    opacity: 0.7;
 
     margin-bottom: 8px;
 }
 
-.opening-text h1 {
-    font-size: clamp(2rem, 8vw, 3.6rem);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-}
+.opening-age {
+    font-size:
+        clamp(2.2rem, 9vw, 4rem);
 
-.age {
-    margin-top: 4px;
-
-    font-size: clamp(3rem, 12vw, 5rem);
     font-weight: 300;
 
-    line-height: 1;
+    line-height: 1.1;
+
+    letter-spacing: 0.02em;
 }
+
+.opening-message {
+    margin-top: 22px;
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+
+    letter-spacing: 0.04em;
+
+    opacity: 0.72;
+}
+
+
+/* ==================================================
+   BEGIN BUTTON
+================================================== */
 
 #begin-button {
     margin-top: 35px;
 
-    padding: 14px 28px;
+    padding: 14px 30px;
 
     border-radius: 999px;
 
     color: #ffffff;
 
-    background: rgba(255, 255, 255, 0.12);
+    background:
+        rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border:
+        1px solid rgba(255, 255, 255, 0.25);
 
     box-shadow:
-        0 0 20px rgba(120, 180, 255, 0.15);
+        0 0 25px rgba(90, 160, 235, 0.12);
+
+    cursor: pointer;
 
     transition:
         transform 0.3s ease,
@@ -226,28 +343,33 @@ button {
 #begin-button:hover {
     transform: translateY(-2px);
 
-    background: rgba(255, 255, 255, 0.2);
+    background:
+        rgba(255, 255, 255, 0.15);
 
     box-shadow:
-        0 0 30px rgba(120, 180, 255, 0.3);
+        0 0 35px rgba(100, 175, 245, 0.25);
+}
+
+#begin-button:active {
+    transform: translateY(0);
 }
 
 
-/* =========================================
-   SCENE 2 — SHIBA INU
-========================================= */
+/* ==================================================
+   SCENE 02 — SHIBA
+================================================== */
 
 #shiba-scene {
     background:
         radial-gradient(
             circle at 50% 35%,
-            rgba(80, 125, 190, 0.22),
+            rgba(60, 110, 180, 0.22),
             transparent 45%
         ),
         linear-gradient(
             180deg,
             #081a32,
-            #06101e
+            #040b15
         );
 }
 
@@ -255,32 +377,36 @@ button {
     position: relative;
 
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    overflow: hidden;
 }
 
 #shiba-character {
-    width: min(75vw, 360px);
-    height: 280px;
+    position: relative;
+
+    width: min(80vw, 390px);
+    height: 330px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.cake-container {
+#birthday-cake {
     position: absolute;
 
-    bottom: 18%;
+    left: 50%;
+    bottom: 24%;
 
-    width: 180px;
-    height: 120px;
+    width: 190px;
+    height: 130px;
+
+    transform: translateX(-50%);
 
     display: flex;
     align-items: center;
@@ -290,34 +416,30 @@ button {
 .scene-text {
     position: absolute;
 
-    bottom: 8%;
+    left: 50%;
+    bottom: 9%;
 
-    width: min(90%, 500px);
+    width: min(88%, 520px);
+
+    transform: translateX(-50%);
 
     text-align: center;
 }
 
 #shiba-message {
-    font-size: 1.15rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
 
-    opacity: 0.9;
+    line-height: 1.8;
+
+    letter-spacing: 0.03em;
+
+    opacity: 0.85;
 }
 
 
-/* =========================================
-   QUIZ SHARED STYLES
-========================================= */
-
-.quiz-container,
-.result-container,
-.wishes-container {
-    width: min(90%, 620px);
-
-    margin: auto;
-
-    text-align: center;
-}
+/* ==================================================
+   QUIZ SCENES
+================================================== */
 
 #personal-quiz,
 #mbti-quiz,
@@ -329,48 +451,98 @@ button {
 
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(60, 105, 170, 0.2),
+            circle at 50% 25%,
+            rgba(60, 110, 180, 0.18),
             transparent 50%
         ),
-        #07111f;
+        linear-gradient(
+            180deg,
+            #081a32,
+            #040b15
+        );
 }
 
-.quiz-label,
-.result-label,
-.wishes-label {
-    margin-bottom: 18px;
 
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
+/* ==================================================
+   QUIZ CONTAINER
+================================================== */
+
+.quiz-container {
+    width: min(90%, 650px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    text-align: center;
+
+    padding: 30px 0;
+}
+
+
+/* ==================================================
+   QUIZ HEADER
+================================================== */
+
+.quiz-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.quiz-label {
+    font-size: 0.78rem;
+
+    letter-spacing: 0.18em;
+
     text-transform: uppercase;
 
     opacity: 0.55;
 }
 
-.quiz-container h2,
-.result-container h2,
-.wishes-container h2 {
-    font-size: clamp(1.7rem, 6vw, 2.8rem);
+.quiz-progress {
+    font-size: 0.8rem;
+
+    letter-spacing: 0.08em;
+
+    opacity: 0.5;
+}
+
+
+/* ==================================================
+   QUESTION
+================================================== */
+
+.question-area {
+    margin-bottom: 30px;
+}
+
+.question-number {
+    margin-bottom: 15px;
+
+    font-size: 0.85rem;
+
+    opacity: 0.45;
+}
+
+.question-text {
+    font-size:
+        clamp(1.3rem, 5vw, 2rem);
 
     font-weight: 400;
 
-    line-height: 1.3;
-
-    margin-bottom: 28px;
+    line-height: 1.5;
 }
 
-#personal-question,
-#mbti-question {
-    font-size: clamp(1.1rem, 4vw, 1.45rem);
 
-    line-height: 1.7;
+/* ==================================================
+   ANSWERS
+================================================== */
 
-    margin-bottom: 28px;
-}
-
-#personal-answer-area,
-#mbti-answer-area {
+.answer-area {
     display: flex;
     flex-direction: column;
 
@@ -380,99 +552,148 @@ button {
 .quiz-answer {
     width: 100%;
 
-    padding: 16px 20px;
+    padding: 16px 19px;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
     color: #ffffff;
 
-    background: rgba(255, 255, 255, 0.07);
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
     text-align: left;
 
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    cursor: pointer;
+
     transition:
+        transform 0.25s ease,
         background 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
+        border-color 0.25s ease;
 }
 
 .quiz-answer:hover {
     transform: translateY(-2px);
 
-    background: rgba(255, 255, 255, 0.12);
+    background:
+        rgba(255, 255, 255, 0.1);
 
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color:
+        rgba(180, 220, 255, 0.3);
 }
 
 .quiz-answer.selected {
-    background: rgba(100, 155, 220, 0.25);
+    background:
+        rgba(90, 150, 220, 0.25);
 
-    border-color: rgba(150, 200, 255, 0.6);
+    border-color:
+        rgba(170, 215, 255, 0.65);
 }
 
-#personal-next-button,
-#mbti-next-button,
-#birthday-ending-button {
+
+/* ==================================================
+   QUIZ BUTTON
+================================================== */
+
+.quiz-next-button {
     margin-top: 25px;
 
-    padding: 13px 27px;
+    padding: 13px 28px;
 
     border-radius: 999px;
 
     color: #ffffff;
 
-    background: rgba(255, 255, 255, 0.1);
+    background:
+        rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
 
-    opacity: 0.5;
+    cursor: pointer;
+
+    opacity: 0.35;
 
     transition:
         opacity 0.25s ease,
-        background 0.25s ease,
-        transform 0.25s ease;
+        transform 0.25s ease,
+        background 0.25s ease;
 }
 
-#personal-next-button.enabled,
-#mbti-next-button.enabled,
-#birthday-ending-button {
+.quiz-next-button:not(:disabled) {
     opacity: 1;
 }
 
-#personal-next-button.enabled:hover,
-#mbti-next-button.enabled:hover,
-#birthday-ending-button:hover {
+.quiz-next-button:not(:disabled):hover {
     transform: translateY(-2px);
 
-    background: rgba(255, 255, 255, 0.18);
+    background:
+        rgba(255, 255, 255, 0.15);
 }
 
 
-/* =========================================
+/* ==================================================
    MBTI RESULT
-========================================= */
+================================================== */
 
-#mbti-type {
-    font-size: clamp(3.5rem, 15vw, 7rem);
+.result-container {
+    width: min(90%, 650px);
 
-    letter-spacing: 0.08em;
+    max-height: 90vh;
 
-    margin-bottom: 5px;
+    overflow-y: auto;
+
+    text-align: center;
+
+    padding: 30px 0;
 }
 
-#mbti-title {
-    font-size: 1.3rem;
+.result-label {
+    margin-bottom: 12px;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.2em;
+
+    text-transform: uppercase;
+
+    opacity: 0.55;
+}
+
+.result-introduction {
+    margin-bottom: 15px;
+
+    opacity: 0.6;
+
+    font-size: 0.95rem;
+}
+
+.mbti-type {
+    font-size:
+        clamp(4rem, 17vw, 8rem);
+
+    font-weight: 300;
+
+    letter-spacing: 0.1em;
+
+    line-height: 1;
+}
+
+.mbti-title {
+    margin-top: 15px;
+
+    margin-bottom: 25px;
+
+    font-size: 1.4rem;
 
     font-weight: 400;
 
     opacity: 0.8;
-
-    margin-bottom: 25px;
 }
 
-#mbti-description {
+.mbti-description {
     font-size: 1.05rem;
 
     line-height: 1.8;
@@ -480,27 +701,87 @@ button {
     opacity: 0.85;
 }
 
-#mbti-details {
+.mbti-details {
     margin-top: 25px;
+
+    font-size: 0.95rem;
 
     line-height: 1.8;
 
-    opacity: 0.75;
+    opacity: 0.7;
+}
+
+#birthday-ending-button {
+    margin-top: 30px;
+
+    padding: 13px 28px;
+
+    border-radius: 999px;
+
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+#birthday-ending-button:hover {
+    transform: translateY(-2px);
+
+    background:
+        rgba(255, 255, 255, 0.15);
 }
 
 
-/* =========================================
-   BIRTHDAY WISHES
-========================================= */
+/* ==================================================
+   FINAL BIRTHDAY WISHES
+================================================== */
 
-#wishes-text {
-    max-height: 60vh;
+.wishes-container {
+    width: min(90%, 650px);
+
+    max-height: 85vh;
 
     overflow-y: auto;
 
-    padding: 0 8px;
+    text-align: center;
 
-    font-size: 1.05rem;
+    padding: 30px 0;
+}
+
+.wishes-label {
+    margin-bottom: 15px;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.2em;
+
+    text-transform: uppercase;
+
+    opacity: 0.55;
+}
+
+.wishes-title {
+    margin-bottom: 30px;
+
+    font-size:
+        clamp(2rem, 8vw, 3.5rem);
+
+    font-weight: 300;
+
+    line-height: 1.2;
+}
+
+.wishes-text {
+    font-size: 1rem;
 
     line-height: 2;
 
@@ -508,52 +789,141 @@ button {
 
     white-space: pre-line;
 
-    scrollbar-width: thin;
+    opacity: 0.82;
+
+    padding: 0 5px;
 }
 
 
-/* =========================================
+/* ==================================================
+   SCROLLBARS
+================================================== */
+
+.quiz-container::-webkit-scrollbar,
+.result-container::-webkit-scrollbar,
+.wishes-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.quiz-container::-webkit-scrollbar-track,
+.result-container::-webkit-scrollbar-track,
+.wishes-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.quiz-container::-webkit-scrollbar-thumb,
+.result-container::-webkit-scrollbar-thumb,
+.wishes-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
    MOBILE
-========================================= */
+================================================== */
 
 @media (max-width: 600px) {
 
     .opening-content {
-        padding: 20px 15px;
+        width: 92%;
+
+        padding:
+            20px 12px;
     }
 
     .photo-frame {
-        width: min(72vw, 290px);
+        width: min(70vw, 290px);
     }
 
     .opening-text {
-        margin-top: 22px;
+        margin-top: 25px;
+    }
+
+    .opening-message {
+        font-size: 0.95rem;
     }
 
     #begin-button {
         margin-top: 28px;
-    }
 
-    .shiba-container {
-        padding: 20px;
+        padding:
+            13px 25px;
     }
 
     #shiba-character {
-        width: 85vw;
-        height: 260px;
+        width: 88vw;
+
+        height: 300px;
     }
 
-    .cake-container {
-        bottom: 20%;
+    #birthday-cake {
+        bottom: 23%;
+    }
+
+    .scene-text {
+        bottom: 8%;
     }
 
     .quiz-container,
     .result-container,
     .wishes-container {
         width: 88%;
+
+        max-height: 88vh;
+    }
+
+    .quiz-header {
+        margin-bottom: 20px;
+    }
+
+    .quiz-label {
+        font-size: 0.68rem;
+    }
+
+    .question-text {
+        font-size: 1.25rem;
     }
 
     .quiz-answer {
-        padding: 14px 16px;
+        padding:
+            14px 16px;
+
+        font-size: 0.95rem;
+    }
+
+    .mbti-type {
+        font-size: 4.5rem;
+    }
+
+    .wishes-text {
+        font-size: 0.95rem;
+
+        line-height: 1.9;
+    }
+}
+
+
+/* ==================================================
+   VERY SMALL PHONES
+================================================== */
+
+@media (max-height: 700px) {
+
+    .photo-frame {
+        width: 210px;
+    }
+
+    .opening-text {
+        margin-top: 18px;
+    }
+
+    .opening-message {
+        margin-top: 12px;
+    }
+
+    #begin-button {
+        margin-top: 20px;
     }
 }
