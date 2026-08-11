@@ -8,12 +8,12 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  font-family: Arial, sans-serif;
-  background: #75b9e6;
-  color: #ffffff;
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #75b9e6;
+  color: #ffffff;
   overflow-x: hidden;
 }
 
@@ -21,15 +21,16 @@ button {
   font-family: inherit;
   border: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.hidden {
-  display: none !important;
+button:active {
+  transform: scale(0.95);
 }
 
 
 /* =========================================
-   GENERAL SCENES
+   SCENES
    ========================================= */
 
 .scene {
@@ -39,49 +40,31 @@ button {
   overflow: hidden;
 }
 
+.scene.hidden {
+  display: none !important;
+}
+
 .scene.active {
   display: flex;
-}
-
-#scene-opening {
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(
-      to bottom,
-      #172b5c 0%,
-      #315d96 45%,
-      #75b9e6 100%
-    );
-}
-
-.story-card,
-.message-container,
-.final-content {
-  position: relative;
-  z-index: 10;
-  width: min(90%, 720px);
-  margin: auto;
-  padding: 40px 24px;
-  text-align: center;
-}
-
-.story-card h1,
-.story-card h2,
-.final-content h1,
-.final-content h2 {
-  margin-bottom: 20px;
-}
-
-.story-card p {
-  margin: 14px auto;
-  line-height: 1.7;
 }
 
 
 /* =========================================
    OPENING
    ========================================= */
+
+#scene-opening {
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(
+      to bottom,
+      #152b59 0%,
+      #315d96 48%,
+      #75b9e6 100%
+    );
+}
 
 .night-sky {
   position: absolute;
@@ -92,79 +75,200 @@ button {
 .stars {
   position: absolute;
   inset: 0;
+  opacity: 0.55;
+
   background-image:
-    radial-gradient(circle, #ffffff 1px, transparent 1px);
-  background-size: 90px 90px;
-  opacity: 0.5;
+    radial-gradient(
+      circle,
+      #ffffff 1px,
+      transparent 1px
+    );
+
+  background-size: 85px 85px;
 }
 
 .opening-content {
   position: relative;
   z-index: 5;
+
   width: min(92%, 600px);
+
   padding: 30px 20px;
+
   text-align: center;
 }
 
 .portrait-frame {
-  width: min(80vw, 330px);
-  margin: 0 auto 24px;
+  width: min(78vw, 340px);
+
+  margin: 0 auto 25px;
+
   padding: 8px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.3);
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.25);
+
   box-shadow:
-    0 0 25px rgba(255, 255, 255, 0.5),
-    0 15px 45px rgba(0, 0, 0, 0.25);
+    0 0 30px rgba(255, 255, 255, 0.45),
+    0 18px 45px rgba(0, 0, 0, 0.25);
 }
 
 .portrait-frame img {
   display: block;
+
   width: 100%;
   height: auto;
+
   max-height: 62vh;
+
   object-fit: contain;
-  border-radius: 16px;
+
+  border-radius: 17px;
 }
 
-.date-text,
-.small-title {
-  letter-spacing: 3px;
+.date-text {
+  margin-bottom: 12px;
+
   font-size: 12px;
+
+  letter-spacing: 3px;
+
   opacity: 0.8;
-  margin-bottom: 15px;
 }
 
 .opening-content h1 {
-  font-size: clamp(32px, 8vw, 58px);
   margin-bottom: 8px;
+
+  font-size:
+    clamp(32px, 8vw, 58px);
+
+  line-height: 1.05;
 }
 
 .opening-content h2 {
-  font-size: clamp(20px, 5vw, 30px);
+  margin-bottom: 14px;
+
+  font-size:
+    clamp(20px, 5vw, 30px);
+
   font-weight: normal;
 }
 
 .age-text {
-  margin: 15px 0 28px;
-  font-size: 20px;
+  margin-bottom: 28px;
+
+  font-size: 18px;
 }
 
 .opening-content button,
 .story-card button,
 .message-container button,
 .cake-scene button {
-  padding: 15px 25px;
+  padding: 15px 26px;
+
   border-radius: 999px;
+
   background: #ffffff;
+
   color: #315d96;
+
   font-size: 16px;
+
   font-weight: bold;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-button:active {
-  transform: scale(0.94);
+
+/* =========================================
+   INTRODUCTION
+   ========================================= */
+
+#scene-introduction {
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #315d96,
+      #75b9e6
+    );
+}
+
+.story-card {
+  position: relative;
+  z-index: 5;
+
+  width: min(90%, 700px);
+
+  padding: 45px 25px;
+
+  text-align: center;
+}
+
+.story-card h1 {
+  margin-bottom: 25px;
+
+  font-size:
+    clamp(30px, 7vw, 50px);
+}
+
+.story-card p {
+  margin-bottom: 18px;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+.small-title {
+  margin-bottom: 15px;
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+
+  opacity: 0.75;
+}
+
+
+/* =========================================
+   PHOTO SCENE
+   ========================================= */
+
+#scene-photo {
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #75b9e6,
+      #c9eafa
+    );
+
+  color: #18304f;
+}
+
+.story-card .large {
+  width: min(82vw, 430px);
+
+  margin-bottom: 25px;
+}
+
+.story-card .large img {
+  max-height: 58vh;
+}
+
+.story-card h1 {
+  margin-bottom: 18px;
+}
+
+.story-card button {
+  margin-top: 10px;
 }
 
 
@@ -174,23 +278,30 @@ button:active {
 
 .cloud {
   position: absolute;
+
   width: 150px;
   height: 55px;
+
   background: rgba(255, 255, 255, 0.25);
+
   border-radius: 50px;
 }
 
 .cloud::before,
 .cloud::after {
   content: "";
+
   position: absolute;
+
   background: inherit;
+
   border-radius: 50%;
 }
 
 .cloud::before {
   width: 75px;
   height: 75px;
+
   left: 25px;
   bottom: 15px;
 }
@@ -198,55 +309,9 @@ button:active {
 .cloud::after {
   width: 60px;
   height: 60px;
+
   right: 20px;
   bottom: 12px;
-}
-
-.cloud-one {
-  top: 12%;
-  left: -160px;
-  animation: cloudMove 30s linear infinite;
-}
-
-.cloud-two {
-  top: 30%;
-  left: -220px;
-  transform: scale(0.7);
-  animation: cloudMove 42s linear infinite;
-}
-
-@keyframes cloudMove {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(100vw + 450px));
-  }
-}
-
-
-/* =========================================
-   PHOTO SCENE
-   ========================================= */
-
-.large {
-  width: min(82vw, 420px);
-}
-
-#scene-photo {
-  background:
-    linear-gradient(
-      to bottom,
-      #75b9e6,
-      #c7e8f7
-    );
-  color: #18304f;
-}
-
-#scene-photo .story-card {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 28px;
 }
 
 
@@ -255,106 +320,159 @@ button:active {
    ========================================= */
 
 #scene-platform-game {
-  background: #75b9e6;
   display: block;
+
+  min-height: 100vh;
+
+  background: #75b9e6;
 }
 
 .game-wrapper {
-  width: 100%;
-  min-height: 100vh;
   position: relative;
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  overflow: hidden;
 }
 
 .game-header {
   position: absolute;
+
   z-index: 100;
+
   top: 15px;
   left: 15px;
   right: 15px;
+
   display: flex;
+
   justify-content: space-between;
-  font-size: 12px;
+
+  font-size: 10px;
+
   font-weight: bold;
+
   letter-spacing: 1px;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4);
 }
+
+
+/* =========================================
+   GAME SKY
+   ========================================= */
 
 .platform-game {
   position: relative;
+
   width: 100%;
-  height: 70vh;
-  min-height: 400px;
-  margin-top: 0;
+
+  height: calc(100vh - 105px);
+
+  min-height: 420px;
+
   overflow: hidden;
+
   background:
     linear-gradient(
       to bottom,
-      #69b7e6 0%,
-      #9dd5ed 65%,
-      #c9ebc3 100%
+      #65b4e5 0%,
+      #9ed7ee 65%,
+      #b9dfa7 100%
     );
 }
 
 .sky-background {
   position: absolute;
+
   inset: 0;
+
   pointer-events: none;
 }
 
+
+/* =========================================
+   GAME CLOUDS
+   ========================================= */
+
 .game-cloud {
   position: absolute;
-  width: 120px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.7);
+
+  width: 130px;
+  height: 42px;
+
+  background: rgba(255, 255, 255, 0.75);
+
   border-radius: 50px;
 }
 
 .game-cloud::before,
 .game-cloud::after {
   content: "";
+
   position: absolute;
+
   background: inherit;
+
   border-radius: 50%;
 }
 
 .game-cloud::before {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
+
   left: 20px;
   bottom: 10px;
 }
 
 .game-cloud::after {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
+
   right: 15px;
-  bottom: 5px;
+  bottom: 6px;
 }
 
 .cloud-game-one {
-  top: 18%;
-  left: 10%;
+  top: 16%;
+  left: 8%;
 }
 
 .cloud-game-two {
-  top: 30%;
+  top: 29%;
   left: 55%;
-  transform: scale(0.7);
+
+  transform: scale(0.75);
 }
 
 .cloud-game-three {
   top: 12%;
-  left: 90%;
+  left: 88%;
+
   transform: scale(0.6);
 }
 
+
+/* =========================================
+   HILLS
+   ========================================= */
+
 .hill {
   position: absolute;
+
   bottom: 0;
-  width: 500px;
+
+  width: 520px;
   height: 180px;
-  border-radius: 50% 50% 0 0;
+
+  border-radius:
+    50% 50% 0 0;
+
   background: #83c97a;
+
   opacity: 0.8;
 }
 
@@ -363,35 +481,49 @@ button:active {
 }
 
 .hill-two {
-  left: 550px;
+  left: 600px;
 }
 
 
-/* WORLD */
+/* =========================================
+   GAME WORLD
+   ========================================= */
 
 .game-world {
   position: absolute;
+
   left: 0;
   bottom: 0;
+
   width: 5000px;
   height: 100%;
-  transition: transform 0.05s linear;
+
+  transition:
+    transform 0.04s linear;
 }
 
 
-/* PLATFORMS */
+/* =========================================
+   PLATFORMS
+   ========================================= */
 
 .platform {
   position: absolute;
+
   height: 28px;
-  border-radius: 8px 8px 0 0;
+
+  border-radius:
+    8px 8px 0 0;
+
   background:
     linear-gradient(
       to bottom,
-      #63b64d 0 35%,
+      #5eb64d 0 35%,
       #8b5a35 35% 100%
     );
-  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.12);
+
+  box-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 
@@ -401,15 +533,24 @@ button:active {
 
 .character {
   position: absolute;
-  z-index: 20;
-  width: 58px;
+
+  z-index: 30;
+
+  width: 60px;
   height: 70px;
+
   display: flex;
+
   align-items: flex-end;
   justify-content: center;
+
   font-size: 52px;
-  transition: none;
+
+  line-height: 1;
+
   user-select: none;
+
+  pointer-events: none;
 }
 
 .chihuahua {
@@ -419,156 +560,65 @@ button:active {
 
 .shibainu {
   bottom: 28px;
-  transform: scaleX(-1);
+
+  transform:
+    scaleX(-1);
 }
 
 
 /* =========================================
-   MUSHROOM
-   ========================================= */
-
-.magic-mushroom {
-  position: absolute;
-  z-index: 15;
-  bottom: 28px;
-  width: 60px;
-  height: 65px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
-  animation: mushroomFloat 1.5s ease-in-out infinite;
-}
-
-@keyframes mushroomFloat {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-
-/* =========================================
-   COLLECTIBLES
-   ========================================= */
-
-.collectible {
-  position: absolute;
-  z-index: 14;
-  bottom: 70px;
-  color: #fff4a8;
-  font-size: 30px;
-  text-shadow: 0 0 12px #ffffff;
-  animation: starFloat 1s ease-in-out infinite;
-}
-
-@keyframes starFloat {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-
-/* =========================================
-   OBSTACLES
-   ========================================= */
-
-.game-obstacle {
-  position: absolute;
-  z-index: 15;
-  bottom: 28px;
-  font-size: 48px;
-}
-
-
-/* =========================================
-   CAKE
-   ========================================= */
-
-.birthday-cake {
-  position: absolute;
-  z-index: 18;
-  bottom: 28px;
-  width: 90px;
-  height: 100px;
-  text-align: center;
-}
-
-.cake-top {
-  font-size: 65px;
-}
-
-.cake-candle {
-  position: absolute;
-  top: -20px;
-  left: 35px;
-  font-size: 20px;
-}
-
-.flame {
-  display: block;
-  animation: flameFlicker 0.5s infinite alternate;
-}
-
-.candle-number {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-@keyframes flameFlicker {
-  from {
-    transform: scale(0.9);
-  }
-
-  to {
-    transform: scale(1.15);
-  }
-}
-
-
-/* =========================================
-   CONTROLS
+   MOBILE CONTROLS
    ========================================= */
 
 .mobile-controls {
+  position: relative;
+
+  z-index: 200;
+
   height: 105px;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
-  gap: 14px;
+
+  gap: 18px;
+
   background: #315d96;
+
+  padding:
+    10px 15px;
+
+  touch-action: manipulation;
 }
 
 .mobile-controls button {
-  min-width: 75px;
-  min-height: 60px;
+  width: 82px;
+  height: 62px;
+
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
+
+  background: rgba(255, 255, 255, 0.95);
+
   color: #315d96;
-  font-size: 18px;
+
+  font-size: 25px;
+
   font-weight: bold;
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.18);
+
   touch-action: manipulation;
 }
 
 .mobile-controls #jumpButton {
-  min-width: 110px;
+  width: 110px;
+
+  font-size: 15px;
+
+  letter-spacing: 1px;
 }
 
 
@@ -578,15 +628,30 @@ button:active {
 
 .game-message {
   position: absolute;
-  z-index: 200;
+
+  z-index: 250;
+
   left: 50%;
-  bottom: 125px;
-  transform: translateX(-50%);
+
+  bottom: 118px;
+
+  transform:
+    translateX(-50%);
+
   width: 90%;
+
   text-align: center;
-  font-size: 14px;
+
+  font-size: 13px;
+
   font-weight: bold;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+
+  color: #ffffff;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5);
+
+  pointer-events: none;
 }
 
 
@@ -595,31 +660,56 @@ button:active {
    ========================================= */
 
 #scene-cake {
+  align-items: center;
+  justify-content: center;
+
   background:
     radial-gradient(
       circle at center,
-      #456fa8,
-      #172b5c
+      #4b76ad,
+      #172b59
     );
 }
 
 .cake-scene {
-  width: min(92%, 760px);
-  margin: auto;
-  text-align: center;
+  width: min(94%, 760px);
+
   padding: 40px 20px;
+
+  text-align: center;
+}
+
+.cake-scene h1 {
+  margin-bottom: 18px;
+
+  font-size:
+    clamp(30px, 8vw, 55px);
+}
+
+.cake-intro {
+  margin-bottom: 30px;
+
+  font-size: 17px;
+
+  line-height: 1.7;
 }
 
 .couple {
   display: flex;
+
   align-items: flex-end;
+
   justify-content: center;
+
   gap: 25px;
+
   margin-bottom: 30px;
 }
 
 .ending-character {
   font-size: 70px;
+
+  line-height: 1;
 }
 
 .cake-big {
@@ -627,58 +717,94 @@ button:active {
 }
 
 .big-cake {
-  font-size: 110px;
+  font-size: 105px;
+
+  line-height: 1;
 }
 
 .big-flame {
   position: absolute;
+
   left: 50%;
-  top: -20px;
-  transform: translateX(-50%);
-  font-size: 35px;
-  animation: flameFlicker 0.5s infinite alternate;
+
+  top: -22px;
+
+  transform:
+    translateX(-50%);
+
+  font-size: 34px;
+
+  animation:
+    flameFlicker 0.5s infinite alternate;
 }
 
-.cake-scene h1 {
-  font-size: clamp(30px, 8vw, 55px);
-  margin-bottom: 15px;
-}
+@keyframes flameFlicker {
 
-.cake-intro {
-  margin-bottom: 30px;
+  from {
+    transform:
+      translateX(-50%)
+      scale(0.9);
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scale(1.15);
+  }
+
 }
 
 
 /* =========================================
-   BIRTHDAY LETTER
+   BIRTHDAY MESSAGE
    ========================================= */
 
 #scene-message {
+  align-items: flex-start;
+  justify-content: center;
+
   background:
     linear-gradient(
       to bottom,
-      #172b5c,
+      #172b59,
       #315d96
     );
 }
 
 .message-container {
-  max-width: 780px;
+  position: relative;
+  z-index: 5;
+
+  width: min(92%, 780px);
+
+  padding:
+    55px 20px 70px;
+
+  text-align: center;
 }
 
 .message-container h1 {
-  font-size: clamp(28px, 7vw, 48px);
   margin-bottom: 8px;
+
+  font-size:
+    clamp(28px, 7vw, 48px);
+
+  line-height: 1.15;
 }
 
 .message-container h2 {
+  margin-bottom: 38px;
+
+  font-size: 22px;
+
   font-weight: normal;
-  margin-bottom: 35px;
 }
 
 .birthday-letter {
   text-align: left;
+
   font-size: 16px;
+
   line-height: 1.85;
 }
 
@@ -686,59 +812,98 @@ button:active {
   margin-bottom: 28px;
 }
 
+.message-container button {
+  margin-top: 10px;
+}
+
 
 /* =========================================
-   BIBLE
+   BIBLE VERSE
    ========================================= */
 
 #scene-bible {
+  align-items: center;
+  justify-content: center;
+
   background:
     linear-gradient(
       to bottom,
       #315d96,
-      #172b5c
+      #172b59
     );
 }
 
+#scene-bible .message-container {
+  text-align: center;
+}
+
 blockquote {
-  margin: 30px auto;
   max-width: 650px;
-  font-size: clamp(22px, 5vw, 34px);
+
+  margin:
+    30px auto;
+
+  font-size:
+    clamp(22px, 5vw, 34px);
+
   line-height: 1.5;
+
   font-style: italic;
 }
 
 
 /* =========================================
-   FINAL
+   FINAL SCENE
    ========================================= */
 
 #scene-final {
+  align-items: center;
+  justify-content: center;
+
   background:
     linear-gradient(
       to bottom,
-      #172b5c,
+      #172b59,
       #315d96
     );
-  align-items: center;
-  justify-content: center;
 }
 
 .final-content {
+  width: min(92%, 650px);
+
+  padding: 45px 20px;
+
+  text-align: center;
+
   font-size: 17px;
+
   line-height: 1.8;
 }
 
 .final-content h1 {
-  font-size: clamp(32px, 8vw, 55px);
+  margin:
+    15px 0 8px;
+
+  font-size:
+    clamp(32px, 8vw, 55px);
+
+  line-height: 1.1;
 }
 
 .final-content h2 {
+  margin-bottom: 25px;
+
   font-weight: normal;
+}
+
+.final-content p {
+  margin-bottom: 18px;
 }
 
 .final-portrait {
   width: min(75vw, 300px);
+
+  margin-bottom: 25px;
 }
 
 
@@ -748,33 +913,89 @@ blockquote {
 
 @media (max-width: 600px) {
 
-  .platform-game {
-    height: 67vh;
-    min-height: 350px;
+  .opening-content {
+    padding:
+      25px 15px;
   }
 
-  .game-world {
-    height: 100%;
-  }
-
-  .birthday-letter {
-    font-size: 15px;
+  .portrait-frame {
+    width: min(78vw, 310px);
   }
 
   .story-card {
-    padding: 30px 20px;
+    padding:
+      35px 20px;
+  }
+
+  .story-card p {
+    font-size: 16px;
+  }
+
+  .platform-game {
+    height: calc(100vh - 105px);
+
+    min-height: 360px;
+  }
+
+  .game-header {
+    font-size: 9px;
   }
 
   .character {
     font-size: 48px;
   }
 
-  .chihuahua {
-    width: 52px;
+  .mobile-controls {
+    gap: 12px;
   }
 
-  .shibainu {
-    width: 52px;
+  .mobile-controls button {
+    width: 75px;
+    height: 58px;
+  }
+
+  .mobile-controls #jumpButton {
+    width: 100px;
+  }
+
+  .birthday-letter {
+    font-size: 15px;
+
+    line-height: 1.8;
+  }
+
+  .couple {
+    gap: 12px;
+  }
+
+  .ending-character {
+    font-size: 58px;
+  }
+
+  .big-cake {
+    font-size: 85px;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 380px) {
+
+  .mobile-controls {
+    gap: 8px;
+  }
+
+  .mobile-controls button {
+    width: 68px;
+    height: 55px;
+  }
+
+  .mobile-controls #jumpButton {
+    width: 90px;
   }
 
 }
