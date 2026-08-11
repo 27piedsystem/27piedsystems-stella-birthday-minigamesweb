@@ -1,741 +1,400 @@
-document.addEventListener("DOMContentLoaded", function () {
+* {
+  box-sizing: border-box;
+}
 
-  /* ==========================================
-     SCENE SYSTEM
-     ========================================== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+  background: #07152e;
+  color: white;
+}
 
-  const scenes = document.querySelectorAll(".game-scene");
+body {
+  overflow-x: hidden;
+}
 
-  function showScene(sceneId) {
-    scenes.forEach(function (scene) {
-      scene.hidden = true;
-      scene.classList.remove("active-scene");
-    });
+button {
+  font: inherit;
+}
 
-    const targetScene = document.getElementById(sceneId);
+.game-scene {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(55, 105, 180, 0.35), transparent 40%),
+    linear-gradient(#07152e, #0b2850 55%, #07152e);
+  text-align: center;
+}
 
-    if (targetScene) {
-      targetScene.hidden = false;
-      targetScene.classList.add("active-scene");
-      window.scrollTo(0, 0);
-    }
+.game-scene[hidden] {
+  display: none;
+}
+
+.scene-content {
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+  animation: sceneAppear 0.8s ease;
+}
+
+@keyframes sceneAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  /* ==========================================
-     BACKGROUND MUSIC
-     ========================================== */
 
-  const backgroundMusic = document.getElementById("backgroundMusic");
+/* STARS */
 
-  function startMusic() {
-    if (backgroundMusic) {
-      backgroundMusic.volume = 0.35;
+.stars,
+.stars::before,
+.stars::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 
-      const musicPromise = backgroundMusic.play();
+.stars {
+  background-image:
+    radial-gradient(circle, white 1px, transparent 1.5px),
+    radial-gradient(circle, white 1px, transparent 1.5px),
+    radial-gradient(circle, white 1px, transparent 1.5px);
+  background-size: 120px 120px, 180px 180px, 240px 240px;
+  background-position: 20px 30px, 80px 90px, 140px 20px;
+  opacity: 0.55;
+  animation: starsMove 12s linear infinite;
+}
 
-      if (musicPromise !== undefined) {
-        musicPromise.catch(function () {
-          // The browser may block automatic audio.
-          // The game will continue normally.
-        });
-      }
-    }
+@keyframes starsMove {
+  from {
+    transform: translateY(0);
   }
 
-
-  /* ==========================================
-     OPENING
-     ========================================== */
-
-  const startAdventureButton =
-    document.getElementById("startAdventureButton");
-
-  if (startAdventureButton) {
-    startAdventureButton.addEventListener("click", function () {
-
-      startMusic();
-
-      showScene("scene-introduction");
-
-    });
+  to {
+    transform: translateY(-30px);
   }
-
-
-  /* ==========================================
-     INTRODUCTION
-     ========================================== */
-
-  const introductionContinueButton =
-    document.getElementById("introductionContinueButton");
-
-  if (introductionContinueButton) {
-    introductionContinueButton.addEventListener("click", function () {
-
-      showScene("scene-photo-one");
-
-    });
-  }
-
-
-  /* ==========================================
-     PHOTO ONE
-     ========================================== */
-
-  const photoOneContinueButton =
-    document.getElementById("photoOneContinueButton");
-
-  if (photoOneContinueButton) {
-    photoOneContinueButton.addEventListener("click", function () {
-
-      showScene("scene-photo-two");
-
-    });
-  }
-
-
-  /* ==========================================
-     PHOTO TWO
-     ========================================== */
-
-  const photoTwoContinueButton =
-    document.getElementById("photoTwoContinueButton");
-
-  if (photoTwoContinueButton) {
-    photoTwoContinueButton.addEventListener("click", function () {
-
-      showScene("scene-quest-map");
-
-    });
-  }
-
-
-  /* ==========================================
-     QUEST DATA
-     ========================================== */
-
-  const quests = {
-
-    1: {
-      question: "What is Stella's birthday?",
-      answers: [
-        "8 August",
-        "20 August",
-        "8 September"
-      ],
-      correct: 0
-    },
-
-    2: {
-      question: "How old is Stella now?",
-      answers: [
-        "18",
-        "19",
-        "20"
-      ],
-      correct: 2
-    },
-
-    3: {
-      question: "What nickname appears throughout this adventure?",
-      answers: [
-        "Chihuahua",
-        "Turtle",
-        "Panda"
-      ],
-      correct: 0
-    },
-
-    4: {
-      question: "What number is celebrated in this adventure?",
-      answers: [
-        "18",
-        "20",
-        "25"
-      ],
-      correct: 1
-    },
-
-    5: {
-      question: "What should you do when something isn't right?",
-      answers: [
-        "Ignore it forever",
-        "Keep trying to make it right",
-        "Give up immediately"
-      ],
-      correct: 1
-    },
-
-    6: {
-      question: "What birthday number appears throughout the adventure?",
-      answers: [
-        "10",
-        "20",
-        "30"
-      ],
-      correct: 1
-    },
-
-    7: {
-      question: "What is something you are allowed to do when life becomes difficult?",
-      answers: [
-        "Take a break",
-        "Give up on everything",
-        "Pretend nothing happened"
-      ],
-      correct: 0
-    },
-
-    8: {
-      question: "What should you keep doing?",
-      answers: [
-        "Keep learning and becoming yourself",
-        "Compare yourself to everyone",
-        "Rush everything"
-      ],
-      correct: 0
-    }
-
-  };
-
-
-  /* ==========================================
-     QUEST STATE
-     ========================================== */
-
-  let currentQuest = 1;
-
-
-  function setupQuest(questNumber) {
-
-    const quest = quests[questNumber];
-
-    if (!quest) {
-      return;
-    }
-
-    const questionElement =
-      document.getElementById("quest" + questNumber + "Question");
-
-    const answersElement =
-      document.getElementById("quest" + questNumber + "Answers");
-
-    const feedbackElement =
-      document.getElementById("quest" + questNumber + "Feedback");
-
-    if (!questionElement || !answersElement || !feedbackElement) {
-      return;
-    }
-
-    questionElement.textContent = quest.question;
-
-    answersElement.innerHTML = "";
-
-    feedbackElement.textContent = "";
-
-    quest.answers.forEach(function (answer, index) {
-
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.className = "answer-button";
-      button.textContent = answer;
-
-      button.addEventListener("click", function () {
-
-        if (index === quest.correct) {
-
-          feedbackElement.textContent = "Correct! ❤️";
-
-          button.disabled = true;
-
-          unlockNextQuest(questNumber);
-
-          setTimeout(function () {
-
-            if (questNumber < 8) {
-
-              currentQuest = questNumber + 1;
-
-              showScene("scene-quest-" + currentQuest);
-
-              setupQuest(currentQuest);
-
-            } else {
-
-              showScene("scene-mini-game");
-
-            }
-
-          }, 700);
-
-        } else {
-
-          feedbackElement.textContent =
-            "Not quite. Try again! ❤️";
-
-        }
-
-      });
-
-      answersElement.appendChild(button);
-
-    });
-
-  }
-
-
-  /* ==========================================
-     UNLOCK NEXT QUEST
-     ========================================== */
-
-  function unlockNextQuest(questNumber) {
-
-    const nextQuest = questNumber + 1;
-
-    if (nextQuest > 8) {
-      return;
-    }
-
-    const nextButton =
-      document.getElementById("questMapButton" + nextQuest);
-
-    if (nextButton) {
-
-      nextButton.disabled = false;
-
-      nextButton.classList.remove("locked");
-
-    }
-
-  }
-
-
-  /* ==========================================
-     QUEST MAP
-     ========================================== */
-
-  for (let i = 1; i <= 8; i++) {
-
-    const questButton =
-      document.getElementById("questMapButton" + i);
-
-    if (questButton) {
-
-      questButton.addEventListener("click", function () {
-
-        const questNumber =
-          Number(questButton.dataset.quest);
-
-        currentQuest = questNumber;
-
-        showScene("scene-quest-" + questNumber);
-
-        setupQuest(questNumber);
-
-      });
-
-    }
-
-  }
-
-
-  /* ==========================================
-     MINI GAME
-     ========================================== */
-
-  const startMiniGameButton =
-    document.getElementById("startMiniGameButton");
-
-  const jumpButton =
-    document.getElementById("jumpButton");
-
-  const restartMiniGameButton =
-    document.getElementById("restartMiniGameButton");
-
-  const gameCharacter =
-    document.getElementById("gameCharacter");
-
-  const gameObstacle =
-    document.getElementById("gameObstacle");
-
-  const gameScore =
-    document.getElementById("gameScore");
-
-  const miniGameMessage =
-    document.getElementById("miniGameMessage");
-
-
-  let miniGameRunning = false;
-  let miniGameScore = 0;
-  let jumpTimeout = null;
-
-
-  function jump() {
-
-    if (!miniGameRunning || !gameCharacter) {
-      return;
-    }
-
-    gameCharacter.classList.add("jumping");
-
-    clearTimeout(jumpTimeout);
-
-    jumpTimeout = setTimeout(function () {
-
-      gameCharacter.classList.remove("jumping");
-
-    }, 600);
-
-  }
-
-
-  function startMiniGame() {
-
-    miniGameRunning = true;
-
-    miniGameScore = 0;
-
-    if (gameScore) {
-      gameScore.textContent = "Score: 0";
-    }
-
-    if (miniGameMessage) {
-      miniGameMessage.textContent =
-        "Reach 20.0806!";
-    }
-
-    if (restartMiniGameButton) {
-      restartMiniGameButton.hidden = true;
-    }
-
-    if (startMiniGameButton) {
-      startMiniGameButton.hidden = true;
-    }
-
-    if (gameObstacle) {
-      gameObstacle.classList.add("moving");
-    }
-
-    const scoreInterval = setInterval(function () {
-
-      if (!miniGameRunning) {
-
-        clearInterval(scoreInterval);
-
-        return;
-
-      }
-
-      miniGameScore += 0.1004;
-
-      if (gameScore) {
-
-        gameScore.textContent =
-          "Score: " + miniGameScore.toFixed(4);
-
-      }
-
-      if (miniGameScore >= 20.0806) {
-
-        miniGameRunning = false;
-
-        clearInterval(scoreInterval);
-
-        if (gameObstacle) {
-          gameObstacle.classList.remove("moving");
-        }
-
-        if (miniGameMessage) {
-          miniGameMessage.textContent =
-            "You did it! ❤️";
-        }
-
-        if (restartMiniGameButton) {
-          restartMiniGameButton.hidden = true;
-        }
-
-        setTimeout(function () {
-
-          unlockGifts();
-
-          showScene("scene-gifts");
-
-        }, 1000);
-
-      }
-
-    }, 100);
-
-  }
-
-
-  function restartMiniGame() {
-
-    miniGameRunning = false;
-
-    miniGameScore = 0;
-
-    if (gameScore) {
-      gameScore.textContent = "Score: 0";
-    }
-
-    if (miniGameMessage) {
-      miniGameMessage.textContent = "";
-    }
-
-    if (restartMiniGameButton) {
-      restartMiniGameButton.hidden = true;
-    }
-
-    if (startMiniGameButton) {
-      startMiniGameButton.hidden = false;
-    }
-
-    if (gameObstacle) {
-      gameObstacle.classList.remove("moving");
-    }
-
-  }
-
-
-  if (jumpButton) {
-    jumpButton.addEventListener("click", jump);
-  }
-
-
-  if (startMiniGameButton) {
-    startMiniGameButton.addEventListener(
-      "click",
-      startMiniGame
+}
+
+
+/* TEXT */
+
+.small-intro,
+.scene-label,
+.quest-number {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+h1 {
+  font-size: clamp(38px, 9vw, 72px);
+  line-height: 1.05;
+  margin: 15px 0;
+}
+
+h2 {
+  font-size: clamp(25px, 6vw, 42px);
+  line-height: 1.2;
+  margin: 15px 0 20px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.birthday-age {
+  font-size: clamp(70px, 18vw, 140px);
+  line-height: 0.9;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.late-gift-message {
+  opacity: 0.85;
+}
+
+
+/* BUTTONS */
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 25px;
+  margin: 10px;
+  background: rgba(255, 255, 255, 0.13);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* PHOTOS */
+
+.photo-frame,
+.final-photo-frame {
+  width: min(90vw, 430px);
+  margin: 25px auto;
+  padding: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 25px rgba(120, 180, 255, 0.35),
+    0 0 70px rgba(80, 130, 220, 0.2);
+}
+
+.photo-frame img,
+.final-photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+
+/* QUEST MAP */
+
+.quest-map {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 500px;
+  margin: 25px auto;
+}
+
+.quest-map button {
+  width: auto;
+  margin: 0;
+}
+
+
+/* ANSWERS */
+
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 550px;
+  margin: 25px auto;
+}
+
+.answer-button {
+  width: 100%;
+  margin: 7px 0;
+}
+
+.quest-feedback {
+  min-height: 30px;
+  font-weight: bold;
+}
+
+
+/* MINI GAME */
+
+.target-score {
+  font-size: 20px;
+}
+
+.runner-game {
+  position: relative;
+  width: min(92vw, 650px);
+  height: 260px;
+  margin: 25px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      to bottom,
+      #163b69,
+      #2e6692
     );
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.game-score {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 5;
+  font-weight: bold;
+}
+
+#gameCharacter {
+  position: absolute;
+  left: 50px;
+  bottom: 45px;
+  font-size: 45px;
+  z-index: 3;
+}
+
+#gameCharacter.jumping {
+  animation: jump 0.5s ease;
+}
+
+@keyframes jump {
+  0% {
+    bottom: 45px;
   }
 
-
-  if (restartMiniGameButton) {
-    restartMiniGameButton.addEventListener(
-      "click",
-      restartMiniGame
-    );
+  50% {
+    bottom: 150px;
   }
 
+  100% {
+    bottom: 45px;
+  }
+}
 
-  /* ==========================================
-     KEYBOARD JUMP
-     ========================================== */
+#gameObstacle {
+  position: absolute;
+  right: 60px;
+  bottom: 42px;
+  font-size: 38px;
+}
 
-  document.addEventListener("keydown", function (event) {
+.game-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45px;
+  background: rgba(0, 0, 0, 0.25);
+}
 
-    if (event.code === "Space") {
-
-      event.preventDefault();
-
-      jump();
-
-    }
-
-  });
-
-
-  /* ==========================================
-     GIFTS
-     ========================================== */
-
-  const giftMessages = {
-
-    1: {
-      title: "Gift 01",
-      message:
-        "For all the little moments that made me smile."
-    },
-
-    2: {
-      title: "Gift 02",
-      message:
-        "For the memories we already have, and the ones still waiting for us."
-    },
-
-    3: {
-      title: "Gift 03",
-      message:
-        "For every weird, funny, random moment that somehow became a good memory."
-    },
-
-    4: {
-      title: "Gift 04",
-      message:
-        "For your 20th year. I hope you make it a year worth remembering."
-    },
-
-    5: {
-      title: "Gift 05",
-      message:
-        "For the version of you that is still growing and figuring things out."
-    },
-
-    6: {
-      title: "Gift 06",
-      message:
-        "For every difficult day you manage to get through."
-    },
-
-    7: {
-      title: "Gift 07",
-      message:
-        "For all the things you haven't discovered about yourself yet."
-    },
-
-    8: {
-      title: "Gift 08",
-      message:
-        "The last gift isn't really a thing. It's just a reminder that your story is still going."
-    }
-
-  };
+.game-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
 
-  function unlockGifts() {
+/* GIFTS */
 
-    for (let i = 1; i <= 8; i++) {
+.gift-collection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 550px;
+  margin: 25px auto;
+}
 
-      const giftButton =
-        document.getElementById("gift" + i);
+.gift-collection button {
+  margin: 0;
+}
 
-      if (giftButton) {
 
-        giftButton.disabled = false;
+/* LETTER */
 
-        giftButton.classList.remove("locked");
+.birthday-letter {
+  text-align: left;
+  max-width: 650px;
+  margin: 25px auto;
+}
 
-      }
+.birthday-letter p {
+  margin-bottom: 25px;
+}
 
-    }
 
+/* BIBLE */
+
+blockquote {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  font-size: 22px;
+  line-height: 1.7;
+  font-style: italic;
+  border-left: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+
+/* FINAL */
+
+#scene-final {
+  background:
+    radial-gradient(circle at center, rgba(50, 100, 190, 0.45), transparent 45%),
+    linear-gradient(#07152e, #0b2850);
+}
+
+#scene-final .scene-content {
+  max-width: 700px;
+}
+
+#scene-final h1 {
+  margin-bottom: 10px;
+}
+
+#scene-final p {
+  font-size: 18px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .game-scene {
+    padding: 25px 16px;
   }
 
-
-  for (let i = 1; i <= 8; i++) {
-
-    const giftButton =
-      document.getElementById("gift" + i);
-
-    if (giftButton) {
-
-      giftButton.addEventListener("click", function () {
-
-        openGift(i);
-
-      });
-
-    }
-
+  .quest-map,
+  .gift-collection {
+    grid-template-columns: 1fr 1fr;
   }
 
-
-  function openGift(number) {
-
-    const gift = giftMessages[number];
-
-    if (!gift) {
-      return;
-    }
-
-    const giftNumber =
-      document.getElementById("giftNumber");
-
-    const giftTitle =
-      document.getElementById("giftTitle");
-
-    const giftMessage =
-      document.getElementById("giftMessage");
-
-    if (giftNumber) {
-      giftNumber.textContent =
-        "Gift " + String(number).padStart(2, "0");
-    }
-
-    if (giftTitle) {
-      giftTitle.textContent = gift.title;
-    }
-
-    if (giftMessage) {
-      giftMessage.textContent = gift.message;
-    }
-
-    showScene("scene-gift-message");
-
+  p {
+    font-size: 16px;
   }
 
-
-  /* ==========================================
-     CLOSE GIFT
-     ========================================== */
-
-  const closeGiftButton =
-    document.getElementById("closeGiftButton");
-
-  if (closeGiftButton) {
-
-    closeGiftButton.addEventListener("click", function () {
-
-      showScene("scene-gifts");
-
-    });
-
+  .birthday-letter p {
+    font-size: 16px;
   }
 
-
-  /* ==========================================
-     BIRTHDAY MESSAGE
-     ========================================== */
-
-  const messagePageOneButton =
-    document.getElementById("messagePageOneButton");
-
-  const messagePageTwoButton =
-    document.getElementById("messagePageTwoButton");
-
-  const bibleVerseContinueButton =
-    document.getElementById("bibleVerseContinueButton");
-
-
-  if (messagePageOneButton) {
-
-    messagePageOneButton.addEventListener("click", function () {
-
-      showScene("scene-message-two");
-
-    });
-
+  .runner-game {
+    height: 220px;
   }
 
-
-  if (messagePageTwoButton) {
-
-    messagePageTwoButton.addEventListener("click", function () {
-
-      showScene("scene-bible-verse");
-
-    });
-
-  }
-
-
-  if (bibleVerseContinueButton) {
-
-    bibleVerseContinueButton.addEventListener("click", function () {
-
-      showScene("scene-final");
-
-    });
-
-  }
-
-
-  /* ==========================================
-     START WITH OPENING SCENE
-     ========================================== */
-
-  showScene("scene-opening");
-
-});
+}
