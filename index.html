@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,27 +9,21 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Happy Birthday, Stella</title>
+    <title>Happy Birthday, Stella Halim</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
-
 
 <body>
 
-
-    <!-- =========================================
-         BACKGROUND MUSIC
-    ========================================== -->
+    <!-- BACKGROUND MUSIC -->
 
     <audio
         id="background-music"
         loop
-        preload="auto"
     >
         <source
             src="music.mp3"
@@ -39,30 +32,42 @@
     </audio>
 
 
-
-    <!-- =========================================
-         SCENE 01
+    <!-- =====================================================
          OPENING
-    ========================================== -->
+    ====================================================== -->
 
-    <main
+    <section
         id="opening"
-        class="scene active"
+        class="scene active night-scene"
     >
 
         <div class="stars"></div>
 
         <div class="opening-content">
 
-            <p class="small-text">
+            <p class="opening-small">
                 a little adventure made only for
             </p>
 
+            <div class="portrait-frame">
+
+                <img
+                    src="stella-photo-1.jpeg"
+                    alt="Stella"
+                    class="opening-photo"
+                >
+
+            </div>
+
             <h1>
-                Stella Halim
+                happy birthday
             </h1>
 
-            <p class="age">
+            <h2>
+                stella halim
+            </h2>
+
+            <p class="opening-age">
                 20 years old
             </p>
 
@@ -80,101 +85,12 @@
 
         </div>
 
-    </main>
-
-
-
-    <!-- =========================================
-         SCENE 02
-         SHIBAINU
-    ========================================== -->
-
-    <section
-        id="shiba-scene"
-        class="scene"
-    >
-
-        <div class="shiba-content">
-
-            <div
-                id="shiba-character"
-                class="shiba-character"
-            >
-
-                <!-- SHIBA HEAD -->
-
-                <div class="shiba-head">
-
-                    <div class="ear left-ear"></div>
-
-                    <div class="ear right-ear"></div>
-
-                    <div class="face">
-
-                        <div class="eye left-eye"></div>
-
-                        <div class="eye right-eye"></div>
-
-                        <div class="snout">
-
-                            <div class="nose"></div>
-
-                            <div class="mouth"></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CAKE -->
-
-                <div class="cake">
-
-                    <div class="cake-top">
-
-                        <span class="candle candle-two">
-                            2
-                        </span>
-
-                        <span class="candle candle-zero">
-                            0
-                        </span>
-
-                    </div>
-
-                    <div class="cake-body"></div>
-
-                </div>
-
-
-                <!-- HANDS -->
-
-                <div class="shiba-hand left-hand"></div>
-
-                <div class="shiba-hand right-hand"></div>
-
-            </div>
-
-
-            <p
-                id="shiba-message"
-                class="shiba-message"
-            >
-                before we continue...
-            </p>
-
-        </div>
-
     </section>
 
 
-
-    <!-- =========================================
-         SCENE 03
+    <!-- =====================================================
          PERSONAL QUIZ
-    ========================================== -->
+    ====================================================== -->
 
     <section
         id="personal-quiz"
@@ -184,49 +100,37 @@
         <div class="quiz-container">
 
             <p class="quiz-label">
-                a few questions for you
+                before the personality test
             </p>
 
             <p
                 id="personal-question-number"
                 class="question-number"
             >
-                Question 1
+                question 1
             </p>
 
             <div class="progress">
 
-                <span
-                    id="personal-progress-current"
-                >
+                <span id="personal-progress-current">
                     1
                 </span>
 
-                <span>
-                    /
-                </span>
-
-                <span>
-                    8
-                </span>
+                / 8
 
             </div>
-
 
             <h2
                 id="personal-question"
                 class="quiz-question"
             >
-                Question
             </h2>
-
 
             <div
                 id="personal-answer-area"
                 class="answer-area"
             >
             </div>
-
 
             <button
                 id="personal-next-button"
@@ -241,11 +145,9 @@
     </section>
 
 
-
-    <!-- =========================================
-         SCENE 04
+    <!-- =====================================================
          MBTI QUIZ
-    ========================================== -->
+    ====================================================== -->
 
     <section
         id="mbti-quiz"
@@ -255,49 +157,37 @@
         <div class="quiz-container">
 
             <p class="quiz-label">
-                let's see what your personality says
+                now let's find your personality
             </p>
 
             <p
                 id="mbti-question-number"
                 class="question-number"
             >
-                Question 1 of 20
+                question 1 of 20
             </p>
 
             <div class="progress">
 
-                <span
-                    id="mbti-progress-current"
-                >
+                <span id="mbti-progress-current">
                     1
                 </span>
 
-                <span>
-                    /
-                </span>
-
-                <span>
-                    20
-                </span>
+                / 20
 
             </div>
-
 
             <h2
                 id="mbti-question"
                 class="quiz-question"
             >
-                Question
             </h2>
-
 
             <div
                 id="mbti-answer-area"
                 class="answer-area"
             >
             </div>
-
 
             <button
                 id="mbti-next-button"
@@ -312,15 +202,52 @@
     </section>
 
 
+    <!-- =====================================================
+         SECOND PHOTO
+         THIS APPEARS ONLY AFTER MBTI QUESTION 20
+    ====================================================== -->
 
-    <!-- =========================================
-         SCENE 05
+    <section
+        id="second-photo"
+        class="scene photo-scene"
+    >
+
+        <div class="photo-scene-content">
+
+            <div class="portrait-frame second-frame">
+
+                <img
+                    src="stella-photo-2.jpeg"
+                    alt="Stella"
+                    class="second-photo"
+                >
+
+            </div>
+
+            <p class="photo-message">
+                and here you are,
+                still becoming yourself.
+            </p>
+
+            <button
+                id="photo-continue-button"
+                class="main-button"
+            >
+                see your result
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
          MBTI RESULT
-    ========================================== -->
+    ====================================================== -->
 
     <section
         id="mbti-result"
-        class="scene"
+        class="scene result-scene"
     >
 
         <div class="result-container">
@@ -333,33 +260,28 @@
                 id="mbti-type"
                 class="mbti-type"
             >
-                INFJ
             </div>
 
             <h2
                 id="mbti-title"
                 class="result-title"
             >
-                The Advocate
             </h2>
 
             <p
                 id="mbti-description"
                 class="result-description"
             >
-                Your personality description.
             </p>
 
             <p
                 id="mbti-details"
                 class="result-details"
             >
-                More about your personality.
             </p>
 
-
             <button
-                id="birthday-ending-button"
+                id="result-continue-button"
                 class="main-button"
             >
                 continue
@@ -370,11 +292,50 @@
     </section>
 
 
+    <!-- =====================================================
+         SHIBA
+    ====================================================== -->
 
-    <!-- =========================================
-         SCENE 06
-         FINAL BIRTHDAY WISHES
-    ========================================== -->
+    <section
+        id="shiba-scene"
+        class="scene shiba-scene"
+    >
+
+        <div class="shiba-content">
+
+            <div class="shiba-picture-wrap">
+
+                <img
+                    src="shiba.jpg"
+                    alt="Shiba Inu"
+                    class="shiba-image"
+                >
+
+            </div>
+
+            <p class="shiba-message">
+                that's all from your shibainu.
+            </p>
+
+            <p class="shiba-love">
+                i love you 2in1, and it's always be.
+            </p>
+
+            <button
+                id="wishes-button"
+                class="main-button"
+            >
+                one last thing
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL WISHES
+    ====================================================== -->
 
     <section
         id="birthday-wishes"
@@ -383,9 +344,7 @@
 
         <div class="wishes-container">
 
-            <div class="wishes-decoration">
-                20
-            </div>
+            <div class="final-stars"></div>
 
             <h2>
                 happy birthday, stella halim
@@ -397,23 +356,12 @@
             >
             </div>
 
-            <p class="wishes-signature">
-                — your shibainu
-            </p>
-
         </div>
 
     </section>
 
 
-
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
-
-    <script
-        src="script.js"
-    ></script>
+    <script src="script.js"></script>
 
 </body>
 
