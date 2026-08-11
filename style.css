@@ -7,512 +7,809 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
     overflow: hidden;
-    font-family: Georgia, "Times New Roman", serif;
-    background: #07152e;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     color: white;
+    background: #050d1d;
 }
 
-/* SCENES */
+
+/* =====================================================
+   SCENES
+===================================================== */
 
 .scene {
     position: fixed;
+
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
-    transition: opacity 1s ease, visibility 1s ease;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
 }
 
 .scene.active {
     opacity: 1;
     visibility: visible;
+
     pointer-events: auto;
 }
 
-/* OPENING */
 
-#opening {
+/* =====================================================
+   BLUE NIGHT SKY
+===================================================== */
+
+.night-scene {
+    overflow: hidden;
+
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #244b82 0%,
-            #102b52 35%,
-            #07152e 75%,
-            #030914 100%
+            ellipse at 50% 20%,
+            #315d96 0%,
+            #193b69 30%,
+            #0b2446 58%,
+            #06152e 82%,
+            #020814 100%
         );
 }
 
+
+/* STARS */
+
+.stars,
+.final-stars {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.9) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.55) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.75) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        120px 140px,
+        190px 180px,
+        260px 230px;
+
+    background-position:
+        20px 30px,
+        70px 90px,
+        140px 20px;
+
+    opacity: 0.55;
+
+    animation:
+        starsMove 12s linear infinite;
+}
+
+@keyframes starsMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(20px);
+    }
+
+}
+
+
+/* =====================================================
+   OPENING
+===================================================== */
+
 .opening-content {
     position: relative;
+
     z-index: 2;
-    text-align: center;
+
     width: min(90%, 650px);
+
+    text-align: center;
+
+    animation:
+        openingAppear 1.8s ease forwards;
 }
 
-.small-text {
-    font-size: 0.9rem;
-    letter-spacing: 0.18em;
-    opacity: 0.7;
-    margin-bottom: 18px;
+@keyframes openingAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
+
+.opening-small {
+    margin-bottom: 22px;
+
+    font-size: 0.82rem;
+
+    letter-spacing: 0.18em;
+
+    text-transform: lowercase;
+
+    opacity: 0.65;
+}
+
+
+/* =====================================================
+   PORTRAIT
+===================================================== */
+
+.portrait-frame {
+    position: relative;
+
+    width: min(58vw, 260px);
+
+    margin: 0 auto 28px;
+
+    padding: 6px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 0 35px
+        rgba(145, 190, 255, 0.28),
+
+        0 20px 50px
+        rgba(0, 0, 0, 0.35);
+
+    animation:
+        portraitGlow 3s ease-in-out infinite;
+}
+
+.portrait-frame::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 22px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    pointer-events: none;
+}
+
+.opening-photo {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    object-fit: cover;
+
+    border-radius: 13px;
+}
+
+@keyframes portraitGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 30px
+            rgba(145, 190, 255, 0.22),
+
+            0 20px 50px
+            rgba(0, 0, 0, 0.35);
+    }
+
+    50% {
+        box-shadow:
+            0 0 50px
+            rgba(145, 190, 255, 0.42),
+
+            0 20px 50px
+            rgba(0, 0, 0, 0.35);
+    }
+
+}
+
+
+/* =====================================================
+   OPENING TEXT
+===================================================== */
 
 .opening-content h1 {
-    font-size: clamp(2.8rem, 10vw, 6rem);
+    font-size:
+        clamp(
+            2.2rem,
+            8vw,
+            4.5rem
+        );
+
     font-weight: 400;
-    letter-spacing: 0.04em;
+
+    letter-spacing: 0.03em;
 }
 
-.age {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    letter-spacing: 0.2em;
-    opacity: 0.75;
+.opening-content h2 {
+    margin-top: 5px;
+
+    font-size:
+        clamp(
+            1.2rem,
+            4vw,
+            1.8rem
+        );
+
+    font-weight: 400;
+
+    opacity: 0.9;
+}
+
+.opening-age {
+    margin-top: 8px;
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.6;
 }
 
 .opening-message {
-    margin-top: 45px;
+    margin-top: 28px;
+
     line-height: 1.8;
+
     font-size: 1rem;
-    opacity: 0.85;
+
+    opacity: 0.78;
 }
 
-/* BUTTON */
+
+/* =====================================================
+   BUTTON
+===================================================== */
 
 .main-button {
-    margin-top: 40px;
+    margin-top: 30px;
+
     padding: 14px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
     color: white;
+
     font-family: inherit;
+
     font-size: 0.95rem;
+
     cursor: pointer;
+
     transition:
         background 0.3s ease,
+        border-color 0.3s ease,
         transform 0.3s ease;
 }
 
 .main-button:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    border-color:
+        rgba(255, 255, 255, 0.65);
+
     transform: translateY(-2px);
 }
 
 .main-button:disabled {
-    opacity: 0.35;
+    opacity: 0.3;
+
     cursor: default;
+
     transform: none;
 }
 
-/* SHIBA SCENE */
 
-#shiba-scene {
-    background:
-        radial-gradient(
-            circle at center,
-            #254c78,
-            #0c2442 55%,
-            #050e1c
-        );
-}
-
-.shiba-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.shiba-character {
-    position: relative;
-    width: 330px;
-    height: 300px;
-}
-
-/* SHIBA HEAD */
-
-.shiba-head {
-    position: absolute;
-    left: 50%;
-    top: 20px;
-    transform: translateX(-50%);
-    width: 190px;
-    height: 170px;
-}
-
-.face {
-    position: absolute;
-    inset: 20px 0 0;
-    background: #d99a58;
-    border-radius: 45% 45% 48% 48%;
-    border: 3px solid #9b6237;
-}
-
-.ear {
-    position: absolute;
-    top: 0;
-    width: 75px;
-    height: 75px;
-    background: #d99a58;
-    border: 3px solid #9b6237;
-    transform: rotate(45deg);
-    border-radius: 15px 50px 15px 15px;
-}
-
-.left-ear {
-    left: 3px;
-}
-
-.right-ear {
-    right: 3px;
-    transform: rotate(45deg);
-}
-
-/* FACE */
-
-.eye {
-    position: absolute;
-    top: 65px;
-    width: 13px;
-    height: 17px;
-    background: #211710;
-    border-radius: 50%;
-}
-
-.left-eye {
-    left: 50px;
-}
-
-.right-eye {
-    right: 50px;
-}
-
-.snout {
-    position: absolute;
-    left: 50%;
-    top: 80px;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 55px;
-    background: #f0c48c;
-    border-radius: 50%;
-}
-
-.nose {
-    position: absolute;
-    left: 50%;
-    top: 12px;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 14px;
-    background: #211710;
-    border-radius: 50%;
-}
-
-.mouth {
-    position: absolute;
-    left: 50%;
-    top: 27px;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 12px;
-    border-bottom: 2px solid #211710;
-    border-radius: 0 0 50% 50%;
-}
-
-/* CAKE */
-
-.cake {
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
-    width: 125px;
-    height: 80px;
-    z-index: 5;
-}
-
-.cake-body {
-    position: absolute;
-    bottom: 0;
-    width: 125px;
-    height: 55px;
-    background: #f2d2a2;
-    border-radius: 12px 12px 18px 18px;
-    border: 3px solid #b47a4b;
-}
-
-.cake-top {
-    position: absolute;
-    left: 8px;
-    top: 10px;
-    width: 109px;
-    height: 28px;
-    background: #fff0d4;
-    border-radius: 50%;
-    border: 3px solid #b47a4b;
-    z-index: 2;
-}
-
-.candle {
-    position: absolute;
-    top: -42px;
-    width: 25px;
-    height: 45px;
-    background: #f6df8f;
-    border: 2px solid #a9863e;
-    border-radius: 5px 5px 2px 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    color: #7b542d;
-}
-
-.candle-two {
-    left: 27px;
-}
-
-.candle-zero {
-    right: 27px;
-}
-
-.candle::before {
-    content: "";
-    position: absolute;
-    top: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 11px;
-    height: 16px;
-    background: #ffbd55;
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(255, 189, 85, 0.8);
-}
-
-/* SHIBA HANDS */
-
-.shiba-hand {
-    position: absolute;
-    bottom: 20px;
-    width: 75px;
-    height: 38px;
-    background: #d99a58;
-    border: 3px solid #9b6237;
-    border-radius: 50%;
-    z-index: 8;
-}
-
-.left-hand {
-    left: 50px;
-    transform: rotate(-18deg);
-}
-
-.right-hand {
-    right: 50px;
-    transform: rotate(18deg);
-}
-
-.shiba-message {
-    margin-top: 30px;
-    font-size: 1.1rem;
-    letter-spacing: 0.08em;
-    opacity: 0.85;
-    text-align: center;
-}
-
-/* QUIZ */
+/* =====================================================
+   QUIZ
+===================================================== */
 
 .quiz-scene {
     background:
-        linear-gradient(
-            180deg,
-            #0b2344,
-            #07152e
+        radial-gradient(
+            circle at 50% 15%,
+            #234b79,
+            #102b50 45%,
+            #06152d 100%
         );
 }
 
 .quiz-container {
     width: min(90%, 650px);
+
     text-align: center;
 }
 
 .quiz-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    opacity: 0.6;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.16em;
+
+    text-transform: lowercase;
+
+    opacity: 0.55;
 }
 
 .question-number {
-    font-size: 0.85rem;
-    opacity: 0.6;
+    font-size: 0.82rem;
+
+    opacity: 0.65;
 }
 
 .progress {
-    margin-top: 8px;
-    opacity: 0.45;
-    font-size: 0.8rem;
+    margin-top: 7px;
+
+    font-size: 0.75rem;
+
+    opacity: 0.4;
 }
 
 .quiz-question {
     margin-top: 35px;
-    font-size: clamp(1.4rem, 4vw, 2.1rem);
-    line-height: 1.5;
+
+    font-size:
+        clamp(
+            1.35rem,
+            4vw,
+            2rem
+        );
+
+    line-height: 1.55;
+
     font-weight: 400;
 }
 
 .answer-area {
     display: flex;
+
     flex-direction: column;
-    gap: 12px;
-    margin-top: 35px;
+
+    gap: 11px;
+
+    margin-top: 32px;
 }
 
 .quiz-answer {
     width: 100%;
+
     padding: 15px 18px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.17);
+
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
     color: white;
+
     font-family: inherit;
-    font-size: 1rem;
+
+    font-size: 0.96rem;
+
+    line-height: 1.45;
+
     cursor: pointer;
+
     transition:
         background 0.25s ease,
-        border 0.25s ease;
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .quiz-answer:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background:
+        rgba(255, 255, 255, 0.09);
+
+    transform: translateY(-1px);
 }
 
 .quiz-answer.selected {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.7);
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    border-color:
+        rgba(255, 255, 255, 0.7);
 }
 
-/* MBTI RESULT */
 
-#mbti-result {
+/* =====================================================
+   SECOND PHOTO
+===================================================== */
+
+.photo-scene {
+    overflow: hidden;
+
     background:
         radial-gradient(
-            circle,
-            #284d78,
-            #07152e 70%
+            circle at 50% 25%,
+            #315d96,
+            #193b69 40%,
+            #06152e 100%
+        );
+}
+
+.photo-scene-content {
+    width: min(90%, 650px);
+
+    text-align: center;
+
+    animation:
+        secondPhotoAppear 1.4s ease forwards;
+}
+
+.second-frame {
+    width: min(65vw, 310px);
+
+    margin-bottom: 32px;
+}
+
+.second-photo {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    object-fit: cover;
+
+    border-radius: 13px;
+}
+
+@keyframes secondPhotoAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.photo-message {
+    max-width: 450px;
+
+    margin: 0 auto;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+
+    opacity: 0.8;
+}
+
+
+/* =====================================================
+   MBTI RESULT
+===================================================== */
+
+.result-scene {
+    background:
+        radial-gradient(
+            circle at center,
+            #2c527e,
+            #0d2648 45%,
+            #06152e 100%
         );
 }
 
 .result-container {
     width: min(90%, 650px);
+
     text-align: center;
 }
 
 .mbti-type {
-    margin-top: 20px;
+    margin-top: 15px;
+
     font-family: Arial, sans-serif;
-    font-size: clamp(4rem, 15vw, 8rem);
+
+    font-size:
+        clamp(
+            4rem,
+            15vw,
+            7.5rem
+        );
+
     font-weight: 700;
+
     letter-spacing: 0.08em;
+
+    text-shadow:
+        0 0 30px
+        rgba(180, 215, 255, 0.3);
 }
 
 .result-title {
-    margin-top: 10px;
+    margin-top: 5px;
+
     font-size: 1.8rem;
+
     font-weight: 400;
 }
 
 .result-description {
     margin-top: 20px;
-    font-size: 1.1rem;
+
+    font-size: 1.08rem;
+
     line-height: 1.7;
 }
 
 .result-details {
-    margin-top: 15px;
-    font-size: 0.95rem;
+    margin-top: 14px;
+
+    font-size: 0.92rem;
+
     line-height: 1.7;
-    opacity: 0.7;
+
+    opacity: 0.65;
 }
 
-/* FINAL WISHES */
+
+/* =====================================================
+   SHIBA
+===================================================== */
+
+.shiba-scene {
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #315d96,
+            #193b69 45%,
+            #06152e 100%
+        );
+}
+
+.shiba-content {
+    width: min(90%, 650px);
+
+    text-align: center;
+}
+
+.shiba-picture-wrap {
+    animation:
+        shibaAppear 1.5s ease forwards;
+}
+
+.shiba-image {
+    display: block;
+
+    width: min(70vw, 360px);
+
+    max-height: 52vh;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+
+    filter:
+        drop-shadow(
+            0 18px 35px
+            rgba(0, 0, 0, 0.42)
+        );
+}
+
+@keyframes shibaAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.shiba-message {
+    margin-top: 30px;
+
+    font-size: 1.1rem;
+
+    letter-spacing: 0.05em;
+
+    opacity: 0.9;
+}
+
+.shiba-love {
+    margin-top: 12px;
+
+    font-size: 0.95rem;
+
+    opacity: 0.65;
+}
+
+
+/* =====================================================
+   FINAL WISHES
+===================================================== */
 
 .wishes-scene {
     overflow-y: auto;
+
     align-items: flex-start;
+
     background:
-        linear-gradient(
-            180deg,
-            #07152e,
-            #030914
+        radial-gradient(
+            ellipse at 50% 0%,
+            #18375e,
+            #07152e 45%,
+            #020814 100%
         );
 }
 
 .wishes-container {
+    position: relative;
+
     width: min(90%, 760px);
-    padding: 80px 0;
+
+    padding:
+        75px 0 110px;
 }
 
 .wishes-container h2 {
-    font-size: clamp(2rem, 7vw, 3.5rem);
-    font-weight: 400;
-    text-align: center;
-    margin-bottom: 50px;
-}
+    position: relative;
 
-.wishes-decoration {
+    z-index: 2;
+
+    margin-bottom: 50px;
+
+    font-size:
+        clamp(
+            2rem,
+            7vw,
+            3.6rem
+        );
+
+    font-weight: 400;
+
     text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 4rem;
-    opacity: 0.15;
-    margin-bottom: 20px;
 }
 
 .wishes-text {
+    position: relative;
+
+    z-index: 2;
+
     white-space: pre-line;
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
+
+    font-size:
+        clamp(
+            1rem,
+            2.5vw,
+            1.12rem
+        );
+
     line-height: 2;
+
     opacity: 0.88;
 }
 
-.wishes-signature {
-    margin-top: 50px;
-    text-align: right;
-    font-style: italic;
-    opacity: 0.7;
-}
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media (max-width: 600px) {
 
-    .shiba-character {
-        transform: scale(0.82);
+    .opening-content {
+        padding: 18px;
     }
 
-    .opening-content {
-        padding: 20px;
+    .portrait-frame {
+        width: min(58vw, 230px);
+    }
+
+    .opening-message {
+        margin-top: 20px;
+    }
+
+    .main-button {
+        padding:
+            13px 25px;
     }
 
     .quiz-container {
-        padding: 20px;
+        padding: 18px;
+    }
+
+    .quiz-question {
+        margin-top: 25px;
+    }
+
+    .answer-area {
+        margin-top: 25px;
+    }
+
+    .second-frame {
+        width: min(65vw, 260px);
+    }
+
+    .shiba-image {
+        width: 68vw;
     }
 
     .wishes-container {
-        padding: 60px 10px;
+        padding:
+            60px 12px 100px;
     }
+
 }
