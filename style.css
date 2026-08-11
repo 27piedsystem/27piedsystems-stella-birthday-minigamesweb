@@ -1,929 +1,518 @@
-/* ==================================================
-   GLOBAL RESET
-================================================== */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-html {
+html,
+body {
     width: 100%;
     height: 100%;
 }
 
 body {
-    width: 100%;
-    min-height: 100%;
     overflow: hidden;
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    color: #ffffff;
-    background: #071525;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #07152e;
+    color: white;
 }
 
-button {
-    font: inherit;
-}
-
-
-/* ==================================================
-   MAIN APP
-================================================== */
-
-#birthday-app {
-    position: relative;
-
-    width: 100%;
-    min-height: 100vh;
-}
-
-
-/* ==================================================
-   SCENE SYSTEM
-================================================== */
+/* SCENES */
 
 .scene {
     position: fixed;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     visibility: hidden;
-
     pointer-events: none;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
 .scene.active {
     opacity: 1;
     visibility: visible;
-
     pointer-events: auto;
 }
 
-
-/* ==================================================
-   SCENE 01 — OPENING
-================================================== */
+/* OPENING */
 
 #opening {
     background:
         radial-gradient(
-            circle at 50% 25%,
-            rgba(70, 118, 185, 0.28),
-            transparent 42%
-        ),
-        linear-gradient(
-            180deg,
-            #091d38 0%,
-            #07182d 45%,
-            #030a14 100%
+            circle at 50% 20%,
+            #244b82 0%,
+            #102b52 35%,
+            #07152e 75%,
+            #030914 100%
         );
 }
-
-.night-sky {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-
-/* ==================================================
-   STARS
-================================================== */
-
-.stars {
-    position: absolute;
-    inset: 0;
-
-    opacity: 0.55;
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.9) 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(190, 220, 255, 0.65) 1px,
-            transparent 1.5px
-        ),
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.45) 1px,
-            transparent 1.5px
-        );
-
-    background-size:
-        95px 95px,
-        145px 145px,
-        210px 210px;
-
-    background-position:
-        15px 20px,
-        60px 80px,
-        100px 40px;
-
-    animation:
-        stars-floating 20s linear infinite;
-}
-
-@keyframes stars-floating {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-
-/* ==================================================
-   OPENING CONTENT
-================================================== */
 
 .opening-content {
     position: relative;
     z-index: 2;
-
-    width: min(90%, 520px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     text-align: center;
-
-    padding: 30px 20px;
+    width: min(90%, 650px);
 }
 
-
-/* ==================================================
-   PHOTO
-================================================== */
-
-.photo-frame {
-    position: relative;
-
-    width: min(72vw, 310px);
-    aspect-ratio: 1 / 1;
-
-    padding: 6px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.8),
-            rgba(130, 180, 235, 0.4)
-        );
-
-    box-shadow:
-        0 0 25px rgba(130, 190, 255, 0.3),
-        0 0 70px rgba(60, 130, 220, 0.18);
-
-    animation:
-        photo-pulse 4s ease-in-out infinite;
-}
-
-.photo-frame::before {
-    content: "";
-
-    position: absolute;
-    inset: -8px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(180, 220, 255, 0.25);
-
-    animation:
-        frame-rotation 12s linear infinite;
-}
-
-.photo-frame img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-}
-
-@keyframes photo-pulse {
-
-    0%,
-    100% {
-        box-shadow:
-            0 0 25px rgba(130, 190, 255, 0.25),
-            0 0 70px rgba(60, 130, 220, 0.12);
-    }
-
-    50% {
-        box-shadow:
-            0 0 35px rgba(160, 210, 255, 0.5),
-            0 0 95px rgba(70, 145, 230, 0.22);
-    }
-}
-
-@keyframes frame-rotation {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* ==================================================
-   OPENING TEXT
-================================================== */
-
-.opening-text {
-    margin-top: 30px;
-}
-
-.opening-name {
+.small-text {
     font-size: 0.9rem;
-
-    letter-spacing: 0.25em;
-
-    text-transform: uppercase;
-
+    letter-spacing: 0.18em;
     opacity: 0.7;
-
-    margin-bottom: 8px;
+    margin-bottom: 18px;
 }
 
-.opening-age {
-    font-size:
-        clamp(2.2rem, 9vw, 4rem);
+.opening-content h1 {
+    font-size: clamp(2.8rem, 10vw, 6rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+}
 
-    font-weight: 300;
-
-    line-height: 1.1;
-
-    letter-spacing: 0.02em;
+.age {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    opacity: 0.75;
 }
 
 .opening-message {
-    margin-top: 22px;
-
-    font-size: 1rem;
-
+    margin-top: 45px;
     line-height: 1.8;
-
-    letter-spacing: 0.04em;
-
-    opacity: 0.72;
+    font-size: 1rem;
+    opacity: 0.85;
 }
 
+/* BUTTON */
 
-/* ==================================================
-   BEGIN BUTTON
-================================================== */
-
-#begin-button {
-    margin-top: 35px;
-
+.main-button {
+    margin-top: 40px;
     padding: 14px 30px;
-
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 999px;
-
-    color: #ffffff;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.25);
-
-    box-shadow:
-        0 0 25px rgba(90, 160, 235, 0.12);
-
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-family: inherit;
+    font-size: 0.95rem;
     cursor: pointer;
-
     transition:
-        transform 0.3s ease,
         background 0.3s ease,
-        box-shadow 0.3s ease;
+        transform 0.3s ease;
 }
 
-#begin-button:hover {
+.main-button:hover {
+    background: rgba(255, 255, 255, 0.18);
     transform: translateY(-2px);
-
-    background:
-        rgba(255, 255, 255, 0.15);
-
-    box-shadow:
-        0 0 35px rgba(100, 175, 245, 0.25);
 }
 
-#begin-button:active {
-    transform: translateY(0);
+.main-button:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
 }
 
-
-/* ==================================================
-   SCENE 02 — SHIBA
-================================================== */
+/* SHIBA SCENE */
 
 #shiba-scene {
     background:
         radial-gradient(
-            circle at 50% 35%,
-            rgba(60, 110, 180, 0.22),
-            transparent 45%
-        ),
-        linear-gradient(
-            180deg,
-            #081a32,
-            #040b15
+            circle at center,
+            #254c78,
+            #0c2442 55%,
+            #050e1c
         );
 }
 
-.shiba-container {
-    position: relative;
-
+.shiba-content {
     width: 100%;
     height: 100%;
-
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    overflow: hidden;
 }
 
-#shiba-character {
+.shiba-character {
     position: relative;
-
-    width: min(80vw, 390px);
-    height: 330px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 330px;
+    height: 300px;
 }
 
-#birthday-cake {
+/* SHIBA HEAD */
+
+.shiba-head {
     position: absolute;
-
     left: 50%;
-    bottom: 24%;
-
+    top: 20px;
+    transform: translateX(-50%);
     width: 190px;
-    height: 130px;
+    height: 170px;
+}
 
+.face {
+    position: absolute;
+    inset: 20px 0 0;
+    background: #d99a58;
+    border-radius: 45% 45% 48% 48%;
+    border: 3px solid #9b6237;
+}
+
+.ear {
+    position: absolute;
+    top: 0;
+    width: 75px;
+    height: 75px;
+    background: #d99a58;
+    border: 3px solid #9b6237;
+    transform: rotate(45deg);
+    border-radius: 15px 50px 15px 15px;
+}
+
+.left-ear {
+    left: 3px;
+}
+
+.right-ear {
+    right: 3px;
+    transform: rotate(45deg);
+}
+
+/* FACE */
+
+.eye {
+    position: absolute;
+    top: 65px;
+    width: 13px;
+    height: 17px;
+    background: #211710;
+    border-radius: 50%;
+}
+
+.left-eye {
+    left: 50px;
+}
+
+.right-eye {
+    right: 50px;
+}
+
+.snout {
+    position: absolute;
+    left: 50%;
+    top: 80px;
     transform: translateX(-50%);
+    width: 60px;
+    height: 55px;
+    background: #f0c48c;
+    border-radius: 50%;
+}
 
+.nose {
+    position: absolute;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 14px;
+    background: #211710;
+    border-radius: 50%;
+}
+
+.mouth {
+    position: absolute;
+    left: 50%;
+    top: 27px;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 12px;
+    border-bottom: 2px solid #211710;
+    border-radius: 0 0 50% 50%;
+}
+
+/* CAKE */
+
+.cake {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    width: 125px;
+    height: 80px;
+    z-index: 5;
+}
+
+.cake-body {
+    position: absolute;
+    bottom: 0;
+    width: 125px;
+    height: 55px;
+    background: #f2d2a2;
+    border-radius: 12px 12px 18px 18px;
+    border: 3px solid #b47a4b;
+}
+
+.cake-top {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    width: 109px;
+    height: 28px;
+    background: #fff0d4;
+    border-radius: 50%;
+    border: 3px solid #b47a4b;
+    z-index: 2;
+}
+
+.candle {
+    position: absolute;
+    top: -42px;
+    width: 25px;
+    height: 45px;
+    background: #f6df8f;
+    border: 2px solid #a9863e;
+    border-radius: 5px 5px 2px 2px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #7b542d;
 }
 
-.scene-text {
+.candle-two {
+    left: 27px;
+}
+
+.candle-zero {
+    right: 27px;
+}
+
+.candle::before {
+    content: "";
     position: absolute;
-
+    top: -16px;
     left: 50%;
-    bottom: 9%;
-
-    width: min(88%, 520px);
-
     transform: translateX(-50%);
+    width: 11px;
+    height: 16px;
+    background: #ffbd55;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 189, 85, 0.8);
+}
 
+/* SHIBA HANDS */
+
+.shiba-hand {
+    position: absolute;
+    bottom: 20px;
+    width: 75px;
+    height: 38px;
+    background: #d99a58;
+    border: 3px solid #9b6237;
+    border-radius: 50%;
+    z-index: 8;
+}
+
+.left-hand {
+    left: 50px;
+    transform: rotate(-18deg);
+}
+
+.right-hand {
+    right: 50px;
+    transform: rotate(18deg);
+}
+
+.shiba-message {
+    margin-top: 30px;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
     text-align: center;
 }
 
-#shiba-message {
-    font-size: 1.1rem;
+/* QUIZ */
 
-    line-height: 1.8;
-
-    letter-spacing: 0.03em;
-
-    opacity: 0.85;
-}
-
-
-/* ==================================================
-   QUIZ SCENES
-================================================== */
-
-#personal-quiz,
-#mbti-quiz,
-#mbti-result,
-#birthday-wishes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.quiz-scene {
     background:
-        radial-gradient(
-            circle at 50% 25%,
-            rgba(60, 110, 180, 0.18),
-            transparent 50%
-        ),
         linear-gradient(
             180deg,
-            #081a32,
-            #040b15
+            #0b2344,
+            #07152e
         );
 }
-
-
-/* ==================================================
-   QUIZ CONTAINER
-================================================== */
 
 .quiz-container {
     width: min(90%, 650px);
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
     text-align: center;
-
-    padding: 30px 0;
-}
-
-
-/* ==================================================
-   QUIZ HEADER
-================================================== */
-
-.quiz-header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 25px;
 }
 
 .quiz-label {
-    font-size: 0.78rem;
-
-    letter-spacing: 0.18em;
-
-    text-transform: uppercase;
-
-    opacity: 0.55;
-}
-
-.quiz-progress {
-    font-size: 0.8rem;
-
-    letter-spacing: 0.08em;
-
-    opacity: 0.5;
-}
-
-
-/* ==================================================
-   QUESTION
-================================================== */
-
-.question-area {
-    margin-bottom: 30px;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+    margin-bottom: 20px;
 }
 
 .question-number {
-    margin-bottom: 15px;
-
     font-size: 0.85rem;
+    opacity: 0.6;
+}
 
+.progress {
+    margin-top: 8px;
     opacity: 0.45;
+    font-size: 0.8rem;
 }
 
-.question-text {
-    font-size:
-        clamp(1.3rem, 5vw, 2rem);
-
-    font-weight: 400;
-
+.quiz-question {
+    margin-top: 35px;
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
     line-height: 1.5;
+    font-weight: 400;
 }
-
-
-/* ==================================================
-   ANSWERS
-================================================== */
 
 .answer-area {
     display: flex;
     flex-direction: column;
-
     gap: 12px;
+    margin-top: 35px;
 }
 
 .quiz-answer {
     width: 100%;
-
-    padding: 16px 19px;
-
-    border-radius: 15px;
-
-    color: #ffffff;
-
-    text-align: left;
-
-    background:
-        rgba(255, 255, 255, 0.06);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.12);
-
+    padding: 15px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
     cursor: pointer;
-
     transition:
-        transform 0.25s ease,
         background 0.25s ease,
-        border-color 0.25s ease;
+        border 0.25s ease;
 }
 
 .quiz-answer:hover {
-    transform: translateY(-2px);
-
-    background:
-        rgba(255, 255, 255, 0.1);
-
-    border-color:
-        rgba(180, 220, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .quiz-answer.selected {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* MBTI RESULT */
+
+#mbti-result {
     background:
-        rgba(90, 150, 220, 0.25);
-
-    border-color:
-        rgba(170, 215, 255, 0.65);
+        radial-gradient(
+            circle,
+            #284d78,
+            #07152e 70%
+        );
 }
-
-
-/* ==================================================
-   QUIZ BUTTON
-================================================== */
-
-.quiz-next-button {
-    margin-top: 25px;
-
-    padding: 13px 28px;
-
-    border-radius: 999px;
-
-    color: #ffffff;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.2);
-
-    cursor: pointer;
-
-    opacity: 0.35;
-
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        background 0.25s ease;
-}
-
-.quiz-next-button:not(:disabled) {
-    opacity: 1;
-}
-
-.quiz-next-button:not(:disabled):hover {
-    transform: translateY(-2px);
-
-    background:
-        rgba(255, 255, 255, 0.15);
-}
-
-
-/* ==================================================
-   MBTI RESULT
-================================================== */
 
 .result-container {
     width: min(90%, 650px);
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
     text-align: center;
-
-    padding: 30px 0;
-}
-
-.result-label {
-    margin-bottom: 12px;
-
-    font-size: 0.78rem;
-
-    letter-spacing: 0.2em;
-
-    text-transform: uppercase;
-
-    opacity: 0.55;
-}
-
-.result-introduction {
-    margin-bottom: 15px;
-
-    opacity: 0.6;
-
-    font-size: 0.95rem;
 }
 
 .mbti-type {
-    font-size:
-        clamp(4rem, 17vw, 8rem);
-
-    font-weight: 300;
-
-    letter-spacing: 0.1em;
-
-    line-height: 1;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
 }
 
-.mbti-title {
-    margin-top: 15px;
-
-    margin-bottom: 25px;
-
-    font-size: 1.4rem;
-
+.result-title {
+    margin-top: 10px;
+    font-size: 1.8rem;
     font-weight: 400;
-
-    opacity: 0.8;
 }
 
-.mbti-description {
-    font-size: 1.05rem;
-
-    line-height: 1.8;
-
-    opacity: 0.85;
+.result-description {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    line-height: 1.7;
 }
 
-.mbti-details {
-    margin-top: 25px;
-
+.result-details {
+    margin-top: 15px;
     font-size: 0.95rem;
-
-    line-height: 1.8;
-
+    line-height: 1.7;
     opacity: 0.7;
 }
 
-#birthday-ending-button {
-    margin-top: 30px;
+/* FINAL WISHES */
 
-    padding: 13px 28px;
-
-    border-radius: 999px;
-
-    color: #ffffff;
-
+.wishes-scene {
+    overflow-y: auto;
+    align-items: flex-start;
     background:
-        rgba(255, 255, 255, 0.08);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.2);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
+        linear-gradient(
+            180deg,
+            #07152e,
+            #030914
+        );
 }
-
-#birthday-ending-button:hover {
-    transform: translateY(-2px);
-
-    background:
-        rgba(255, 255, 255, 0.15);
-}
-
-
-/* ==================================================
-   FINAL BIRTHDAY WISHES
-================================================== */
 
 .wishes-container {
-    width: min(90%, 650px);
+    width: min(90%, 760px);
+    padding: 80px 0;
+}
 
-    max-height: 85vh;
-
-    overflow-y: auto;
-
+.wishes-container h2 {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 400;
     text-align: center;
-
-    padding: 30px 0;
+    margin-bottom: 50px;
 }
 
-.wishes-label {
-    margin-bottom: 15px;
-
-    font-size: 0.78rem;
-
-    letter-spacing: 0.2em;
-
-    text-transform: uppercase;
-
-    opacity: 0.55;
-}
-
-.wishes-title {
-    margin-bottom: 30px;
-
-    font-size:
-        clamp(2rem, 8vw, 3.5rem);
-
-    font-weight: 300;
-
-    line-height: 1.2;
+.wishes-decoration {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 4rem;
+    opacity: 0.15;
+    margin-bottom: 20px;
 }
 
 .wishes-text {
-    font-size: 1rem;
-
-    line-height: 2;
-
-    text-align: left;
-
     white-space: pre-line;
-
-    opacity: 0.82;
-
-    padding: 0 5px;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 2;
+    opacity: 0.88;
 }
 
-
-/* ==================================================
-   SCROLLBARS
-================================================== */
-
-.quiz-container::-webkit-scrollbar,
-.result-container::-webkit-scrollbar,
-.wishes-container::-webkit-scrollbar {
-    width: 4px;
+.wishes-signature {
+    margin-top: 50px;
+    text-align: right;
+    font-style: italic;
+    opacity: 0.7;
 }
 
-.quiz-container::-webkit-scrollbar-track,
-.result-container::-webkit-scrollbar-track,
-.wishes-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.quiz-container::-webkit-scrollbar-thumb,
-.result-container::-webkit-scrollbar-thumb,
-.wishes-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-
-    border-radius: 10px;
-}
-
-
-/* ==================================================
-   MOBILE
-================================================== */
+/* MOBILE */
 
 @media (max-width: 600px) {
 
+    .shiba-character {
+        transform: scale(0.82);
+    }
+
     .opening-content {
-        width: 92%;
-
-        padding:
-            20px 12px;
+        padding: 20px;
     }
 
-    .photo-frame {
-        width: min(70vw, 290px);
+    .quiz-container {
+        padding: 20px;
     }
 
-    .opening-text {
-        margin-top: 25px;
-    }
-
-    .opening-message {
-        font-size: 0.95rem;
-    }
-
-    #begin-button {
-        margin-top: 28px;
-
-        padding:
-            13px 25px;
-    }
-
-    #shiba-character {
-        width: 88vw;
-
-        height: 300px;
-    }
-
-    #birthday-cake {
-        bottom: 23%;
-    }
-
-    .scene-text {
-        bottom: 8%;
-    }
-
-    .quiz-container,
-    .result-container,
     .wishes-container {
-        width: 88%;
-
-        max-height: 88vh;
-    }
-
-    .quiz-header {
-        margin-bottom: 20px;
-    }
-
-    .quiz-label {
-        font-size: 0.68rem;
-    }
-
-    .question-text {
-        font-size: 1.25rem;
-    }
-
-    .quiz-answer {
-        padding:
-            14px 16px;
-
-        font-size: 0.95rem;
-    }
-
-    .mbti-type {
-        font-size: 4.5rem;
-    }
-
-    .wishes-text {
-        font-size: 0.95rem;
-
-        line-height: 1.9;
-    }
-}
-
-
-/* ==================================================
-   VERY SMALL PHONES
-================================================== */
-
-@media (max-height: 700px) {
-
-    .photo-frame {
-        width: 210px;
-    }
-
-    .opening-text {
-        margin-top: 18px;
-    }
-
-    .opening-message {
-        margin-top: 12px;
-    }
-
-    #begin-button {
-        margin-top: 20px;
+        padding: 60px 10px;
     }
 }
