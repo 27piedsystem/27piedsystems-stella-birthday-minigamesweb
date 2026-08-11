@@ -1,86 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Happy Birthday, Stella Halim</title>
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
-        rel="stylesheet"
-        href="style.css"
-    >
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <!-- BACKGROUND MUSIC -->
-
     <audio
         id="background-music"
+        src="birthday-music.mp3"
         loop
-    >
-        <source
-            src="music.mp3"
-            type="audio/mpeg"
-        >
+        preload="auto">
     </audio>
 
 
-    <!-- =====================================================
-         OPENING
-    ====================================================== -->
-
-    <section
-        id="opening"
-        class="scene active night-scene"
-    >
+    <!-- INTRODUCTION -->
+    <section id="opening" class="scene active">
 
         <div class="stars"></div>
 
         <div class="opening-content">
 
-            <p class="opening-small">
-                a little adventure made only for
+            <img
+                src="stella-photo-1.jpeg"
+                alt="Stella"
+                class="stella-photo">
+
+            <p class="small-intro">
+                happy birthday
             </p>
 
-            <div class="portrait-frame">
-
-                <img
-                    src="stella-photo-1.jpeg"
-                    alt="Stella"
-                    class="opening-photo"
-                >
-
-            </div>
-
             <h1>
-                happy birthday
+                stella halim
             </h1>
 
-            <h2>
-                stella halim
-            </h2>
-
-            <p class="opening-age">
+            <p class="age">
                 20 years old
             </p>
 
             <p class="opening-message">
                 dear my chihuahua,<br>
-                here begins the adventure
+                here begins the adventure.
             </p>
 
-            <button
-                id="begin-button"
-                class="main-button"
-            >
-                begin the adventure
+            <button id="begin-button">
+                start the adventure
             </button>
 
         </div>
@@ -88,56 +66,39 @@
     </section>
 
 
-    <!-- =====================================================
-         PERSONAL QUIZ
-    ====================================================== -->
-
-    <section
-        id="personal-quiz"
-        class="scene quiz-scene"
-    >
+    <!-- PERSONAL QUESTIONS -->
+    <section id="personal-quiz" class="scene">
 
         <div class="quiz-container">
-
-            <p class="quiz-label">
-                before the personality test
-            </p>
 
             <p
                 id="personal-question-number"
-                class="question-number"
-            >
+                class="question-label">
                 question 1
             </p>
 
-            <div class="progress">
-
-                <span id="personal-progress-current">
-                    1
-                </span>
-
-                / 8
-
+            <div class="question-progress">
+                <div
+                    id="personal-progress-bar"
+                    class="progress-bar">
+                </div>
             </div>
 
-            <h2
-                id="personal-question"
-                class="quiz-question"
-            >
-            </h2>
+            <p
+                id="personal-progress-current"
+                class="progress-number">
+                1
+            </p>
 
-            <div
-                id="personal-answer-area"
-                class="answer-area"
-            >
-            </div>
+            <h2 id="personal-question"></h2>
+
+            <div id="personal-answer-area"></div>
 
             <button
                 id="personal-next-button"
-                class="main-button"
-                disabled
-            >
-                continue
+                class="next-button"
+                disabled>
+                next
             </button>
 
         </div>
@@ -145,56 +106,39 @@
     </section>
 
 
-    <!-- =====================================================
-         MBTI QUIZ
-    ====================================================== -->
-
-    <section
-        id="mbti-quiz"
-        class="scene quiz-scene"
-    >
+    <!-- 20 MBTI QUESTIONS -->
+    <section id="mbti-quiz" class="scene">
 
         <div class="quiz-container">
 
-            <p class="quiz-label">
-                now let's find your personality
-            </p>
-
             <p
                 id="mbti-question-number"
-                class="question-number"
-            >
+                class="question-label">
                 question 1 of 20
             </p>
 
-            <div class="progress">
-
-                <span id="mbti-progress-current">
-                    1
-                </span>
-
-                / 20
-
+            <div class="question-progress">
+                <div
+                    id="mbti-progress-bar"
+                    class="progress-bar">
+                </div>
             </div>
 
-            <h2
-                id="mbti-question"
-                class="quiz-question"
-            >
-            </h2>
+            <p
+                id="mbti-progress-current"
+                class="progress-number">
+                1
+            </p>
 
-            <div
-                id="mbti-answer-area"
-                class="answer-area"
-            >
-            </div>
+            <h2 id="mbti-question"></h2>
+
+            <div id="mbti-answer-area"></div>
 
             <button
                 id="mbti-next-button"
-                class="main-button"
-                disabled
-            >
-                continue
+                class="next-button"
+                disabled>
+                next
             </button>
 
         </div>
@@ -202,38 +146,22 @@
     </section>
 
 
-    <!-- =====================================================
-         SECOND PHOTO
-         THIS APPEARS ONLY AFTER MBTI QUESTION 20
-    ====================================================== -->
+    <!-- STELLA PHOTO 2 -->
+    <section id="second-photo" class="scene">
 
-    <section
-        id="second-photo"
-        class="scene photo-scene"
-    >
+        <div class="photo-scene">
 
-        <div class="photo-scene-content">
+            <img
+                src="stella-photo-2.jpeg"
+                alt="Stella"
+                class="second-stella-photo">
 
-            <div class="portrait-frame second-frame">
-
-                <img
-                    src="stella-photo-2.jpeg"
-                    alt="Stella"
-                    class="second-photo"
-                >
-
-            </div>
-
-            <p class="photo-message">
-                and here you are,
-                still becoming yourself.
+            <p>
+                now let's see what your answers say about you.
             </p>
 
-            <button
-                id="photo-continue-button"
-                class="main-button"
-            >
-                see your result
+            <button id="photo-continue-button">
+                see your personality
             </button>
 
         </div>
@@ -241,49 +169,24 @@
     </section>
 
 
-    <!-- =====================================================
-         MBTI RESULT
-    ====================================================== -->
-
-    <section
-        id="mbti-result"
-        class="scene result-scene"
-    >
+    <!-- MBTI RESULT -->
+    <section id="mbti-result" class="scene">
 
         <div class="result-container">
 
-            <p class="quiz-label">
+            <p class="result-small">
                 your personality
             </p>
 
-            <div
-                id="mbti-type"
-                class="mbti-type"
-            >
-            </div>
+            <h1 id="mbti-type"></h1>
 
-            <h2
-                id="mbti-title"
-                class="result-title"
-            >
-            </h2>
+            <h2 id="mbti-title"></h2>
 
-            <p
-                id="mbti-description"
-                class="result-description"
-            >
-            </p>
+            <p id="mbti-description"></p>
 
-            <p
-                id="mbti-details"
-                class="result-details"
-            >
-            </p>
+            <p id="mbti-details"></p>
 
-            <button
-                id="result-continue-button"
-                class="main-button"
-            >
+            <button id="result-continue-button">
                 continue
             </button>
 
@@ -292,40 +195,26 @@
     </section>
 
 
-    <!-- =====================================================
-         SHIBA
-    ====================================================== -->
+    <!-- SHIBAINU -->
+    <section id="shiba-scene" class="scene">
 
-    <section
-        id="shiba-scene"
-        class="scene shiba-scene"
-    >
+        <div class="shiba-container">
 
-        <div class="shiba-content">
+            <img
+                src="shiba.jpg"
+                alt="Shibainu holding a birthday cake"
+                class="shiba-image">
 
-            <div class="shiba-picture-wrap">
+            <h2>
+                one last thing...
+            </h2>
 
-                <img
-                    src="shiba.jpg"
-                    alt="Shiba Inu"
-                    class="shiba-image"
-                >
-
-            </div>
-
-            <p class="shiba-message">
-                that's all from your shibainu.
+            <p>
+                from your shibainu.
             </p>
 
-            <p class="shiba-love">
-                i love you 2in1, and it's always be.
-            </p>
-
-            <button
-                id="wishes-button"
-                class="main-button"
-            >
-                one last thing
+            <button id="wishes-button">
+                read my wishes
             </button>
 
         </div>
@@ -333,28 +222,12 @@
     </section>
 
 
-    <!-- =====================================================
-         FINAL WISHES
-    ====================================================== -->
-
-    <section
-        id="birthday-wishes"
-        class="scene wishes-scene"
-    >
+    <!-- FINAL WISHES -->
+    <section id="birthday-wishes" class="scene">
 
         <div class="wishes-container">
 
-            <div class="final-stars"></div>
-
-            <h2>
-                happy birthday, stella halim
-            </h2>
-
-            <div
-                id="wishes-text"
-                class="wishes-text"
-            >
-            </div>
+            <div id="wishes-text"></div>
 
         </div>
 
@@ -364,5 +237,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>
