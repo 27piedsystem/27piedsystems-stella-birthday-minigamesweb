@@ -1,16 +1,16 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   min-height: 100%;
   font-family: Arial, sans-serif;
-  background: #07152e;
-  color: white;
+  background: #75b9e6;
+  color: #ffffff;
 }
 
 body {
@@ -18,383 +18,763 @@ body {
 }
 
 button {
-  font: inherit;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
 }
 
-.game-scene {
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   GENERAL SCENES
+   ========================================= */
+
+.scene {
+  position: relative;
+  width: 100%;
   min-height: 100vh;
-  min-height: 100svh;
+  overflow: hidden;
+}
+
+.scene.active {
   display: flex;
+}
+
+#scene-opening {
   align-items: center;
   justify-content: center;
-  padding: 30px 20px;
   background:
-    radial-gradient(circle at 50% 20%, rgba(55, 105, 180, 0.35), transparent 40%),
-    linear-gradient(#07152e, #0b2850 55%, #07152e);
+    linear-gradient(
+      to bottom,
+      #172b5c 0%,
+      #315d96 45%,
+      #75b9e6 100%
+    );
+}
+
+.story-card,
+.message-container,
+.final-content {
+  position: relative;
+  z-index: 10;
+  width: min(90%, 720px);
+  margin: auto;
+  padding: 40px 24px;
   text-align: center;
 }
 
-.game-scene[hidden] {
-  display: none;
+.story-card h1,
+.story-card h2,
+.final-content h1,
+.final-content h2 {
+  margin-bottom: 20px;
 }
 
-.scene-content {
-  width: 100%;
-  max-width: 700px;
+.story-card p {
+  margin: 14px auto;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   OPENING
+   ========================================= */
+
+.night-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, #ffffff 1px, transparent 1px);
+  background-size: 90px 90px;
+  opacity: 0.5;
+}
+
+.opening-content {
   position: relative;
-  z-index: 2;
-  animation: sceneAppear 0.8s ease;
+  z-index: 5;
+  width: min(92%, 600px);
+  padding: 30px 20px;
+  text-align: center;
 }
 
-@keyframes sceneAppear {
+.portrait-frame {
+  width: min(80vw, 330px);
+  margin: 0 auto 24px;
+  padding: 8px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.5),
+    0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.date-text,
+.small-title {
+  letter-spacing: 3px;
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+.opening-content h1 {
+  font-size: clamp(32px, 8vw, 58px);
+  margin-bottom: 8px;
+}
+
+.opening-content h2 {
+  font-size: clamp(20px, 5vw, 30px);
+  font-weight: normal;
+}
+
+.age-text {
+  margin: 15px 0 28px;
+  font-size: 20px;
+}
+
+.opening-content button,
+.story-card button,
+.message-container button,
+.cake-scene button {
+  padding: 15px 25px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #315d96;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================================
+   CLOUDS
+   ========================================= */
+
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: 55px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 75px;
+  height: 75px;
+  left: 25px;
+  bottom: 15px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 60px;
+  right: 20px;
+  bottom: 12px;
+}
+
+.cloud-one {
+  top: 12%;
+  left: -160px;
+  animation: cloudMove 30s linear infinite;
+}
+
+.cloud-two {
+  top: 30%;
+  left: -220px;
+  transform: scale(0.7);
+  animation: cloudMove 42s linear infinite;
+}
+
+@keyframes cloudMove {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(0);
   }
 
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(calc(100vw + 450px));
   }
 }
 
 
-/* STARS */
+/* =========================================
+   PHOTO SCENE
+   ========================================= */
 
-.stars,
-.stars::before,
-.stars::after {
+.large {
+  width: min(82vw, 420px);
+}
+
+#scene-photo {
+  background:
+    linear-gradient(
+      to bottom,
+      #75b9e6,
+      #c7e8f7
+    );
+  color: #18304f;
+}
+
+#scene-photo .story-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+}
+
+
+/* =========================================
+   PLATFORM GAME
+   ========================================= */
+
+#scene-platform-game {
+  background: #75b9e6;
+  display: block;
+}
+
+.game-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.game-header {
+  position: absolute;
+  z-index: 100;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.platform-game {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
+  margin-top: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      #69b7e6 0%,
+      #9dd5ed 65%,
+      #c9ebc3 100%
+    );
+}
+
+.sky-background {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.stars {
-  background-image:
-    radial-gradient(circle, white 1px, transparent 1.5px),
-    radial-gradient(circle, white 1px, transparent 1.5px),
-    radial-gradient(circle, white 1px, transparent 1.5px);
-  background-size: 120px 120px, 180px 180px, 240px 240px;
-  background-position: 20px 30px, 80px 90px, 140px 20px;
-  opacity: 0.55;
-  animation: starsMove 12s linear infinite;
+.game-cloud {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
 }
 
-@keyframes starsMove {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-30px);
-  }
+.game-cloud::before,
+.game-cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
 }
 
-
-/* TEXT */
-
-.small-intro,
-.scene-label,
-.quest-number {
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 12px;
-  opacity: 0.75;
+.game-cloud::before {
+  width: 60px;
+  height: 60px;
+  left: 20px;
+  bottom: 10px;
 }
 
-h1 {
-  font-size: clamp(38px, 9vw, 72px);
-  line-height: 1.05;
-  margin: 15px 0;
+.game-cloud::after {
+  width: 50px;
+  height: 50px;
+  right: 15px;
+  bottom: 5px;
 }
 
-h2 {
-  font-size: clamp(25px, 6vw, 42px);
-  line-height: 1.2;
-  margin: 15px 0 20px;
+.cloud-game-one {
+  top: 18%;
+  left: 10%;
 }
 
-h3 {
-  font-size: 22px;
+.cloud-game-two {
+  top: 30%;
+  left: 55%;
+  transform: scale(0.7);
 }
 
-p {
-  font-size: 17px;
-  line-height: 1.7;
+.cloud-game-three {
+  top: 12%;
+  left: 90%;
+  transform: scale(0.6);
 }
 
-.birthday-age {
-  font-size: clamp(70px, 18vw, 140px);
-  line-height: 0.9;
-  margin: 20px 0;
-  font-weight: bold;
+.hill {
+  position: absolute;
+  bottom: 0;
+  width: 500px;
+  height: 180px;
+  border-radius: 50% 50% 0 0;
+  background: #83c97a;
+  opacity: 0.8;
 }
 
-.late-gift-message {
-  opacity: 0.85;
+.hill-one {
+  left: 0;
 }
 
-
-/* BUTTONS */
-
-button {
-  border: 0;
-  border-radius: 999px;
-  padding: 14px 25px;
-  margin: 10px;
-  background: rgba(255, 255, 255, 0.13);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    opacity 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.22);
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-button:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
+.hill-two {
+  left: 550px;
 }
 
 
-/* PHOTOS */
+/* WORLD */
 
-.photo-frame,
-.final-photo-frame {
-  width: min(90vw, 430px);
-  margin: 25px auto;
-  padding: 8px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 0 25px rgba(120, 180, 255, 0.35),
-    0 0 70px rgba(80, 130, 220, 0.2);
-}
-
-.photo-frame img,
-.final-photo-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 65vh;
-  object-fit: cover;
-  border-radius: 14px;
+.game-world {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 5000px;
+  height: 100%;
+  transition: transform 0.05s linear;
 }
 
 
-/* QUEST MAP */
+/* PLATFORMS */
 
-.quest-map {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-width: 500px;
-  margin: 25px auto;
-}
-
-.quest-map button {
-  width: auto;
-  margin: 0;
-}
-
-
-/* ANSWERS */
-
-.answer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  max-width: 550px;
-  margin: 25px auto;
-}
-
-.answer-button {
-  width: 100%;
-  margin: 7px 0;
-}
-
-.quest-feedback {
-  min-height: 30px;
-  font-weight: bold;
-}
-
-
-/* MINI GAME */
-
-.target-score {
-  font-size: 20px;
-}
-
-.runner-game {
-  position: relative;
-  width: min(92vw, 650px);
-  height: 260px;
-  margin: 25px auto;
-  overflow: hidden;
-  border-radius: 20px;
+.platform {
+  position: absolute;
+  height: 28px;
+  border-radius: 8px 8px 0 0;
   background:
     linear-gradient(
       to bottom,
-      #163b69,
-      #2e6692
+      #63b64d 0 35%,
+      #8b5a35 35% 100%
     );
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-.game-score {
+
+/* =========================================
+   CHARACTERS
+   ========================================= */
+
+.character {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 5;
-  font-weight: bold;
+  z-index: 20;
+  width: 58px;
+  height: 70px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 52px;
+  transition: none;
+  user-select: none;
 }
 
-#gameCharacter {
+.chihuahua {
+  left: 120px;
+  bottom: 28px;
+}
+
+.shibainu {
+  bottom: 28px;
+  transform: scaleX(-1);
+}
+
+
+/* =========================================
+   MUSHROOM
+   ========================================= */
+
+.magic-mushroom {
   position: absolute;
-  left: 50px;
-  bottom: 45px;
-  font-size: 45px;
-  z-index: 3;
+  z-index: 15;
+  bottom: 28px;
+  width: 60px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
+  animation: mushroomFloat 1.5s ease-in-out infinite;
 }
 
-#gameCharacter.jumping {
-  animation: jump 0.5s ease;
-}
-
-@keyframes jump {
+@keyframes mushroomFloat {
   0% {
-    bottom: 45px;
+    transform: translateY(0);
   }
 
   50% {
-    bottom: 150px;
+    transform: translateY(-10px);
   }
 
   100% {
-    bottom: 45px;
+    transform: translateY(0);
   }
 }
 
-#gameObstacle {
+
+/* =========================================
+   COLLECTIBLES
+   ========================================= */
+
+.collectible {
   position: absolute;
-  right: 60px;
-  bottom: 42px;
-  font-size: 38px;
+  z-index: 14;
+  bottom: 70px;
+  color: #fff4a8;
+  font-size: 30px;
+  text-shadow: 0 0 12px #ffffff;
+  animation: starFloat 1s ease-in-out infinite;
 }
 
-.game-ground {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 45px;
-  background: rgba(0, 0, 0, 0.25);
+@keyframes starFloat {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
-.game-controls {
+
+/* =========================================
+   OBSTACLES
+   ========================================= */
+
+.game-obstacle {
+  position: absolute;
+  z-index: 15;
+  bottom: 28px;
+  font-size: 48px;
+}
+
+
+/* =========================================
+   CAKE
+   ========================================= */
+
+.birthday-cake {
+  position: absolute;
+  z-index: 18;
+  bottom: 28px;
+  width: 90px;
+  height: 100px;
+  text-align: center;
+}
+
+.cake-top {
+  font-size: 65px;
+}
+
+.cake-candle {
+  position: absolute;
+  top: -20px;
+  left: 35px;
+  font-size: 20px;
+}
+
+.flame {
+  display: block;
+  animation: flameFlicker 0.5s infinite alternate;
+}
+
+.candle-number {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@keyframes flameFlicker {
+  from {
+    transform: scale(0.9);
+  }
+
+  to {
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================
+   CONTROLS
+   ========================================= */
+
+.mobile-controls {
+  height: 105px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  background: #315d96;
+}
+
+.mobile-controls button {
+  min-width: 75px;
+  min-height: 60px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #315d96;
+  font-size: 18px;
+  font-weight: bold;
+  touch-action: manipulation;
+}
+
+.mobile-controls #jumpButton {
+  min-width: 110px;
 }
 
 
-/* GIFTS */
+/* =========================================
+   GAME MESSAGE
+   ========================================= */
 
-.gift-collection {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-width: 550px;
-  margin: 25px auto;
+.game-message {
+  position: absolute;
+  z-index: 200;
+  left: 50%;
+  bottom: 125px;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
 }
 
-.gift-collection button {
-  margin: 0;
+
+/* =========================================
+   CAKE SCENE
+   ========================================= */
+
+#scene-cake {
+  background:
+    radial-gradient(
+      circle at center,
+      #456fa8,
+      #172b5c
+    );
+}
+
+.cake-scene {
+  width: min(92%, 760px);
+  margin: auto;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.couple {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.ending-character {
+  font-size: 70px;
+}
+
+.cake-big {
+  position: relative;
+}
+
+.big-cake {
+  font-size: 110px;
+}
+
+.big-flame {
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  transform: translateX(-50%);
+  font-size: 35px;
+  animation: flameFlicker 0.5s infinite alternate;
+}
+
+.cake-scene h1 {
+  font-size: clamp(30px, 8vw, 55px);
+  margin-bottom: 15px;
+}
+
+.cake-intro {
+  margin-bottom: 30px;
 }
 
 
-/* LETTER */
+/* =========================================
+   BIRTHDAY LETTER
+   ========================================= */
+
+#scene-message {
+  background:
+    linear-gradient(
+      to bottom,
+      #172b5c,
+      #315d96
+    );
+}
+
+.message-container {
+  max-width: 780px;
+}
+
+.message-container h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  margin-bottom: 8px;
+}
+
+.message-container h2 {
+  font-weight: normal;
+  margin-bottom: 35px;
+}
 
 .birthday-letter {
   text-align: left;
-  max-width: 650px;
-  margin: 25px auto;
+  font-size: 16px;
+  line-height: 1.85;
 }
 
 .birthday-letter p {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 
-/* BIBLE */
+/* =========================================
+   BIBLE
+   ========================================= */
+
+#scene-bible {
+  background:
+    linear-gradient(
+      to bottom,
+      #315d96,
+      #172b5c
+    );
+}
 
 blockquote {
-  max-width: 600px;
   margin: 30px auto;
-  padding: 25px;
-  font-size: 22px;
-  line-height: 1.7;
+  max-width: 650px;
+  font-size: clamp(22px, 5vw, 34px);
+  line-height: 1.5;
   font-style: italic;
-  border-left: 3px solid rgba(255, 255, 255, 0.5);
 }
 
 
-/* FINAL */
+/* =========================================
+   FINAL
+   ========================================= */
 
 #scene-final {
   background:
-    radial-gradient(circle at center, rgba(50, 100, 190, 0.45), transparent 45%),
-    linear-gradient(#07152e, #0b2850);
+    linear-gradient(
+      to bottom,
+      #172b5c,
+      #315d96
+    );
+  align-items: center;
+  justify-content: center;
 }
 
-#scene-final .scene-content {
-  max-width: 700px;
+.final-content {
+  font-size: 17px;
+  line-height: 1.8;
 }
 
-#scene-final h1 {
-  margin-bottom: 10px;
+.final-content h1 {
+  font-size: clamp(32px, 8vw, 55px);
 }
 
-#scene-final p {
-  font-size: 18px;
+.final-content h2 {
+  font-weight: normal;
+}
+
+.final-portrait {
+  width: min(75vw, 300px);
 }
 
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 600px) {
 
-  .game-scene {
-    padding: 25px 16px;
+  .platform-game {
+    height: 67vh;
+    min-height: 350px;
   }
 
-  .quest-map,
-  .gift-collection {
-    grid-template-columns: 1fr 1fr;
+  .game-world {
+    height: 100%;
   }
 
-  p {
-    font-size: 16px;
+  .birthday-letter {
+    font-size: 15px;
   }
 
-  .birthday-letter p {
-    font-size: 16px;
+  .story-card {
+    padding: 30px 20px;
   }
 
-  .runner-game {
-    height: 220px;
+  .character {
+    font-size: 48px;
+  }
+
+  .chihuahua {
+    width: 52px;
+  }
+
+  .shibainu {
+    width: 52px;
   }
 
 }
