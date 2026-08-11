@@ -1,916 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#75b9e6"
-  >
-
-  <title>Happy Birthday, Stella</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Chihuahua</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-
-
-  <!-- =========================================
-       BACKGROUND MUSIC
-       ========================================= -->
-
-  <audio
-    id="backgroundMusic"
-    loop
-    preload="auto"
-  >
-
-    <source
-      src="birthday-music.mp3"
-      type="audio/mpeg"
-    >
-
-  </audio>
-
-
-  <!-- =========================================
-       SCENE 01
-       OPENING
-       ========================================= -->
-
-  <section
-    id="scene-opening"
-    class="scene active"
-  >
-
-    <div class="night-sky">
-
-      <div class="stars"></div>
-
-    </div>
-
-
-    <div class="opening-content">
-
-
-      <div class="portrait-frame">
-
-        <img
-          src="stella-photo-1.jpeg"
-          alt="Stella"
-        >
-
-      </div>
-
-
-      <p class="date-text">
-        8 August 2026
-      </p>
-
-
-      <h1>
-        Happy Birthday, Stella
-      </h1>
-
-
-      <h2>
-        My Chihuahua
-      </h2>
-
-
-      <p class="age-text">
-        20 years old
-      </p>
-
-
-      <button
-        id="startAdventureButton"
-        type="button"
-      >
-        Start the Adventure
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 02
-       INTRODUCTION
-       ========================================= -->
-
-  <section
-    id="scene-introduction"
-    class="scene hidden"
-  >
-
-    <div class="story-card">
-
-
-      <p class="small-title">
-        BEFORE WE START
-      </p>
-
-
-      <h1>
-        There's something I made for you.
-      </h1>
-
-
-      <p>
-        It's not just a birthday message.
-      </p>
-
-
-      <p>
-        You have to take a little journey first.
-      </p>
-
-
-      <p>
-        So come on, Chihuahua.
-        Your adventure starts here.
-      </p>
-
-
-      <button
-        id="introductionContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 03
-       PHOTO
-       ========================================= -->
-
-  <section
-    id="scene-photo"
-    class="scene hidden"
-  >
-
-    <div class="story-card">
-
-
-      <p class="small-title">
-        THE BIRTHDAY GIRL
-      </p>
-
-
-      <div class="portrait-frame large">
-
-        <img
-          src="stella-photo-2.jpeg"
-          alt="Stella"
-        >
-
-      </div>
-
-
-      <h1>
-        20 years of being you.
-      </h1>
-
-
-      <p>
-        Now stop looking at your own picture.
-        There's somewhere you need to go.
-      </p>
-
-
-      <button
-        id="photoContinueButton"
-        type="button"
-      >
-        Let's Go
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 04
-       CHIHUAHUA PLATFORM GAME
-       ========================================= -->
-
-  <section
-    id="scene-platform-game"
-    class="scene hidden"
-  >
-
-
-    <div
-      id="platformGame"
-      class="game-wrapper"
-    >
-
-
-      <!-- GAME HEADER -->
-
-      <div class="game-header">
-
-        <span>
-          CHIHUAHUA ADVENTURE
-        </span>
-
-        <span>
-          FIND SHIBAINU
-        </span>
-
-      </div>
-
-
-
-      <!-- GAME WORLD -->
-
-      <div
-        class="platform-game"
-      >
-
-
-        <!-- SKY -->
-
-        <div class="sky-background">
-
-
-          <div
-            class="game-cloud cloud-game-one"
-          ></div>
-
-
-          <div
-            class="game-cloud cloud-game-two"
-          ></div>
-
-
-          <div
-            class="game-cloud cloud-game-three"
-          ></div>
-
-
-          <div class="hill hill-one"></div>
-
-          <div class="hill hill-two"></div>
-
-
-        </div>
-
-
-
-        <!-- WORLD -->
-
-        <div
-          id="gameWorld"
-          class="game-world"
-        >
-
-
-          <!-- =================================
-               PLATFORM 01
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 0px;
-              bottom: 0px;
-              width: 700px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               PLATFORM 02
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 820px;
-              bottom: 0px;
-              width: 650px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               PLATFORM 03
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 1590px;
-              bottom: 0px;
-              width: 700px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               PLATFORM 04
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 2410px;
-              bottom: 0px;
-              width: 650px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               PLATFORM 05
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 3180px;
-              bottom: 0px;
-              width: 750px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               PLATFORM 06
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 4050px;
-              bottom: 0px;
-              width: 900px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               HIGHER PLATFORMS
-               ================================= -->
-
-          <div
-            class="platform"
-            style="
-              left: 500px;
-              bottom: 150px;
-              width: 180px;
-            "
-          ></div>
-
-
-          <div
-            class="platform"
-            style="
-              left: 1100px;
-              bottom: 120px;
-              width: 180px;
-            "
-          ></div>
-
-
-          <div
-            class="platform"
-            style="
-              left: 1850px;
-              bottom: 170px;
-              width: 200px;
-            "
-          ></div>
-
-
-          <div
-            class="platform"
-            style="
-              left: 2700px;
-              bottom: 130px;
-              width: 200px;
-            "
-          ></div>
-
-
-          <div
-            class="platform"
-            style="
-              left: 3500px;
-              bottom: 170px;
-              width: 200px;
-            "
-          ></div>
-
-
-
-          <!-- =================================
-               CHIHUAHUA
-               ================================= -->
-
-          <div
-            id="chihuahua"
-            class="character chihuahua"
-          >
-            🐩
-          </div>
-
-
-
-          <!-- =================================
-               SHIBAINU
-               ================================= -->
-
-          <div
-            id="shibainu"
-            class="character shibainu"
-            style="
-              left: 4500px;
-            "
-          >
-            🐕
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- =====================================
-           MOBILE CONTROLS
-           ===================================== -->
-
-      <div class="mobile-controls">
-
-
-        <button
-          id="leftButton"
-          type="button"
-          aria-label="Move left"
-        >
-          ⬅
-        </button>
-
-
-        <button
-          id="jumpButton"
-          type="button"
-          aria-label="Jump"
-        >
-          JUMP
-        </button>
-
-
-        <button
-          id="rightButton"
-          type="button"
-          aria-label="Move right"
-        >
-          ➡
-        </button>
-
-
-      </div>
-
-
-
-      <!-- =====================================
-           GAME MESSAGE
-           ===================================== -->
-
-      <p
-        id="gameMessage"
-        class="game-message"
-      >
-        Walk right ➡ and jump over the platforms.
-      </p>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 05
-       CAKE
-       ========================================= -->
-
-  <section
-    id="scene-cake"
-    class="scene hidden"
-  >
-
-
-    <div class="cake-scene">
-
-
-      <p class="small-title">
-        YOU FOUND ME
-      </p>
-
-
-      <div class="couple">
-
-
-        <div class="ending-character">
-          🐩
-        </div>
-
-
-        <div class="cake-big">
-
-          <div class="big-cake">
-            🎂
-          </div>
-
-          <div class="big-flame">
-            🔥
-          </div>
-
-        </div>
-
-
-        <div class="ending-character">
-          🐕
-        </div>
-
-
-      </div>
-
-
-      <h1>
-        Make a wish, Chihuahua.
-      </h1>
-
-
-      <p class="cake-intro">
-        I brought you a cake.
-        Now there's one last thing I want you to read.
-      </p>
-
-
-      <button
-        id="birthdayMessageButton"
-        type="button"
-      >
-        Blow Out the Candle
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 06
-       LONG BIRTHDAY MESSAGE
-       ========================================= -->
-
-  <section
-    id="scene-message"
-    class="scene hidden"
-  >
-
-
-    <div class="message-container">
-
-
-      <p class="small-title">
-        A FEW WORDS FROM ME
-      </p>
-
-
-      <h1>
-        Happy Birthday, Stella Halim
-      </h1>
-
-
-      <h2>
-        My Chihuahua
-      </h2>
-
-
-      <div class="birthday-letter">
-
-
-        <p>
-          you're 20 now, and i just want to leave you
-          with some words for this new part of your life.
-          getting older means there are more things to think about,
-          more decisions to make, and sometimes you just have to
-          figure things out on your own.
-          life doesn't always give you a clear answer,
-          and that's okay.
-        </p>
-
-
-        <p>
-          i hope you don't put too much pressure on yourself
-          to have everything figured out already.
-          you're still learning.
-          you're still finding out what you like,
-          what you don't like, what you want,
-          and what kind of person you want to become.
-          there's nothing wrong with changing your mind
-          along the way.
-          life isn't something you have to understand all at once.
-        </p>
-
-
-        <p>
-          you're going to make mistakes,
-          and some of them might hurt.
-          some decisions won't turn out the way you expected,
-          and sometimes you'll work hard for something
-          and still not get it.
-          when that happens, don't let it make you think
-          you're not good enough.
-          take the lesson, accept what happened,
-          and keep going.
-          you don't have to be perfect to move forward.
-        </p>
-
-
-        <p>
-          there will also be times when you look at other people
-          and feel like they're already ahead of you.
-          maybe they have a better job, more money,
-          a clearer future, or they seem like they already
-          know what they're doing.
-          don't let that make you feel like you're behind.
-          everyone has their own timing,
-          and honestly, most people are still figuring things out too.
-          you don't have to compete with anyone.
-          just focus on building your own life.
-        </p>
-
-
-        <p>
-          as you get older, learning how to stand on your own
-          becomes important.
-          learn how to make your own decisions,
-          take responsibility when you're wrong,
-          know when to say no,
-          and know when something isn't good for you anymore.
-          you don't always have to explain yourself to everyone.
-          sometimes you just need to know what's right for you
-          and have the courage to follow it.
-        </p>
-
-
-        <p>
-          and don't think being strong means you can't be tired
-          or confused.
-          you're allowed to have bad days.
-          you're allowed to feel lost sometimes.
-          you're allowed to take a break when things become too much.
-          being strong doesn't mean pretending everything is okay.
-          sometimes being strong is simply getting yourself back up
-          and continuing after a difficult day.
-        </p>
-
-
-        <p>
-          life really does have different seasons.
-          sometimes things will be good,
-          sometimes things will be difficult,
-          and sometimes nothing will seem to make sense.
-          but none of those moments last forever.
-          you'll grow, things will change,
-          and you'll understand some things later
-          that you can't understand right now.
-        </p>
-
-
-        <p>
-          so my chihuahua, take your time.
-          don't rush yourself just because you think
-          you should already know what you're doing.
-          learn things properly,
-          make mistakes,
-          try again,
-          work for what you want,
-          and don't be afraid to start over
-          when something isn't right.
-        </p>
-
-
-        <p>
-          there are still so many things you haven't experienced yet.
-          there are places you haven't seen,
-          things you haven't learned,
-          and parts of yourself you haven't discovered yet.
-          you don't need to know exactly where everything is going.
-          just keep moving and keep becoming better in your own way.
-        </p>
-
-
-        <p>
-          when life gets difficult,
-          don't forget that one bad day is just one bad day.
-          one mistake is just one mistake.
-          one failure doesn't decide what your whole life
-          is going to be.
-        </p>
-
-
-        <p>
-          i hope you grow into someone who is strong but still kind,
-          independent but still knows when to listen,
-          confident but still humble,
-          and someone who can look back at herself
-          and know that she didn't give up
-          when things got hard.
-        </p>
-
-
-      </div>
-
-
-      <button
-        id="messageContinueButton"
-        type="button"
-      >
-        One Last Thing
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 07
-       BIBLE VERSE
-       ========================================= -->
-
-  <section
-    id="scene-bible"
-    class="scene hidden"
-  >
-
-
-    <div class="message-container">
-
-
-      <p class="small-title">
-        ONE LAST THING
-      </p>
-
-
-      <h1>
-        Ecclesiastes 3:1
-      </h1>
-
-
-      <blockquote>
-
-        To everything there is a season,
-        and a time to every purpose
-        under the heaven.
-
-      </blockquote>
-
-
-      <p>
-        Take your time.
-        Life has different seasons.
-      </p>
-
-
-      <button
-        id="bibleContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       SCENE 08
-       FINAL
-       ========================================= -->
-
-  <section
-    id="scene-final"
-    class="scene hidden"
-  >
-
-
-    <div class="final-content">
-
-
-      <div class="portrait-frame final-portrait">
-
-
-        <img
-          src="stella-photo-1.jpeg"
-          alt="Stella"
-        >
-
-
-      </div>
-
-
-      <p>
-        8 August 2026
-      </p>
-
-
-      <h1>
-        Happy Birthday, Stella.
-      </h1>
-
-
-      <h2>
-        20 years old.
-      </h2>
-
-
-      <p>
-        Take care of yourself, Chihuahua.
-      </p>
-
-
-      <p>
-        Keep going.<br>
-        Keep learning.<br>
-        Keep becoming yourself.
-      </p>
-
-
-      <p>
-        i love you 2in1, and it's always be.
-      </p>
-
-
-      <p>
-        — from me
-      </p>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       JAVASCRIPT
-       ========================================= -->
-
-  <script src="script.js"></script>
-
-
+    <main id="birthday-app">
+        <!-- ================================
+             SCENE 1 — OPENING
+        ================================= -->
+        <section id="opening" class="scene active">
+            <div class="night-sky">
+                <div class="stars"></div>
+                <div class="opening-content">
+                    <div class="photo-frame">
+                        <img
+                            src="stella-photo-1.jpeg"
+                            alt="Birthday photo"
+                        >
+                    </div>
+                    <div class="opening-text">
+                        <p class="small-title">Happy Birthday</p>
+                        <h1>My Chihuahua</h1>
+                        <p class="age">20</p>
+                    </div>
+                    <button id="begin-button">
+                        Begin the Adventure
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- ================================
+             SCENE 2 — SHIBA INU
+        ================================= -->
+        <section id="shiba-scene" class="scene">
+            <div class="shiba-container">
+                <div id="shiba-character">
+                    <!-- Shiba Inu SVG will be added later -->
+                </div>
+                <div class="cake-container">
+                    <!-- Birthday cake will be added later -->
+                </div>
+                <div class="scene-text">
+                    <p id="shiba-message"></p>
+                </div>
+            </div>
+        </section>
+        <!-- ================================
+             SCENE 3 — PERSONAL QUESTIONS
+        ================================= -->
+        <section id="personal-quiz" class="scene">
+            <div class="quiz-container">
+                <p class="quiz-label">A little something about you</p>
+                <h2 id="personal-question-number">
+                    Question 1
+                </h2>
+                <div id="personal-question">
+                    <!-- Question will be inserted by JavaScript -->
+                </div>
+                <div id="personal-answer-area">
+                    <!-- Answers will be inserted by JavaScript -->
+                </div>
+                <button id="personal-next-button">
+                    Continue
+                </button>
+            </div>
+        </section>
+        <!-- ================================
+             SCENE 4 — MBTI TEST
+        ================================= -->
+        <section id="mbti-quiz" class="scene">
+            <div class="quiz-container">
+                <p class="quiz-label">A little more about your personality</p>
+                <h2 id="mbti-question-number">
+                    Question 1 of 20
+                </h2>
+                <div id="mbti-question">
+                    <!-- MBTI question will be inserted by JavaScript -->
+                </div>
+                <div id="mbti-answer-area">
+                    <!-- MBTI answers will be inserted by JavaScript -->
+                </div>
+                <button id="mbti-next-button">
+                    Continue
+                </button>
+            </div>
+        </section>
+        <!-- ================================
+             SCENE 5 — MBTI RESULT
+        ================================= -->
+        <section id="mbti-result" class="scene">
+            <div class="result-container">
+                <p class="result-label">
+                    Your personality
+                </p>
+                <h2 id="mbti-type">
+                    INFJ
+                </h2>
+                <h3 id="mbti-title">
+                    <!-- Personality title -->
+                </h3>
+                <p id="mbti-description">
+                    <!-- Personality description -->
+                </p>
+                <div id="mbti-details">
+                    <!-- Personality details -->
+                </div>
+                <button id="birthday-ending-button">
+                    Continue
+                </button>
+            </div>
+        </section>
+        <!-- ================================
+             SCENE 6 — BIRTHDAY WISHES
+        ================================= -->
+        <section id="birthday-wishes" class="scene">
+            <div class="wishes-container">
+                <p class="wishes-label">
+                    For you
+                </p>
+                <h2>
+                    Happy Birthday
+                </h2>
+                <div id="wishes-text">
+                    <!-- Your long birthday wishes will go here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Background music -->
+    <audio
+        id="background-music"
+        src="birthday-music.mp3"
+        loop
+        preload="auto">
+    </audio>
+    <script src="script.js"></script>
 </body>
-
 </html>
