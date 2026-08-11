@@ -1,1031 +1,1002 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================
+   BIRTHDAY GAME — MAIN JAVASCRIPT
+========================================= */
 
 
-  /* =========================================
-     MUSIC
-     ========================================= */
+/* =========================================
+   SCENES
+========================================= */
 
-  const backgroundMusic =
-    document.getElementById("backgroundMusic");
-
-
-  function startMusic() {
-
-    if (!backgroundMusic) {
-      return;
-    }
-
-    backgroundMusic.volume = 0.55;
-
-    const playPromise =
-      backgroundMusic.play();
-
-    if (playPromise !== undefined) {
-
-      playPromise.catch(function () {
-
-        console.log(
-          "Music will start after another user interaction."
-        );
-
-      });
-
-    }
-
-  }
+const scenes = {
+    opening: document.getElementById("opening"),
+    shiba: document.getElementById("shiba-scene"),
+    personalQuiz: document.getElementById("personal-quiz"),
+    mbtiQuiz: document.getElementById("mbti-quiz"),
+    mbtiResult: document.getElementById("mbti-result"),
+    birthdayWishes: document.getElementById("birthday-wishes")
+};
 
 
+function showScene(scene) {
 
-  /* =========================================
-     SCENE SYSTEM
-     ========================================= */
+    Object.values(scenes).forEach(currentScene => {
+        currentScene.classList.remove("active");
+    });
 
-  const scenes = {
-
-    opening:
-      document.getElementById("scene-opening"),
-
-    introduction:
-      document.getElementById("scene-introduction"),
-
-    photo:
-      document.getElementById("scene-photo"),
-
-    platformGame:
-      document.getElementById("scene-platform-game"),
-
-    cake:
-      document.getElementById("scene-cake"),
-
-    message:
-      document.getElementById("scene-message"),
-
-    bible:
-      document.getElementById("scene-bible"),
-
-    final:
-      document.getElementById("scene-final")
-
-  };
+    scene.classList.add("active");
+}
 
 
-  function showScene(sceneName) {
+/* =========================================
+   BACKGROUND MUSIC
+========================================= */
 
-    Object.keys(scenes).forEach(function (name) {
+const backgroundMusic =
+    document.getElementById("background-music");
 
-      if (!scenes[name]) {
+
+function startMusic() {
+
+    backgroundMusic.volume = 0.35;
+
+    backgroundMusic.play().catch(() => {
+        /*
+         * Some browsers require the user
+         * to interact with the page first.
+         *
+         * The music is started from the
+         * Begin button below.
+         */
+    });
+}
+
+
+/* =========================================
+   SCENE 1 — OPENING
+========================================= */
+
+const beginButton =
+    document.getElementById("begin-button");
+
+
+beginButton.addEventListener("click", () => {
+
+    startMusic();
+
+    showScene(scenes.shiba);
+
+    startShibaScene();
+
+});
+
+
+/* =========================================
+   SCENE 2 — SHIBA INU
+========================================= */
+
+function startShibaScene() {
+
+    const shibaMessage =
+        document.getElementById("shiba-message");
+
+    shibaMessage.textContent =
+        "Before we continue...";
+
+    /*
+     * The Shiba Inu character will be created
+     * here later using SVG/code.
+     */
+
+}
+
+
+/*
+ * Temporary timing for moving from
+ * the Shiba scene to the personal quiz.
+ */
+
+let shibaTimerStarted = false;
+
+
+function continueFromShiba() {
+
+    if (shibaTimerStarted) {
         return;
-      }
+    }
 
-      scenes[name].classList.add("hidden");
-      scenes[name].classList.remove("active");
+    shibaTimerStarted = true;
+
+    setTimeout(() => {
+
+        showScene(scenes.personalQuiz);
+
+        startPersonalQuiz();
+
+    }, 3500);
+
+}
+
+
+/*
+ * Start the timer after entering
+ * the Shiba scene.
+ */
+
+const originalStartShibaScene = startShibaScene;
+
+startShibaScene = function () {
+
+    originalStartShibaScene();
+
+    continueFromShiba();
+
+};
+
+
+/* =========================================
+   SCENE 3 — PERSONAL QUESTIONS
+========================================= */
+
+
+/*
+ * YOUR 8 PERSONAL QUESTIONS
+ *
+ * We will put your exact questions here.
+ *
+ * Do not change them yet.
+ */
+
+const personalQuestions = [
+
+    {
+        question: "PERSONAL QUESTION 1",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 2",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 3",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 4",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 5",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 6",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 7",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    },
+
+    {
+        question: "PERSONAL QUESTION 8",
+        answers: [
+            "Answer A",
+            "Answer B",
+            "Answer C",
+            "Answer D"
+        ]
+    }
+
+];
+
+
+let personalQuestionIndex = 0;
+
+let selectedPersonalAnswer = null;
+
+const personalQuestionNumber =
+    document.getElementById("personal-question-number");
+
+const personalQuestion =
+    document.getElementById("personal-question");
+
+const personalAnswerArea =
+    document.getElementById("personal-answer-area");
+
+const personalNextButton =
+    document.getElementById("personal-next-button");
+
+
+function startPersonalQuiz() {
+
+    personalQuestionIndex = 0;
+
+    selectedPersonalAnswer = null;
+
+    renderPersonalQuestion();
+
+}
+
+
+function renderPersonalQuestion() {
+
+    const currentQuestion =
+        personalQuestions[personalQuestionIndex];
+
+    personalQuestionNumber.textContent =
+        `Question ${personalQuestionIndex + 1} of ${personalQuestions.length}`;
+
+    personalQuestion.textContent =
+        currentQuestion.question;
+
+    personalAnswerArea.innerHTML = "";
+
+    selectedPersonalAnswer = null;
+
+    personalNextButton.classList.remove("enabled");
+
+
+    currentQuestion.answers.forEach((answer, index) => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "quiz-answer";
+
+        button.textContent = answer;
+
+        button.addEventListener("click", () => {
+
+            document
+                .querySelectorAll("#personal-answer-area .quiz-answer")
+                .forEach(answerButton => {
+                    answerButton.classList.remove("selected");
+                });
+
+            button.classList.add("selected");
+
+            selectedPersonalAnswer = index;
+
+            personalNextButton.classList.add("enabled");
+
+        });
+
+        personalAnswerArea.appendChild(button);
 
     });
 
+}
 
-    const selectedScene =
-      scenes[sceneName];
 
-    if (!selectedScene) {
-      return;
-    }
+personalNextButton.addEventListener("click", () => {
 
-
-    selectedScene.classList.remove("hidden");
-    selectedScene.classList.add("active");
-
-  }
-
-
-
-  /* =========================================
-     OPENING
-     ========================================= */
-
-  const startAdventureButton =
-    document.getElementById(
-      "startAdventureButton"
-    );
-
-
-  if (startAdventureButton) {
-
-    startAdventureButton.addEventListener(
-      "click",
-      function () {
-
-        startMusic();
-
-        showScene("introduction");
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     INTRODUCTION
-     ========================================= */
-
-  const introductionContinueButton =
-    document.getElementById(
-      "introductionContinueButton"
-    );
-
-
-  if (introductionContinueButton) {
-
-    introductionContinueButton.addEventListener(
-      "click",
-      function () {
-
-        showScene("photo");
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     PHOTO
-     ========================================= */
-
-  const photoContinueButton =
-    document.getElementById(
-      "photoContinueButton"
-    );
-
-
-  if (photoContinueButton) {
-
-    photoContinueButton.addEventListener(
-      "click",
-      function () {
-
-        showScene("platformGame");
-
-        startPlatformGame();
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     PLATFORM GAME
-     ========================================= */
-
-  const gameWorld =
-    document.getElementById("gameWorld");
-
-  const chihuahua =
-    document.getElementById("chihuahua");
-
-  const shibainu =
-    document.getElementById("shibainu");
-
-  const gameMessage =
-    document.getElementById("gameMessage");
-
-  const gameScore =
-    document.getElementById("gameScore");
-
-
-  const leftButton =
-    document.getElementById("leftButton");
-
-  const rightButton =
-    document.getElementById("rightButton");
-
-  const jumpButton =
-    document.getElementById("jumpButton");
-
-
-
-  /* =========================================
-     GAME SETTINGS
-     ========================================= */
-
-  const WORLD_WIDTH = 5000;
-
-  const GRAVITY = 0.65;
-
-  const MOVE_SPEED = 5.2;
-
-  const JUMP_POWER = 13.5;
-
-
-  let playerX = 120;
-
-  let playerY = 28;
-
-  let velocityY = 0;
-
-  let cameraX = 0;
-
-  let movingLeft = false;
-
-  let movingRight = false;
-
-  let jumping = false;
-
-  let gameStarted = false;
-
-  let gameFinished = false;
-
-  let animationFrame;
-
-
-
-  /* =========================================
-     SCORE
-     ========================================= */
-
-  function updateScore() {
-
-    if (gameScore) {
-
-      gameScore.textContent =
-        "200.806";
-
-    }
-
-  }
-
-
-
-  /* =========================================
-     START GAME
-     ========================================= */
-
-  function startPlatformGame() {
-
-    if (gameStarted) {
-      return;
-    }
-
-    gameStarted = true;
-
-    gameFinished = false;
-
-    playerX = 120;
-
-    playerY = 28;
-
-    velocityY = 0;
-
-    cameraX = 0;
-
-
-    if (gameMessage) {
-
-      gameMessage.textContent =
-        "Walk right ➡ and jump over the platforms.";
-
-    }
-
-
-    updateScore();
-
-    positionPlayer();
-
-    gameLoop();
-
-  }
-
-
-
-  /* =========================================
-     PLAYER POSITION
-     ========================================= */
-
-  function positionPlayer() {
-
-    if (!chihuahua) {
-      return;
-    }
-
-
-    chihuahua.style.left =
-      playerX + "px";
-
-    chihuahua.style.bottom =
-      playerY + "px";
-
-
-    if (shibainu) {
-
-      shibainu.style.bottom =
-        "28px";
-
-    }
-
-  }
-
-
-
-  /* =========================================
-     CAMERA
-     ========================================= */
-
-  function updateCamera() {
-
-    const screenWidth =
-      window.innerWidth;
-
-
-    const targetCamera =
-      playerX -
-      screenWidth * 0.35;
-
-
-    cameraX =
-      Math.max(
-        0,
-        Math.min(
-          targetCamera,
-          WORLD_WIDTH - screenWidth
-        )
-      );
-
-
-    if (gameWorld) {
-
-      gameWorld.style.transform =
-        "translateX(" +
-        (-cameraX) +
-        "px)";
-
-    }
-
-  }
-
-
-
-  /* =========================================
-     PLATFORM COLLISION
-     ========================================= */
-
-  function getPlatforms() {
-
-    if (!gameWorld) {
-      return [];
-    }
-
-    return Array.from(
-      gameWorld.querySelectorAll(
-        ".platform"
-      )
-    );
-
-  }
-
-
-
-  function checkGroundCollision() {
-
-    const playerWidth = 55;
-
-    const playerLeft =
-      playerX;
-
-    const playerRight =
-      playerX + playerWidth;
-
-
-    let landed = false;
-
-
-    getPlatforms().forEach(
-      function (platform) {
-
-        const platformLeft =
-          parseFloat(
-            platform.style.left
-          ) || 0;
-
-
-        const platformBottom =
-          parseFloat(
-            platform.style.bottom
-          ) || 0;
-
-
-        const platformWidth =
-          parseFloat(
-            platform.style.width
-          ) || platform.offsetWidth;
-
-
-        const platformTop =
-          platformBottom +
-          28;
-
-
-        const platformRight =
-          platformLeft +
-          platformWidth;
-
-
-        const playerBottom =
-          playerY;
-
-
-        const playerTop =
-          playerY + 65;
-
-
-        const horizontalCollision =
-          playerRight > platformLeft &&
-          playerLeft < platformRight;
-
-
-        const falling =
-          velocityY <= 0;
-
-
-        const verticalCollision =
-          playerBottom <= platformTop &&
-          playerBottom >=
-            platformTop - 20;
-
-
-        if (
-          horizontalCollision &&
-          falling &&
-          verticalCollision
-        ) {
-
-          playerY =
-            platformTop;
-
-          velocityY = 0;
-
-          landed = true;
-
-        }
-
-      }
-    );
-
-
-    return landed;
-
-  }
-
-
-
-  /* =========================================
-     JUMP
-     ========================================= */
-
-  function jump() {
-
-    if (!gameStarted || gameFinished) {
-      return;
-    }
-
-
-    const onGround =
-      playerY <= 30;
-
-
-    if (!onGround) {
-      return;
-    }
-
-
-    velocityY =
-      JUMP_POWER;
-
-    jumping = true;
-
-  }
-
-
-
-  /* =========================================
-     MOVEMENT
-     ========================================= */
-
-  function movePlayer() {
-
-    if (movingLeft) {
-
-      playerX -=
-        MOVE_SPEED;
-
-    }
-
-
-    if (movingRight) {
-
-      playerX +=
-        MOVE_SPEED;
-
-    }
-
-
-    playerX =
-      Math.max(
-        0,
-        Math.min(
-          playerX,
-          WORLD_WIDTH - 80
-        )
-      );
-
-  }
-
-
-
-  /* =========================================
-     GRAVITY
-     ========================================= */
-
-  function applyGravity() {
-
-    velocityY -= GRAVITY;
-
-    playerY += velocityY;
-
-
-    const landed =
-      checkGroundCollision();
-
-
-    if (!landed && playerY < 28) {
-
-      playerY = 28;
-
-      velocityY = 0;
-
-      jumping = false;
-
-    }
-
-
-    if (landed) {
-
-      jumping = false;
-
-    }
-
-  }
-
-
-
-  /* =========================================
-     REACH SHIBAINU
-     ========================================= */
-
-  function checkFinish() {
-
-    if (!shibainu) {
-      return;
-    }
-
-
-    const shibainuX =
-      parseFloat(
-        shibainu.style.left
-      ) || 4500;
-
-
-    const distance =
-      Math.abs(
-        playerX - shibainuX
-      );
-
-
-    if (
-      distance < 85 &&
-      !gameFinished
-    ) {
-
-      finishGame();
-
-    }
-
-  }
-
-
-
-  function finishGame() {
-
-    gameFinished = true;
-
-    movingLeft = false;
-
-    movingRight = false;
-
-
-    if (gameMessage) {
-
-      gameMessage.textContent =
-        "You found Shibainu.";
-
-    }
-
-
-    setTimeout(
-      function () {
-
-        showScene("cake");
-
-      },
-      900
-    );
-
-  }
-
-
-
-  /* =========================================
-     GAME LOOP
-     ========================================= */
-
-  function gameLoop() {
-
-    if (!gameStarted) {
-      return;
-    }
-
-
-    if (!gameFinished) {
-
-      movePlayer();
-
-      applyGravity();
-
-      updateCamera();
-
-      positionPlayer();
-
-      checkFinish();
-
-    }
-
-
-    animationFrame =
-      requestAnimationFrame(
-        gameLoop
-      );
-
-  }
-
-
-
-  /* =========================================
-     KEYBOARD CONTROLS
-     ========================================= */
-
-  document.addEventListener(
-    "keydown",
-    function (event) {
-
-      if (!gameStarted || gameFinished) {
+    if (selectedPersonalAnswer === null) {
         return;
-      }
+    }
 
+    personalQuestionIndex++;
 
-      if (
-        event.key === "ArrowLeft" ||
-        event.key.toLowerCase() === "a"
-      ) {
+    if (personalQuestionIndex < personalQuestions.length) {
 
-        movingLeft = true;
+        renderPersonalQuestion();
 
-      }
+    } else {
 
+        showScene(scenes.mbtiQuiz);
 
-      if (
-        event.key === "ArrowRight" ||
-        event.key.toLowerCase() === "d"
-      ) {
-
-        movingRight = true;
-
-      }
-
-
-      if (
-        event.key === "ArrowUp" ||
-        event.key === " " ||
-        event.key.toLowerCase() === "w"
-      ) {
-
-        event.preventDefault();
-
-        jump();
-
-      }
+        startMBTIQuiz();
 
     }
-  );
-
-
-
-  document.addEventListener(
-    "keyup",
-    function (event) {
-
-      if (
-        event.key === "ArrowLeft" ||
-        event.key.toLowerCase() === "a"
-      ) {
-
-        movingLeft = false;
-
-      }
-
-
-      if (
-        event.key === "ArrowRight" ||
-        event.key.toLowerCase() === "d"
-      ) {
-
-        movingRight = false;
-
-      }
-
-    }
-  );
-
-
-
-  /* =========================================
-     MOBILE LEFT BUTTON
-     ========================================= */
-
-  function startMovingLeft(event) {
-
-    event.preventDefault();
-
-    movingLeft = true;
-
-  }
-
-
-  function stopMovingLeft(event) {
-
-    event.preventDefault();
-
-    movingLeft = false;
-
-  }
-
-
-  if (leftButton) {
-
-    leftButton.addEventListener(
-      "touchstart",
-      startMovingLeft,
-      { passive: false }
-    );
-
-
-    leftButton.addEventListener(
-      "touchend",
-      stopMovingLeft,
-      { passive: false }
-    );
-
-
-    leftButton.addEventListener(
-      "touchcancel",
-      stopMovingLeft,
-      { passive: false }
-    );
-
-
-    leftButton.addEventListener(
-      "mousedown",
-      startMovingLeft
-    );
-
-
-    leftButton.addEventListener(
-      "mouseup",
-      stopMovingLeft
-    );
-
-
-    leftButton.addEventListener(
-      "mouseleave",
-      stopMovingLeft
-    );
-
-  }
-
-
-
-  /* =========================================
-     MOBILE RIGHT BUTTON
-     ========================================= */
-
-  function startMovingRight(event) {
-
-    event.preventDefault();
-
-    movingRight = true;
-
-  }
-
-
-  function stopMovingRight(event) {
-
-    event.preventDefault();
-
-    movingRight = false;
-
-  }
-
-
-  if (rightButton) {
-
-    rightButton.addEventListener(
-      "touchstart",
-      startMovingRight,
-      { passive: false }
-    );
-
-
-    rightButton.addEventListener(
-      "touchend",
-      stopMovingRight,
-      { passive: false }
-    );
-
-
-    rightButton.addEventListener(
-      "touchcancel",
-      stopMovingRight,
-      { passive: false }
-    );
-
-
-    rightButton.addEventListener(
-      "mousedown",
-      startMovingRight
-    );
-
-
-    rightButton.addEventListener(
-      "mouseup",
-      stopMovingRight
-    );
-
-
-    rightButton.addEventListener(
-      "mouseleave",
-      stopMovingRight
-    );
-
-  }
-
-
-
-  /* =========================================
-     JUMP BUTTON
-     ========================================= */
-
-  if (jumpButton) {
-
-    jumpButton.addEventListener(
-      "touchstart",
-      function (event) {
-
-        event.preventDefault();
-
-        jump();
-
-      },
-      { passive: false }
-    );
-
-
-    jumpButton.addEventListener(
-      "click",
-      function () {
-
-        jump();
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     CAKE → MESSAGE
-     ========================================= */
-
-  const birthdayMessageButton =
-    document.getElementById(
-      "birthdayMessageButton"
-    );
-
-
-  if (birthdayMessageButton) {
-
-    birthdayMessageButton.addEventListener(
-      "click",
-      function () {
-
-        showScene("message");
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     MESSAGE → BIBLE
-     ========================================= */
-
-  const messageContinueButton =
-    document.getElementById(
-      "messageContinueButton"
-    );
-
-
-  if (messageContinueButton) {
-
-    messageContinueButton.addEventListener(
-      "click",
-      function () {
-
-        showScene("bible");
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     BIBLE → FINAL
-     ========================================= */
-
-  const bibleContinueButton =
-    document.getElementById(
-      "bibleContinueButton"
-    );
-
-
-  if (bibleContinueButton) {
-
-    bibleContinueButton.addEventListener(
-      "click",
-      function () {
-
-        showScene("final");
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================
-     KEEP MUSIC PLAYING
-     ========================================= */
-
-  document.addEventListener(
-    "visibilitychange",
-    function () {
-
-      if (
-        document.visibilityState ===
-        "visible"
-      ) {
-
-        if (
-          backgroundMusic &&
-          backgroundMusic.paused
-        ) {
-
-          backgroundMusic.play()
-            .catch(function () {});
-
-        }
-
-      }
-
-    }
-  );
-
 
 });
+
+
+/* =========================================
+   SCENE 4 — MBTI TEST
+========================================= */
+
+
+/*
+ * 20 REAL MBTI-STYLE QUESTIONS
+ *
+ * Each answer will contribute to one
+ * of the four MBTI dimensions.
+ *
+ * We will replace the placeholder questions
+ * with the properly written questions next.
+ */
+
+const mbtiQuestions = [
+
+    {
+        question: "MBTI QUESTION 1",
+        answers: [
+            {
+                text: "Option A",
+                type: "E"
+            },
+            {
+                text: "Option B",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 2",
+        answers: [
+            {
+                text: "Option A",
+                type: "E"
+            },
+            {
+                text: "Option B",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 3",
+        answers: [
+            {
+                text: "Option A",
+                type: "S"
+            },
+            {
+                text: "Option B",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 4",
+        answers: [
+            {
+                text: "Option A",
+                type: "S"
+            },
+            {
+                text: "Option B",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 5",
+        answers: [
+            {
+                text: "Option A",
+                type: "T"
+            },
+            {
+                text: "Option B",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 6",
+        answers: [
+            {
+                text: "Option A",
+                type: "T"
+            },
+            {
+                text: "Option B",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 7",
+        answers: [
+            {
+                text: "Option A",
+                type: "J"
+            },
+            {
+                text: "Option B",
+                type: "P"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 8",
+        answers: [
+            {
+                text: "Option A",
+                type: "J"
+            },
+            {
+                text: "Option B",
+                type: "P"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 9",
+        answers: [
+            {
+                text: "Option A",
+                type: "E"
+            },
+            {
+                text: "Option B",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 10",
+        answers: [
+            {
+                text: "Option A",
+                type: "S"
+            },
+            {
+                text: "Option B",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 11",
+        answers: [
+            {
+                text: "Option A",
+                type: "T"
+            },
+            {
+                text: "Option B",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 12",
+        answers: [
+            {
+                text: "Option A",
+                type: "J"
+            },
+            {
+                text: "Option B",
+                type: "P"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 13",
+        answers: [
+            {
+                text: "Option A",
+                type: "E"
+            },
+            {
+                text: "Option B",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 14",
+        answers: [
+            {
+                text: "Option A",
+                type: "S"
+            },
+            {
+                text: "Option B",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 15",
+        answers: [
+            {
+                text: "Option A",
+                type: "T"
+            },
+            {
+                text: "Option B",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 16",
+        answers: [
+            {
+                text: "Option A",
+                type: "J"
+            },
+            {
+                text: "Option B",
+                type: "P"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 17",
+        answers: [
+            {
+                text: "Option A",
+                type: "E"
+            },
+            {
+                text: "Option B",
+                type: "I"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 18",
+        answers: [
+            {
+                text: "Option A",
+                type: "S"
+            },
+            {
+                text: "Option B",
+                type: "N"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 19",
+        answers: [
+            {
+                text: "Option A",
+                type: "T"
+            },
+            {
+                text: "Option B",
+                type: "F"
+            }
+        ]
+    },
+
+    {
+        question: "MBTI QUESTION 20",
+        answers: [
+            {
+                text: "Option A",
+                type: "J"
+            },
+            {
+                text: "Option B",
+                type: "P"
+            }
+        ]
+    }
+
+];
+
+
+let mbtiQuestionIndex = 0;
+
+let mbtiScores = {
+    E: 0,
+    I: 0,
+    S: 0,
+    N: 0,
+    T: 0,
+    F: 0,
+    J: 0,
+    P: 0
+};
+
+let selectedMBTIAnswer = null;
+
+
+const mbtiQuestionNumber =
+    document.getElementById("mbti-question-number");
+
+const mbtiQuestion =
+    document.getElementById("mbti-question");
+
+const mbtiAnswerArea =
+    document.getElementById("mbti-answer-area");
+
+const mbtiNextButton =
+    document.getElementById("mbti-next-button");
+
+
+function startMBTIQuiz() {
+
+    mbtiQuestionIndex = 0;
+
+    selectedMBTIAnswer = null;
+
+    mbtiScores = {
+        E: 0,
+        I: 0,
+        S: 0,
+        N: 0,
+        T: 0,
+        F: 0,
+        J: 0,
+        P: 0
+    };
+
+    renderMBTIQuestion();
+
+}
+
+
+function renderMBTIQuestion() {
+
+    const currentQuestion =
+        mbtiQuestions[mbtiQuestionIndex];
+
+    mbtiQuestionNumber.textContent =
+        `Question ${mbtiQuestionIndex + 1} of ${mbtiQuestions.length}`;
+
+    mbtiQuestion.textContent =
+        currentQuestion.question;
+
+    mbtiAnswerArea.innerHTML = "";
+
+    selectedMBTIAnswer = null;
+
+    mbtiNextButton.classList.remove("enabled");
+
+
+    currentQuestion.answers.forEach((answer, index) => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "quiz-answer";
+
+        button.textContent = answer.text;
+
+        button.addEventListener("click", () => {
+
+            document
+                .querySelectorAll("#mbti-answer-area .quiz-answer")
+                .forEach(answerButton => {
+                    answerButton.classList.remove("selected");
+                });
+
+            button.classList.add("selected");
+
+            selectedMBTIAnswer = index;
+
+            mbtiNextButton.classList.add("enabled");
+
+        });
+
+        mbtiAnswerArea.appendChild(button);
+
+    });
+
+}
+
+
+mbtiNextButton.addEventListener("click", () => {
+
+    if (selectedMBTIAnswer === null) {
+        return;
+    }
+
+    const currentQuestion =
+        mbtiQuestions[mbtiQuestionIndex];
+
+    const selectedAnswer =
+        currentQuestion.answers[selectedMBTIAnswer];
+
+    mbtiScores[selectedAnswer.type]++;
+
+    mbtiQuestionIndex++;
+
+
+    if (mbtiQuestionIndex < mbtiQuestions.length) {
+
+        renderMBTIQuestion();
+
+    } else {
+
+        calculateMBTIResult();
+
+    }
+
+});
+
+
+/* =========================================
+   MBTI RESULT
+========================================= */
+
+function calculateMBTIResult() {
+
+    const type =
+        (mbtiScores.E >= mbtiScores.I ? "E" : "I") +
+        (mbtiScores.S >= mbtiScores.N ? "S" : "N") +
+        (mbtiScores.T >= mbtiScores.F ? "T" : "F") +
+        (mbtiScores.J >= mbtiScores.P ? "J" : "P");
+
+
+    displayMBTIResult(type);
+
+}
+
+
+function displayMBTIResult(type) {
+
+    const mbtiType =
+        document.getElementById("mbti-type");
+
+    const mbtiTitle =
+        document.getElementById("mbti-title");
+
+    const mbtiDescription =
+        document.getElementById("mbti-description");
+
+    const mbtiDetails =
+        document.getElementById("mbti-details");
+
+
+    const personality =
+        personalityTypes[type];
+
+
+    mbtiType.textContent = type;
+
+    mbtiTitle.textContent =
+        personality.title;
+
+    mbtiDescription.textContent =
+        personality.description;
+
+    mbtiDetails.innerHTML =
+        personality.details;
+
+
+    showScene(scenes.mbtiResult);
+
+}
+
+
+/* =========================================
+   MBTI PERSONALITY DATA
+========================================= */
+
+
+/*
+ * The full 16-type personality descriptions
+ * will be added after we finish the actual
+ * question scoring.
+ */
+
+const personalityTypes = {
+
+    INFJ: {
+        title: "The Advocate",
+        description:
+            "Thoughtful, intuitive, and deeply guided by personal meaning.",
+        details:
+            "You tend to look beneath the surface, care deeply about what matters to you, and think carefully about the people around you."
+    },
+
+    INFP: {
+        title: "The Mediator",
+        description:
+            "Imaginative, thoughtful, and guided by personal values.",
+        details:
+            "You tend to value authenticity, meaning, and emotional depth."
+    },
+
+    ENFP: {
+        title: "The Campaigner",
+        description:
+            "Curious, enthusiastic, imaginative, and people-oriented.",
+        details:
+            "You tend to become excited by possibilities and enjoy discovering what makes people and experiences meaningful."
+    },
+
+    ENFJ: {
+        title: "The Protagonist",
+        description:
+            "Warm, encouraging, organized, and attentive to people.",
+        details:
+            "You tend to notice what others need and enjoy helping people move toward something meaningful."
+    },
+
+    ISFP: {
+        title: "The Adventurer",
+        description:
+            "Gentle, observant, flexible, and strongly connected to experience.",
+        details:
+            "You tend to appreciate beauty, personal freedom, and authentic experiences."
+    },
+
+    ESFP: {
+        title: "The Entertainer",
+        description:
+            "Energetic, spontaneous, warm, and engaged with the present.",
+        details:
+            "You tend to bring energy into experiences and enjoy making moments memorable."
+    },
+
+    ISFJ: {
+        title: "The Defender",
+        description:
+            "Reliable, considerate, observant, and caring.",
+        details:
+            "You tend to remember details about people and show care through practical actions."
+    },
+
+    ESFJ: {
+        title: "The Consul",
+        description:
+            "Warm, social, responsible, and attentive to others.",
+        details:
+            "You tend to value harmony, connection, and making people feel included."
+    },
+
+    INTJ: {
+        title: "The Architect",
+        description:
+            "Independent, strategic, analytical, and future-focused.",
+        details:
+            "You tend to enjoy understanding complex systems and building long-term plans."
+    },
+
+    INTP: {
+        title: "The Logician",
+        description:
+            "Curious, analytical, independent, and interested in how things work.",
+        details:
+            "You tend to explore ideas deeply and enjoy solving problems from different angles."
+    },
+
+    ENTJ: {
+        title: "The Commander",
+        description:
+            "Direct, strategic, confident, and goal-oriented.",
+        details:
+            "You tend to naturally organize ideas and people around a clear objective."
+    },
+
+    ENTP: {
+        title: "The Debater",
+        description:
+            "Curious, inventive, energetic, and intellectually playful.",
+        details:
+            "You tend to enjoy exploring possibilities, questioning assumptions, and discovering better ideas."
+    },
+
+    ISTJ: {
+        title: "The Logistician",
+        description:
+            "Practical, dependable, organized, and detail-oriented.",
+        details:
+            "You tend to value consistency, responsibility, and clear expectations."
+    },
+
+    ESTJ: {
+        title: "The Executive",
+        description:
+            "Organized, practical, direct, and responsible.",
+        details:
+            "You tend to prefer clear structures, practical solutions, and getting things done."
+    },
+
+    ISTP: {
+        title: "The Virtuoso",
+        description:
+            "Independent, practical, observant, and adaptable.",
+        details:
+            "You tend to enjoy understanding how things work and solving problems directly."
+    },
+
+    ESTP: {
+        title: "The Entrepreneur",
+        description:
+            "Energetic, adaptable, practical, and action-oriented.",
+        details:
+            "You tend to learn through experience and enjoy responding to opportunities as they appear."
+    }
+
+};
+
+
+/* =========================================
+   SCENE 5 — RESULT → WISHES
+========================================= */
+
+const birthdayEndingButton =
+    document.getElementById("birthday-ending-button");
+
+
+birthdayEndingButton.addEventListener("click", () => {
+
+    showScene(scenes.birthdayWishes);
+
+});
+
+
+/* =========================================
+   FINAL BIRTHDAY WISHES
+========================================= */
+
+
+/*
+ * YOUR LONG BIRTHDAY MESSAGE
+ *
+ * We will put your exact final wishes here.
+ */
+
+const wishesText =
+    document.getElementById("wishes-text");
+
+
+wishesText.textContent =
+    "Your birthday wishes will go here.";
+
+
+/* =========================================
+   INITIAL STATE
+========================================= */
+
+showScene(scenes.opening);
