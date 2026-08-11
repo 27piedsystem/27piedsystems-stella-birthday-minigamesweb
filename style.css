@@ -11,9 +11,9 @@ body {
 }
 
 body {
-    font-family: Arial, Calibri, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
     background: #07152f;
-    color: #ffffff;
+    color: white;
     overflow: hidden;
 }
 
@@ -35,8 +35,8 @@ body {
     pointer-events: none;
 
     transition:
-        opacity 0.9s ease,
-        visibility 0.9s ease;
+        opacity 0.8s ease,
+        visibility 0.8s ease;
 
     overflow-y: auto;
 }
@@ -56,7 +56,7 @@ body {
     background:
         radial-gradient(
             circle at 50% 25%,
-            rgba(95, 135, 220, 0.32),
+            rgba(100, 145, 230, 0.32),
             transparent 42%
         ),
         linear-gradient(
@@ -79,7 +79,7 @@ body {
         ),
         radial-gradient(
             circle,
-            rgba(255, 255, 255, 0.45) 1px,
+            rgba(255, 255, 255, 0.4) 1px,
             transparent 1px
         );
 
@@ -87,11 +87,7 @@ body {
         90px 90px,
         150px 150px;
 
-    background-position:
-        10px 20px,
-        60px 80px;
-
-    opacity: 0.45;
+    opacity: 0.4;
 }
 
 .opening-content {
@@ -106,41 +102,41 @@ body {
 
     text-align: center;
 
-    padding: 35px 0;
+    padding: 30px 0;
 }
 
 .stella-photo {
-    width: min(72vw, 300px);
-    height: min(72vw, 300px);
+    width: min(70vw, 290px);
+    height: min(70vw, 290px);
 
     object-fit: cover;
 
     border-radius: 50%;
 
-    border: 3px solid rgba(255, 255, 255, 0.75);
+    border: 3px solid rgba(255, 255, 255, 0.8);
 
     box-shadow:
         0 0 35px rgba(150, 185, 255, 0.45);
 
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .small-intro {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
+
     font-weight: 600;
 
-    letter-spacing: 0.15em;
+    letter-spacing: 0.16em;
+
     text-transform: uppercase;
 
     opacity: 0.7;
 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
 .opening-content h1 {
-    font-family: Arial, Calibri, sans-serif;
-
-    font-size: clamp(2.7rem, 10vw, 4.3rem);
+    font-size: clamp(2.7rem, 10vw, 4.2rem);
 
     font-weight: 700;
 
@@ -148,28 +144,27 @@ body {
 }
 
 .age {
-    margin-top: 10px;
+    margin-top: 9px;
 
-    font-size: 1rem;
+    font-size: 0.95rem;
+
     font-weight: 400;
 
-    letter-spacing: 0.05em;
-
-    opacity: 0.75;
+    opacity: 0.7;
 }
 
 .opening-message {
-    margin-top: 30px;
+    margin-top: 28px;
 
-    font-size: 1.15rem;
-
-    line-height: 1.8;
+    font-size: 1.08rem;
 
     font-weight: 400;
+
+    line-height: 1.8;
 }
 
 #begin-button {
-    margin-top: 35px;
+    margin-top: 34px;
 }
 
 
@@ -178,18 +173,19 @@ body {
 ========================= */
 
 button {
+    font-family: "Inter", Arial, sans-serif;
+
     border: none;
 
-    font-family: Arial, Calibri, sans-serif;
+    font-size: 0.9rem;
 
-    font-size: 0.95rem;
     font-weight: 600;
 
     color: #142342;
 
-    background: #ffffff;
+    background: white;
 
-    padding: 14px 28px;
+    padding: 14px 27px;
 
     border-radius: 999px;
 
@@ -214,12 +210,13 @@ button:active:not(:disabled) {
 
 button:disabled {
     opacity: 0.35;
+
     cursor: default;
 }
 
 
 /* =========================
-   QUIZZES
+   QUIZ SCREENS
 ========================= */
 
 #personal-quiz,
@@ -235,25 +232,37 @@ button:disabled {
 .quiz-container {
     width: min(90%, 600px);
 
-    padding: 45px 0 60px;
+    padding: 45px 0 70px;
 }
+
+
+/* =========================
+   QUESTION COUNTER
+========================= */
 
 #personal-question-number,
 #mbti-question-number {
     text-align: center;
 
-    font-size: 0.82rem;
+    font-size: 0.8rem;
+
     font-weight: 600;
 
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
 
     opacity: 0.65;
 
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 }
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
 
 .question-progress {
     width: 100%;
+
     height: 4px;
 
     background: rgba(255, 255, 255, 0.15);
@@ -261,15 +270,14 @@ button:disabled {
     border-radius: 10px;
 
     overflow: hidden;
-
-    margin-bottom: 10px;
 }
 
 .progress-bar {
     width: 0%;
+
     height: 100%;
 
-    background: #ffffff;
+    background: white;
 
     transition: width 0.3s ease;
 }
@@ -278,34 +286,55 @@ button:disabled {
 #mbti-progress-current {
     text-align: center;
 
-    font-size: 0.72rem;
+    font-size: 0.7rem;
 
     opacity: 0.4;
 
-    margin-bottom: 42px;
+    margin-top: 9px;
+
+    margin-bottom: 48px;
 }
 
 
 /* =========================
-   QUESTION TEXT
+   QUESTION
 ========================= */
 
 .quiz-container h2 {
-    font-family: Arial, Calibri, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
 
-    font-size: clamp(1.55rem, 6vw, 2.25rem);
+    font-size: clamp(1.45rem, 5.5vw, 2.15rem);
 
     font-weight: 600;
 
-    line-height: 1.45;
+    line-height: 1.5;
 
     text-align: center;
 
-    margin: 0 auto 42px;
-
     max-width: 540px;
 
-    padding: 0 12px;
+    margin: 0 auto;
+
+    padding: 0 10px;
+}
+
+
+/* =========================
+   SPACE BETWEEN QUESTION
+   AND ANSWERS
+========================= */
+
+#personal-answer-area,
+#mbti-answer-area {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+
+    margin-top: 50px;
 }
 
 
@@ -313,42 +342,30 @@ button:disabled {
    ANSWERS
 ========================= */
 
-#personal-answer-area,
-#mbti-answer-area {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 16px;
-
-    width: 100%;
-
-    margin-top: 5px;
-}
-
 .quiz-answer {
     width: 100%;
 
-    min-height: 58px;
+    min-height: 60px;
 
-    padding: 16px 20px;
+    padding: 17px 20px;
 
-    text-align: left;
+    font-family: "Inter", Arial, sans-serif;
 
-    font-family: Arial, Calibri, sans-serif;
+    font-size: 0.93rem;
 
-    font-size: 0.95rem;
     font-weight: 400;
 
     line-height: 1.5;
 
-    color: #ffffff;
+    text-align: left;
+
+    color: white;
 
     background: rgba(255, 255, 255, 0.08);
 
     border: 1px solid rgba(255, 255, 255, 0.15);
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     box-shadow: none;
 }
@@ -363,16 +380,21 @@ button:disabled {
     border-color: rgba(255, 255, 255, 0.75);
 }
 
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
 #personal-next-button,
 #mbti-next-button {
     display: block;
 
-    margin: 32px auto 0;
+    margin: 34px auto 0;
 }
 
 
 /* =========================
-   PHOTO 2
+   SECOND PHOTO
 ========================= */
 
 #second-photo {
@@ -408,7 +430,7 @@ button:disabled {
 }
 
 .photo-scene p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 
     line-height: 1.7;
 
@@ -438,7 +460,8 @@ button:disabled {
 }
 
 .result-container > p:first-child {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+
     font-weight: 600;
 
     letter-spacing: 0.12em;
@@ -459,7 +482,7 @@ button:disabled {
 }
 
 #mbti-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 
     font-weight: 600;
 
@@ -564,11 +587,13 @@ button:disabled {
 @keyframes wishesAppear {
     from {
         opacity: 0;
+
         transform: translateY(20px);
     }
 
     to {
         opacity: 1;
+
         transform: translateY(0);
     }
 }
@@ -589,7 +614,8 @@ button:disabled {
     }
 
     .opening-message {
-        font-size: 1.05rem;
+        font-size: 1.02rem;
+
         line-height: 1.8;
     }
 
@@ -599,31 +625,31 @@ button:disabled {
 
     #personal-progress-current,
     #mbti-progress-current {
-        margin-bottom: 34px;
+        margin-bottom: 40px;
     }
 
     .quiz-container h2 {
-        font-size: 1.5rem;
+        font-size: 1.45rem;
 
-        line-height: 1.5;
-
-        margin-bottom: 36px;
+        line-height: 1.55;
     }
 
     #personal-answer-area,
     #mbti-answer-area {
-        gap: 14px;
+        gap: 15px;
+
+        margin-top: 45px;
     }
 
     .quiz-answer {
-        min-height: 56px;
+        min-height: 58px;
 
-        padding: 15px 17px;
+        padding: 16px 17px;
     }
 
     #personal-next-button,
     #mbti-next-button {
-        margin-top: 30px;
+        margin-top: 32px;
     }
 
     .wishes-container {
