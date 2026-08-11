@@ -10,14 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="theme-color"
-        content="#071525"
-    >
-
-    <title>
-        Happy Birthday, Stella
-    </title>
+    <title>Happy Birthday, Stella</title>
 
     <link
         rel="stylesheet"
@@ -29,482 +22,398 @@
 
 <body>
 
-    <main id="birthday-app">
 
+    <!-- =========================================
+         BACKGROUND MUSIC
+    ========================================== -->
 
-        <!-- ==================================================
-             SCENE 01
-             OPENING
-        =================================================== -->
-
-        <section
-            id="opening"
-            class="scene active"
-            aria-label="Birthday opening"
+    <audio
+        id="background-music"
+        loop
+        preload="auto"
+    >
+        <source
+            src="music.mp3"
+            type="audio/mpeg"
         >
+    </audio>
 
-            <div class="night-sky">
 
-                <div
-                    class="stars"
-                    aria-hidden="true"
-                ></div>
 
+    <!-- =========================================
+         SCENE 01
+         OPENING
+    ========================================== -->
 
-                <div class="opening-content">
+    <main
+        id="opening"
+        class="scene active"
+    >
 
+        <div class="stars"></div>
 
-                    <!-- PHOTO -->
+        <div class="opening-content">
 
-                    <div class="photo-frame">
+            <p class="small-text">
+                a little adventure made only for
+            </p>
 
-                        <img
-                            src="stella-photo-1.jpeg"
-                            alt="Stella Halim"
-                        >
+            <h1>
+                Stella Halim
+            </h1>
 
-                    </div>
+            <p class="age">
+                20 years old
+            </p>
 
+            <p class="opening-message">
+                dear my chihuahua,<br>
+                here begins the adventure
+            </p>
 
-                    <!-- INTRODUCTION -->
+            <button
+                id="begin-button"
+                class="main-button"
+            >
+                begin the adventure
+            </button>
 
-                    <div class="opening-text">
-
-                        <p class="opening-name">
-                            Stella Halim
-                        </p>
-
-                        <h1 class="opening-age">
-                            20 years old
-                        </h1>
-
-                        <p class="opening-message">
-                            dear my chihuahua,<br>
-                            here begin the adventure
-                        </p>
-
-                    </div>
-
-
-                    <!-- START -->
-
-                    <button
-                        id="begin-button"
-                        type="button"
-                    >
-                        Begin the Adventure
-                    </button>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==================================================
-             SCENE 02
-             SHIBA INU + BIRTHDAY CAKE
-        =================================================== -->
-
-        <section
-            id="shiba-scene"
-            class="scene"
-            aria-label="Shiba Inu birthday scene"
-        >
-
-            <div class="shiba-container">
-
-
-                <!--
-                    The Shiba Inu will be created with SVG/code.
-                    No external Shiba image is required.
-                -->
-
-                <div
-                    id="shiba-character"
-                    aria-label="Shiba Inu character"
-                >
-
-                    <!-- SVG CHARACTER WILL GO HERE -->
-
-                </div>
-
-
-                <!--
-                    Birthday cake held by the Shiba Inu.
-                    The cake will also be created with code.
-                -->
-
-                <div
-                    id="birthday-cake"
-                    class="cake-container"
-                    aria-label="Birthday cake"
-                >
-
-                    <!-- CAKE WILL GO HERE -->
-
-                </div>
-
-
-                <!-- SCENE MESSAGE -->
-
-                <div class="scene-text">
-
-                    <p id="shiba-message"></p>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==================================================
-             SCENE 03
-             PERSONAL QUESTIONS
-             QUESTIONS 1–8
-        =================================================== -->
-
-        <section
-            id="personal-quiz"
-            class="scene"
-            aria-label="Personal birthday questions"
-        >
-
-            <div class="quiz-container">
-
-
-                <div class="quiz-header">
-
-                    <p class="quiz-label">
-                        A little something about you
-                    </p>
-
-                    <div
-                        id="personal-progress"
-                        class="quiz-progress"
-                    >
-
-                        <span
-                            id="personal-progress-current"
-                        >
-                            1
-                        </span>
-
-                        <span>
-                            /
-                        </span>
-
-                        <span>
-                            8
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- QUESTION -->
-
-                <div class="question-area">
-
-                    <p
-                        id="personal-question-number"
-                        class="question-number"
-                    >
-                        Question 1
-                    </p>
-
-                    <h2
-                        id="personal-question"
-                        class="question-text"
-                    >
-                        <!-- Question inserted by JavaScript -->
-                    </h2>
-
-                </div>
-
-
-                <!-- ANSWERS -->
-
-                <div
-                    id="personal-answer-area"
-                    class="answer-area"
-                >
-
-                    <!-- Answers inserted by JavaScript -->
-
-                </div>
-
-
-                <!-- CONTINUE -->
-
-                <button
-                    id="personal-next-button"
-                    class="quiz-next-button"
-                    type="button"
-                    disabled
-                >
-                    Continue
-                </button>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==================================================
-             SCENE 04
-             MBTI PERSONALITY TEST
-             QUESTIONS 9–28
-        =================================================== -->
-
-        <section
-            id="mbti-quiz"
-            class="scene"
-            aria-label="MBTI personality test"
-        >
-
-            <div class="quiz-container">
-
-
-                <div class="quiz-header">
-
-                    <p class="quiz-label">
-                        Let's see how your mind works
-                    </p>
-
-                    <div
-                        id="mbti-progress"
-                        class="quiz-progress"
-                    >
-
-                        <span
-                            id="mbti-progress-current"
-                        >
-                            1
-                        </span>
-
-                        <span>
-                            /
-                        </span>
-
-                        <span>
-                            20
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- QUESTION -->
-
-                <div class="question-area">
-
-                    <p
-                        id="mbti-question-number"
-                        class="question-number"
-                    >
-                        Question 1 of 20
-                    </p>
-
-                    <h2
-                        id="mbti-question"
-                        class="question-text"
-                    >
-                        <!-- MBTI question inserted by JavaScript -->
-                    </h2>
-
-                </div>
-
-
-                <!-- ANSWERS -->
-
-                <div
-                    id="mbti-answer-area"
-                    class="answer-area"
-                >
-
-                    <!-- MBTI answers inserted by JavaScript -->
-
-                </div>
-
-
-                <!-- CONTINUE -->
-
-                <button
-                    id="mbti-next-button"
-                    class="quiz-next-button"
-                    type="button"
-                    disabled
-                >
-                    Continue
-                </button>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==================================================
-             SCENE 05
-             MBTI RESULT
-        =================================================== -->
-
-        <section
-            id="mbti-result"
-            class="scene"
-            aria-label="MBTI personality result"
-        >
-
-            <div class="result-container">
-
-
-                <p class="result-label">
-                    Your personality
-                </p>
-
-
-                <p class="result-introduction">
-                    after all those questions...
-                </p>
-
-
-                <!-- FOUR LETTER TYPE -->
-
-                <h2
-                    id="mbti-type"
-                    class="mbti-type"
-                >
-                    INFJ
-                </h2>
-
-
-                <!-- TYPE NAME -->
-
-                <h3
-                    id="mbti-title"
-                    class="mbti-title"
-                >
-                    The Advocate
-                </h3>
-
-
-                <!-- DESCRIPTION -->
-
-                <p
-                    id="mbti-description"
-                    class="mbti-description"
-                >
-                    <!-- Personality description inserted by JavaScript -->
-                </p>
-
-
-                <!-- DETAILS -->
-
-                <div
-                    id="mbti-details"
-                    class="mbti-details"
-                >
-
-                    <!-- Personality details inserted by JavaScript -->
-
-                </div>
-
-
-                <!-- CONTINUE -->
-
-                <button
-                    id="birthday-ending-button"
-                    type="button"
-                >
-                    Continue
-                </button>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==================================================
-             SCENE 06
-             FINAL BIRTHDAY WISHES
-        =================================================== -->
-
-        <section
-            id="birthday-wishes"
-            class="scene"
-            aria-label="Birthday wishes"
-        >
-
-            <div class="wishes-container">
-
-
-                <p class="wishes-label">
-                    For you
-                </p>
-
-
-                <h2 class="wishes-title">
-                    Happy Birthday, Stella
-                </h2>
-
-
-                <!--
-                    Your long birthday wishes will be inserted here.
-                    We will use the exact version you prepared.
-                -->
-
-                <div
-                    id="wishes-text"
-                    class="wishes-text"
-                >
-
-                    <!-- FINAL BIRTHDAY MESSAGE -->
-
-                </div>
-
-
-            </div>
-
-        </section>
-
+        </div>
 
     </main>
 
 
 
-    <!-- ==================================================
-         BACKGROUND MUSIC
-    =================================================== -->
+    <!-- =========================================
+         SCENE 02
+         SHIBAINU
+    ========================================== -->
 
-    <audio
-        id="background-music"
-        src="birthday-music.mp3"
-        loop
-        preload="auto"
-    ></audio>
+    <section
+        id="shiba-scene"
+        class="scene"
+    >
+
+        <div class="shiba-content">
+
+            <div
+                id="shiba-character"
+                class="shiba-character"
+            >
+
+                <!-- SHIBA HEAD -->
+
+                <div class="shiba-head">
+
+                    <div class="ear left-ear"></div>
+
+                    <div class="ear right-ear"></div>
+
+                    <div class="face">
+
+                        <div class="eye left-eye"></div>
+
+                        <div class="eye right-eye"></div>
+
+                        <div class="snout">
+
+                            <div class="nose"></div>
+
+                            <div class="mouth"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAKE -->
+
+                <div class="cake">
+
+                    <div class="cake-top">
+
+                        <span class="candle candle-two">
+                            2
+                        </span>
+
+                        <span class="candle candle-zero">
+                            0
+                        </span>
+
+                    </div>
+
+                    <div class="cake-body"></div>
+
+                </div>
+
+
+                <!-- HANDS -->
+
+                <div class="shiba-hand left-hand"></div>
+
+                <div class="shiba-hand right-hand"></div>
+
+            </div>
+
+
+            <p
+                id="shiba-message"
+                class="shiba-message"
+            >
+                before we continue...
+            </p>
+
+        </div>
+
+    </section>
 
 
 
-    <!-- ==================================================
+    <!-- =========================================
+         SCENE 03
+         PERSONAL QUIZ
+    ========================================== -->
+
+    <section
+        id="personal-quiz"
+        class="scene quiz-scene"
+    >
+
+        <div class="quiz-container">
+
+            <p class="quiz-label">
+                a few questions for you
+            </p>
+
+            <p
+                id="personal-question-number"
+                class="question-number"
+            >
+                Question 1
+            </p>
+
+            <div class="progress">
+
+                <span
+                    id="personal-progress-current"
+                >
+                    1
+                </span>
+
+                <span>
+                    /
+                </span>
+
+                <span>
+                    8
+                </span>
+
+            </div>
+
+
+            <h2
+                id="personal-question"
+                class="quiz-question"
+            >
+                Question
+            </h2>
+
+
+            <div
+                id="personal-answer-area"
+                class="answer-area"
+            >
+            </div>
+
+
+            <button
+                id="personal-next-button"
+                class="main-button"
+                disabled
+            >
+                continue
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCENE 04
+         MBTI QUIZ
+    ========================================== -->
+
+    <section
+        id="mbti-quiz"
+        class="scene quiz-scene"
+    >
+
+        <div class="quiz-container">
+
+            <p class="quiz-label">
+                let's see what your personality says
+            </p>
+
+            <p
+                id="mbti-question-number"
+                class="question-number"
+            >
+                Question 1 of 20
+            </p>
+
+            <div class="progress">
+
+                <span
+                    id="mbti-progress-current"
+                >
+                    1
+                </span>
+
+                <span>
+                    /
+                </span>
+
+                <span>
+                    20
+                </span>
+
+            </div>
+
+
+            <h2
+                id="mbti-question"
+                class="quiz-question"
+            >
+                Question
+            </h2>
+
+
+            <div
+                id="mbti-answer-area"
+                class="answer-area"
+            >
+            </div>
+
+
+            <button
+                id="mbti-next-button"
+                class="main-button"
+                disabled
+            >
+                continue
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCENE 05
+         MBTI RESULT
+    ========================================== -->
+
+    <section
+        id="mbti-result"
+        class="scene"
+    >
+
+        <div class="result-container">
+
+            <p class="quiz-label">
+                your personality
+            </p>
+
+            <div
+                id="mbti-type"
+                class="mbti-type"
+            >
+                INFJ
+            </div>
+
+            <h2
+                id="mbti-title"
+                class="result-title"
+            >
+                The Advocate
+            </h2>
+
+            <p
+                id="mbti-description"
+                class="result-description"
+            >
+                Your personality description.
+            </p>
+
+            <p
+                id="mbti-details"
+                class="result-details"
+            >
+                More about your personality.
+            </p>
+
+
+            <button
+                id="birthday-ending-button"
+                class="main-button"
+            >
+                continue
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCENE 06
+         FINAL BIRTHDAY WISHES
+    ========================================== -->
+
+    <section
+        id="birthday-wishes"
+        class="scene wishes-scene"
+    >
+
+        <div class="wishes-container">
+
+            <div class="wishes-decoration">
+                20
+            </div>
+
+            <h2>
+                happy birthday, stella halim
+            </h2>
+
+            <div
+                id="wishes-text"
+                class="wishes-text"
+            >
+            </div>
+
+            <p class="wishes-signature">
+                — your shibainu
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
          JAVASCRIPT
-    =================================================== -->
+    ========================================== -->
 
-    <script src="script.js"></script>
-
+    <script
+        src="script.js"
+    ></script>
 
 </body>
 
