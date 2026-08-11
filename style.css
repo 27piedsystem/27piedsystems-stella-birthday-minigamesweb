@@ -7,14 +7,14 @@
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
     font-family: "Quicksand", sans-serif;
-    overflow: hidden;
     background: #07152f;
-    color: #f8f7ff;
+    color: #ffffff;
+    overflow: hidden;
 }
 
 
@@ -32,7 +32,6 @@ body {
 
     opacity: 0;
     visibility: hidden;
-
     pointer-events: none;
 
     transition:
@@ -50,21 +49,21 @@ body {
 
 
 /* =========================
-   INTRODUCTION
+   OPENING
 ========================= */
 
 #opening {
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(74, 105, 180, 0.35),
-            transparent 40%
+            circle at 50% 25%,
+            rgba(95, 135, 220, 0.32),
+            transparent 42%
         ),
         linear-gradient(
             180deg,
-            #07152f 0%,
-            #0b2047 50%,
-            #102b59 100%
+            #06132d 0%,
+            #0a1d42 50%,
+            #102d5b 100%
         );
 }
 
@@ -73,8 +72,16 @@ body {
     inset: 0;
 
     background-image:
-        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.8) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.45) 1px,
+            transparent 1px
+        );
 
     background-size:
         90px 90px,
@@ -99,11 +106,10 @@ body {
 
     text-align: center;
 
-    animation: openingAppear 1.5s ease forwards;
+    animation: openingAppear 1.4s ease forwards;
 }
 
 @keyframes openingAppear {
-
     from {
         opacity: 0;
         transform: translateY(25px);
@@ -123,20 +129,24 @@ body {
 
     border-radius: 50%;
 
-    border: 3px solid rgba(255,255,255,0.75);
+    border: 3px solid rgba(255, 255, 255, 0.75);
 
     box-shadow:
-        0 0 30px rgba(166, 190, 255, 0.45);
+        0 0 35px rgba(150, 185, 255, 0.45);
 
     margin-bottom: 28px;
 }
 
 .small-intro {
-    font-size: 0.9rem;
-    letter-spacing: 0.18em;
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
     text-transform: uppercase;
 
-    opacity: 0.75;
+    opacity: 0.7;
 
     margin-bottom: 8px;
 }
@@ -144,7 +154,7 @@ body {
 .opening-content h1 {
     font-family: "DM Serif Display", serif;
 
-    font-size: clamp(2.5rem, 9vw, 4rem);
+    font-size: clamp(2.8rem, 10vw, 4.5rem);
 
     font-weight: 400;
 
@@ -152,20 +162,25 @@ body {
 }
 
 .age {
+    font-family: "Quicksand", sans-serif;
+
     margin-top: 10px;
 
     font-size: 1rem;
+    font-weight: 500;
+
     letter-spacing: 0.08em;
 
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 .opening-message {
-    margin-top: 28px;
-
     font-family: "DM Serif Display", serif;
 
-    font-size: 1.25rem;
+    margin-top: 28px;
+
+    font-size: 1.3rem;
+
     line-height: 1.7;
 }
 
@@ -182,17 +197,18 @@ button {
     border: none;
 
     font-family: "Quicksand", sans-serif;
-    font-weight: 600;
-
-    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
 
     color: #142342;
 
-    background: #f7f4ff;
+    background: #ffffff;
 
-    padding: 13px 27px;
+    padding: 14px 28px;
 
     border-radius: 999px;
+
+    cursor: pointer;
 
     transition:
         transform 0.2s ease,
@@ -204,7 +220,7 @@ button:hover:not(:disabled) {
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,0.2);
+        0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 button:active:not(:disabled) {
@@ -218,7 +234,7 @@ button:disabled {
 
 
 /* =========================
-   QUIZ
+   QUIZZES
 ========================= */
 
 #personal-quiz,
@@ -227,7 +243,7 @@ button:disabled {
         linear-gradient(
             145deg,
             #101d42,
-            #1d315d
+            #1c315b
         );
 }
 
@@ -240,22 +256,23 @@ button:disabled {
 .question-label {
     text-align: center;
 
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
 
     text-transform: uppercase;
 
-    opacity: 0.65;
+    opacity: 0.6;
 }
 
 .question-progress {
     width: 100%;
     height: 3px;
 
-    background: rgba(255,255,255,0.15);
-
     margin-top: 15px;
+
+    background: rgba(255, 255, 255, 0.15);
 
     border-radius: 10px;
 
@@ -276,19 +293,19 @@ button:disabled {
 
     margin-top: 8px;
 
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 
-    opacity: 0.5;
+    opacity: 0.45;
 }
 
 .quiz-container h2 {
     font-family: "DM Serif Display", serif;
 
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+
     font-weight: 400;
 
-    font-size: clamp(1.7rem, 6vw, 2.5rem);
-
-    line-height: 1.25;
+    line-height: 1.3;
 
     text-align: center;
 
@@ -298,40 +315,41 @@ button:disabled {
 #personal-answer-area,
 #mbti-answer-area {
     display: flex;
-
     flex-direction: column;
-
     gap: 12px;
 }
 
 .quiz-answer {
     width: 100%;
 
+    padding: 17px 18px;
+
     text-align: left;
 
-    background: rgba(255,255,255,0.08);
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 0.95rem;
+    font-weight: 500;
 
     color: #ffffff;
 
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
 
     border-radius: 15px;
-
-    padding: 17px 18px;
-
-    font-weight: 500;
 
     box-shadow: none;
 }
 
 .quiz-answer:hover {
-    background: rgba(255,255,255,0.14);
+    background: rgba(255, 255, 255, 0.14);
 }
 
 .quiz-answer.selected {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
 
-    border-color: rgba(255,255,255,0.65);
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .next-button {
@@ -369,7 +387,7 @@ button:disabled {
     border-radius: 22px;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,0.35);
+        0 20px 60px rgba(0, 0, 0, 0.35);
 
     margin-bottom: 25px;
 }
@@ -404,12 +422,13 @@ button:disabled {
     text-align: center;
 }
 
-.result-small {
-    text-transform: uppercase;
+.result-container > p:first-child {
+    font-size: 0.8rem;
+    font-weight: 600;
 
     letter-spacing: 0.15em;
 
-    font-size: 0.8rem;
+    text-transform: uppercase;
 
     opacity: 0.6;
 }
@@ -427,15 +446,17 @@ button:disabled {
 #mbti-title {
     font-family: "DM Serif Display", serif;
 
-    font-weight: 400;
-
     font-size: 2rem;
+
+    font-weight: 400;
 
     margin-bottom: 20px;
 }
 
 #mbti-description,
 #mbti-details {
+    font-family: "Quicksand", sans-serif;
+
     line-height: 1.7;
 
     opacity: 0.85;
@@ -488,6 +509,8 @@ button:disabled {
 }
 
 .shiba-container p {
+    font-family: "Quicksand", sans-serif;
+
     opacity: 0.7;
 
     margin-bottom: 25px;
@@ -514,11 +537,13 @@ button:disabled {
 
     padding: 70px 0;
 
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 1rem;
+
     line-height: 1.9;
 
     white-space: pre-line;
-
-    font-size: 1rem;
 }
 
 #wishes-text {
@@ -526,7 +551,6 @@ button:disabled {
 }
 
 @keyframes wishesAppear {
-
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -546,7 +570,7 @@ button:disabled {
 @media (max-width: 600px) {
 
     .opening-content h1 {
-        font-size: 2.8rem;
+        font-size: 2.9rem;
     }
 
     .opening-message {
@@ -563,6 +587,7 @@ button:disabled {
 
     .wishes-container {
         padding: 50px 0;
+
         font-size: 0.96rem;
     }
 }
