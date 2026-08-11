@@ -1,1156 +1,1192 @@
-<!-- BIRTHDAY ADVENTURE -->
-<!-- Stella Halim — 20 Years Old -->
-<!-- 8 August 2026 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <title>Happy Birthday, Stella</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+  <script src="script.js"></script>
 
-<!-- Background Music -->
-
-<audio
-  id="backgroundMusic"
-  loop
-  preload="auto"
->
-  <source src="assets/music.mp3" type="audio/mpeg">
-</audio>
+  <!-- ==========================================
+       BIRTHDAY ADVENTURE
+       Stella Halim — 20 Years Old
+       8 August 2026
+       ========================================== -->
 
 
-<!-- Main Birthday Game -->
+  <!-- ==========================================
+       BACKGROUND MUSIC
+       ========================================== -->
 
-<main id="birthdayGame">
-
-
-  <!-- ==============================
-       OPENING SCENE
-       ============================== -->
-
-  <section
-    id="scene-opening"
-    class="game-scene active-scene"
-    data-scene="opening"
+  <audio
+    id="backgroundMusic"
+    loop
+    preload="auto"
   >
-
-    <div class="scene-content">
-
-      <p class="small-intro">
-        8 August 2026
-      </p>
-
-      <h1>
-        Happy Birthday, Stella
-      </h1>
-
-      <h2>
-        My Chihuahua
-      </h2>
-
-      <p class="birthday-age">
-        20
-      </p>
-
-      <p class="late-gift-message">
-        A little late...
-        <br>
-        but I still wanted to make something for your 20th.
-      </p>
-
-      <button
-        id="startAdventureButton"
-        type="button"
-      >
-        Start the Adventure
-      </button>
-
-    </div>
-
-  </section>
+    <source src="assets/music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
 
-  <!-- ==============================
-       INTRODUCTION
-       ============================== -->
+  <!-- ==========================================
+       MAIN GAME CONTAINER
+       ========================================== -->
 
-  <section
-    id="scene-introduction"
-    class="game-scene"
-    data-scene="introduction"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="scene-label">
-        BEFORE WE START
-      </p>
-
-      <h2>
-        There's something I made for you.
-      </h2>
-
-      <p>
-        It's not a normal birthday message.
-      </p>
-
-      <p>
-        You have to go through a little adventure first.
-      </p>
-
-      <button
-        id="introductionContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
+  <main id="birthdayGame">
 
 
-  <!-- ==============================
-       PHOTO 01
-       ============================== -->
+    <!-- ========================================
+         SCENE 01 — OPENING
+         ======================================== -->
 
-  <section
-    id="scene-photo-one"
-    class="game-scene"
-    data-scene="photo-one"
-    hidden
-  >
+    <section
+      id="scene-opening"
+      class="game-scene active-scene"
+      data-scene="opening"
+    >
 
-    <div class="scene-content">
+      <div class="scene-content">
 
-      <p class="scene-label">
-        THE BIRTHDAY GIRL
-      </p>
+        <p class="small-intro">
+          8 August 2026
+        </p>
 
-      <h2>
-        20 years of being you.
-      </h2>
+        <h1>
+          Happy Birthday, Stella
+        </h1>
 
-      <div class="photo-frame">
+        <h2>
+          My Chihuahua
+        </h2>
 
-        <img
-          id="stellaPhotoOne"
-          src="assets/stella-photo-1.jpg"
-          alt="Stella holding a snake"
-        >
+        <p class="birthday-age">
+          20
+        </p>
 
-      </div>
-
-      <p>
-        Okay, enough looking at the birthday girl.
-      </p>
-
-      <button
-        id="photoOneContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       PHOTO 02
-       ============================== -->
-
-  <section
-    id="scene-photo-two"
-    class="game-scene"
-    data-scene="photo-two"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="scene-label">
-        ONE MORE
-      </p>
-
-      <h2>
-        And yes, I kept another one.
-      </h2>
-
-      <div class="photo-frame">
-
-        <img
-          id="stellaPhotoTwo"
-          src="assets/stella-photo-2.jpg"
-          alt="Stella at the reptile shop"
-        >
-
-      </div>
-
-      <button
-        id="photoTwoContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST MAP
-       ============================== -->
-
-  <section
-    id="scene-quest-map"
-    class="game-scene"
-    data-scene="quest-map"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="scene-label">
-        THE ADVENTURE
-      </p>
-
-      <h2>
-        Eight quests.
-      </h2>
-
-      <p>
-        Complete them one by one.
-      </p>
-
-      <div
-        id="questMap"
-        class="quest-map"
-      >
+        <p class="late-gift-message">
+          A little late...
+          <br>
+          but I still wanted to make something for your 20th.
+        </p>
 
         <button
-          class="quest-button"
-          id="questMapButton1"
+          id="startAdventureButton"
           type="button"
-          data-quest="1"
         >
-          Quest 01
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton2"
-          type="button"
-          data-quest="2"
-          disabled
-        >
-          Quest 02
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton3"
-          type="button"
-          data-quest="3"
-          disabled
-        >
-          Quest 03
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton4"
-          type="button"
-          data-quest="4"
-          disabled
-        >
-          Quest 04
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton5"
-          type="button"
-          data-quest="5"
-          disabled
-        >
-          Quest 05
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton6"
-          type="button"
-          data-quest="6"
-          disabled
-        >
-          Quest 06
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton7"
-          type="button"
-          data-quest="7"
-          disabled
-        >
-          Quest 07
-        </button>
-
-        <button
-          class="quest-button locked"
-          id="questMapButton8"
-          type="button"
-          data-quest="8"
-          disabled
-        >
-          Quest 08
+          Start the Adventure
         </button>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
 
+    <!-- ========================================
+         SCENE 02 — INTRODUCTION
+         ======================================== -->
 
-  <!-- ==============================
-       QUEST 01
-       ============================== -->
+    <section
+      id="scene-introduction"
+      class="game-scene"
+      data-scene="introduction"
+      hidden
+    >
 
-  <section
-    id="scene-quest-1"
-    class="game-scene quest-scene"
-    data-scene="quest-1"
-    hidden
-  >
+      <div class="scene-content">
 
-    <div class="scene-content">
+        <p class="scene-label">
+          BEFORE WE START
+        </p>
 
-      <p class="quest-number">
-        QUEST 01 / 08
-      </p>
+        <h2>
+          There's something I made for you.
+        </h2>
 
-      <h2>
-        The Adventure Begins
-      </h2>
+        <p>
+          It's not a normal birthday message.
+        </p>
 
-      <p id="quest1Question">
-        Quest question will appear here.
-      </p>
+        <p>
+          You have to go through a little adventure first.
+        </p>
 
-      <div
-        id="quest1Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest1Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 02
-       ============================== -->
-
-  <section
-    id="scene-quest-2"
-    class="game-scene quest-scene"
-    data-scene="quest-2"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 02 / 08
-      </p>
-
-      <h2>
-        Memory Check
-      </h2>
-
-      <p id="quest2Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest2Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest2Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 03
-       ============================== -->
-
-  <section
-    id="scene-quest-3"
-    class="game-scene quest-scene"
-    data-scene="quest-3"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 03 / 08
-      </p>
-
-      <h2>
-        Chihuahua Test
-      </h2>
-
-      <p id="quest3Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest3Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest3Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 04
-       ============================== -->
-
-  <section
-    id="scene-quest-4"
-    class="game-scene quest-scene"
-    data-scene="quest-4"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 04 / 08
-      </p>
-
-      <h2>
-        Twenty
-      </h2>
-
-      <p id="quest4Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest4Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest4Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 05
-       ============================== -->
-
-  <section
-    id="scene-quest-5"
-    class="game-scene quest-scene"
-    data-scene="quest-5"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 05 / 08
-      </p>
-
-      <h2>
-        Choose Your Way
-      </h2>
-
-      <p id="quest5Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest5Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest5Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 06
-       ============================== -->
-
-  <section
-    id="scene-quest-6"
-    class="game-scene quest-scene"
-    data-scene="quest-6"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 06 / 08
-      </p>
-
-      <h2>
-        The Lucky Number
-      </h2>
-
-      <p id="quest6Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest6Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest6Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 07
-       ============================== -->
-
-  <section
-    id="scene-quest-7"
-    class="game-scene quest-scene"
-    data-scene="quest-7"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 07 / 08
-      </p>
-
-      <h2>
-        Almost There
-      </h2>
-
-      <p id="quest7Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest7Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest7Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       QUEST 08
-       ============================== -->
-
-  <section
-    id="scene-quest-8"
-    class="game-scene quest-scene"
-    data-scene="quest-8"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="quest-number">
-        QUEST 08 / 08
-      </p>
-
-      <h2>
-        The Final Door
-      </h2>
-
-      <p id="quest8Question">
-        Quest question will appear here.
-      </p>
-
-      <div
-        id="quest8Answers"
-        class="answer-container"
-      ></div>
-
-      <p
-        id="quest8Feedback"
-        class="quest-feedback"
-      ></p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       MINI GAME
-       ============================== -->
-
-  <section
-    id="scene-mini-game"
-    class="game-scene"
-    data-scene="mini-game"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="scene-label">
-        SPECIAL CHALLENGE
-      </p>
-
-      <h2>
-        The 20.0806 Run
-      </h2>
-
-      <p>
-        Reach the birthday number.
-      </p>
-
-      <p class="target-score">
-        Target: <strong>20.0806</strong>
-      </p>
-
-      <div
-        id="runnerGame"
-        class="runner-game"
-      >
-
-        <div
-          id="gameScore"
-          class="game-score"
+        <button
+          id="introductionContinueButton"
+          type="button"
         >
-          Score: 0
+          Continue
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         SCENE 03 — FIRST PHOTO
+         ======================================== -->
+
+    <section
+      id="scene-photo-one"
+      class="game-scene"
+      data-scene="photo-one"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          THE BIRTHDAY GIRL
+        </p>
+
+        <h2>
+          20 years of being you.
+        </h2>
+
+        <div class="photo-frame">
+
+          <img
+            id="stellaPhotoOne"
+            src="assets/stella-photo-1.jpg"
+            alt="Stella holding a snake"
+          >
+
         </div>
 
-        <div
-          id="gameCharacter"
-          class="game-character"
+        <p>
+          Okay, enough looking at the birthday girl.
+        </p>
+
+        <button
+          id="photoOneContinueButton"
+          type="button"
         >
-          🐕
+          Continue
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         SCENE 04 — SECOND PHOTO
+         ======================================== -->
+
+    <section
+      id="scene-photo-two"
+      class="game-scene"
+      data-scene="photo-two"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          ONE MORE
+        </p>
+
+        <h2>
+          And yes, I kept another one.
+        </h2>
+
+        <div class="photo-frame">
+
+          <img
+            id="stellaPhotoTwo"
+            src="assets/stella-photo-2.jpg"
+            alt="Stella at the reptile shop"
+          >
+
         </div>
 
-        <div
-          id="gameObstacle"
-          class="game-obstacle"
+        <button
+          id="photoTwoContinueButton"
+          type="button"
         >
-          🌵
+          Continue
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         SCENE 05 — QUEST MAP
+         ======================================== -->
+
+    <section
+      id="scene-quest-map"
+      class="game-scene"
+      data-scene="quest-map"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          THE ADVENTURE
+        </p>
+
+        <h2>
+          Eight quests.
+        </h2>
+
+        <p>
+          Complete them one by one.
+        </p>
+
+        <div
+          id="questMap"
+          class="quest-map"
+        >
+
+          <button
+            class="quest-button"
+            id="questMapButton1"
+            type="button"
+            data-quest="1"
+          >
+            Quest 01
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton2"
+            type="button"
+            data-quest="2"
+            disabled
+          >
+            Quest 02
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton3"
+            type="button"
+            data-quest="3"
+            disabled
+          >
+            Quest 03
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton4"
+            type="button"
+            data-quest="4"
+            disabled
+          >
+            Quest 04
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton5"
+            type="button"
+            data-quest="5"
+            disabled
+          >
+            Quest 05
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton6"
+            type="button"
+            data-quest="6"
+            disabled
+          >
+            Quest 06
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton7"
+            type="button"
+            data-quest="7"
+            disabled
+          >
+            Quest 07
+          </button>
+
+          <button
+            class="quest-button locked"
+            id="questMapButton8"
+            type="button"
+            data-quest="8"
+            disabled
+          >
+            Quest 08
+          </button>
+
         </div>
 
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 01
+         ======================================== -->
+
+    <section
+      id="scene-quest-1"
+      class="game-scene quest-scene"
+      data-scene="quest-1"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 01 / 08
+        </p>
+
+        <h2>
+          The Adventure Begins
+        </h2>
+
+        <p id="quest1Question">
+          Quest question will appear here.
+        </p>
+
         <div
-          id="gameGround"
-          class="game-ground"
-        ></div>
+          id="quest1Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest1Feedback"
+          class="quest-feedback"
+        ></p>
 
       </div>
 
-      <div class="game-controls">
+    </section>
+
+
+    <!-- ========================================
+         QUEST 02
+         ======================================== -->
+
+    <section
+      id="scene-quest-2"
+      class="game-scene quest-scene"
+      data-scene="quest-2"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 02 / 08
+        </p>
+
+        <h2>
+          Memory Check
+        </h2>
+
+        <p id="quest2Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest2Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest2Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 03
+         ======================================== -->
+
+    <section
+      id="scene-quest-3"
+      class="game-scene quest-scene"
+      data-scene="quest-3"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 03 / 08
+        </p>
+
+        <h2>
+          Chihuahua Test
+        </h2>
+
+        <p id="quest3Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest3Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest3Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 04
+         ======================================== -->
+
+    <section
+      id="scene-quest-4"
+      class="game-scene quest-scene"
+      data-scene="quest-4"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 04 / 08
+        </p>
+
+        <h2>
+          Twenty
+        </h2>
+
+        <p id="quest4Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest4Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest4Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 05
+         ======================================== -->
+
+    <section
+      id="scene-quest-5"
+      class="game-scene quest-scene"
+      data-scene="quest-5"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 05 / 08
+        </p>
+
+        <h2>
+          Choose Your Way
+        </h2>
+
+        <p id="quest5Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest5Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest5Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 06
+         ======================================== -->
+
+    <section
+      id="scene-quest-6"
+      class="game-scene quest-scene"
+      data-scene="quest-6"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 06 / 08
+        </p>
+
+        <h2>
+          The Lucky Number
+        </h2>
+
+        <p id="quest6Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest6Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest6Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 07
+         ======================================== -->
+
+    <section
+      id="scene-quest-7"
+      class="game-scene quest-scene"
+      data-scene="quest-7"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 07 / 08
+        </p>
+
+        <h2>
+          Almost There
+        </h2>
+
+        <p id="quest7Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest7Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest7Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         QUEST 08
+         ======================================== -->
+
+    <section
+      id="scene-quest-8"
+      class="game-scene quest-scene"
+      data-scene="quest-8"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="quest-number">
+          QUEST 08 / 08
+        </p>
+
+        <h2>
+          The Final Door
+        </h2>
+
+        <p id="quest8Question">
+          Quest question will appear here.
+        </p>
+
+        <div
+          id="quest8Answers"
+          class="answer-container"
+        >
+        </div>
+
+        <p
+          id="quest8Feedback"
+          class="quest-feedback"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         SCENE 06 — MINI GAME
+         ======================================== -->
+
+    <section
+      id="scene-mini-game"
+      class="game-scene"
+      data-scene="mini-game"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          SPECIAL CHALLENGE
+        </p>
+
+        <h2>
+          The 20.0806 Run
+        </h2>
+
+        <p>
+          Reach the birthday number.
+        </p>
+
+        <p class="target-score">
+          Target: <strong>20.0806</strong>
+        </p>
+
+        <div
+          id="runnerGame"
+          class="runner-game"
+        >
+
+          <div
+            id="gameScore"
+            class="game-score"
+          >
+            Score: 0
+          </div>
+
+          <div
+            id="gameCharacter"
+            class="game-character"
+          >
+            🐕
+          </div>
+
+          <div
+            id="gameObstacle"
+            class="game-obstacle"
+          >
+            🌵
+          </div>
+
+          <div
+            id="gameGround"
+            class="game-ground"
+          >
+          </div>
+
+        </div>
+
+        <div class="game-controls">
+
+          <button
+            id="jumpButton"
+            type="button"
+          >
+            JUMP
+          </button>
+
+          <button
+            id="startMiniGameButton"
+            type="button"
+          >
+            Start Game
+          </button>
+
+          <button
+            id="restartMiniGameButton"
+            type="button"
+            hidden
+          >
+            Try Again
+          </button>
+
+        </div>
+
+        <p
+          id="miniGameMessage"
+          class="game-message"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         SCENE 07 — GIFT COLLECTION
+         ======================================== -->
+
+    <section
+      id="scene-gifts"
+      class="game-scene"
+      data-scene="gifts"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          YOU MADE IT
+        </p>
+
+        <h2>
+          Your Birthday Gifts
+        </h2>
+
+        <p>
+          You unlocked them one by one.
+        </p>
+
+        <div
+          id="giftCollection"
+          class="gift-collection"
+        >
+
+          <button
+            class="gift-button locked"
+            id="gift1"
+            type="button"
+            disabled
+          >
+            🎁 Gift 01
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift2"
+            type="button"
+            disabled
+          >
+            🎁 Gift 02
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift3"
+            type="button"
+            disabled
+          >
+            🎁 Gift 03
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift4"
+            type="button"
+            disabled
+          >
+            🎁 Gift 04
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift5"
+            type="button"
+            disabled
+          >
+            🎁 Gift 05
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift6"
+            type="button"
+            disabled
+          >
+            🎁 Gift 06
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift7"
+            type="button"
+            disabled
+          >
+            🎁 Gift 07
+          </button>
+
+          <button
+            class="gift-button locked"
+            id="gift8"
+            type="button"
+            disabled
+          >
+            🎁 Gift 08
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         GIFT MESSAGE
+         ======================================== -->
+
+    <section
+      id="scene-gift-message"
+      class="game-scene"
+      data-scene="gift-message"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p
+          id="giftNumber"
+          class="gift-number"
+        >
+          Gift
+        </p>
+
+        <h2
+          id="giftTitle"
+        >
+          A little something for you.
+        </h2>
+
+        <div
+          id="giftMessage"
+          class="gift-message"
+        >
+        </div>
 
         <button
-          id="jumpButton"
+          id="closeGiftButton"
           type="button"
         >
-          JUMP
-        </button>
-
-        <button
-          id="startMiniGameButton"
-          type="button"
-        >
-          Start Game
-        </button>
-
-        <button
-          id="restartMiniGameButton"
-          type="button"
-          hidden
-        >
-          Try Again
+          Close Gift
         </button>
 
       </div>
 
-      <p
-        id="miniGameMessage"
-        class="game-message"
-      ></p>
-
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ==============================
-       GIFTS
-       ============================== -->
+    <!-- ========================================
+         BIRTHDAY MESSAGE — PAGE 01
+         ======================================== -->
 
-  <section
-    id="scene-gifts"
-    class="game-scene"
-    data-scene="gifts"
-    hidden
-  >
+    <section
+      id="scene-message-one"
+      class="game-scene message-scene"
+      data-scene="message-one"
+      hidden
+    >
 
-    <div class="scene-content">
+      <div class="scene-content">
 
-      <p class="scene-label">
-        YOU MADE IT
-      </p>
+        <p class="scene-label">
+          A FEW WORDS FROM ME
+        </p>
 
-      <h2>
-        Your Birthday Gifts
-      </h2>
+        <h2>
+          Happy Birthday, Stella Halim
+        </h2>
 
-      <p>
-        You unlocked them one by one.
-      </p>
+        <h3>
+          My Chihuahua
+        </h3>
 
-      <div
-        id="giftCollection"
-        class="gift-collection"
-      >
+        <div class="birthday-letter">
 
-        <button
-          class="gift-button locked"
-          id="gift1"
-          type="button"
-          disabled
-        >
-          🎁 Gift 01
-        </button>
+          <p>
+            you're 20 now, and i just want to leave you with some words for this new part of your life.
+            getting older means there are more things to think about, more decisions to make,
+            and sometimes you just have to figure things out on your own.
+            life doesn't always give you a clear answer, and that's okay.
+          </p>
 
-        <button
-          class="gift-button locked"
-          id="gift2"
-          type="button"
-          disabled
-        >
-          🎁 Gift 02
-        </button>
+          <p>
+            i hope you don't put too much pressure on yourself to have everything figured out already.
+            you're still learning.
+            you're still finding out what you like, what you don't like, what you want,
+            and what kind of person you want to become.
+            there's nothing wrong with changing your mind along the way.
+            life isn't something you have to understand all at once.
+          </p>
 
-        <button
-          class="gift-button locked"
-          id="gift3"
-          type="button"
-          disabled
-        >
-          🎁 Gift 03
-        </button>
+          <p>
+            you're going to make mistakes, and some of them might hurt.
+            some decisions won't turn out the way you expected,
+            and sometimes you'll work hard for something and still not get it.
+            when that happens, don't let it make you think you're not good enough.
+            take the lesson, accept what happened, and keep going.
+            you don't have to be perfect to move forward.
+          </p>
 
-        <button
-          class="gift-button locked"
-          id="gift4"
-          type="button"
-          disabled
-        >
-          🎁 Gift 04
-        </button>
+          <p>
+            there will also be times when you look at other people and feel like they're already ahead of you.
+            maybe they have a better job, more money, a clearer future,
+            or they seem like they already know what they're doing.
+            don't let that make you feel like you're behind.
+            everyone has their own timing,
+            and honestly, most people are still figuring things out too.
+            you don't have to compete with anyone.
+            just focus on building your own life.
+          </p>
+
+        </div>
 
         <button
-          class="gift-button locked"
-          id="gift5"
+          id="messagePageOneButton"
           type="button"
-          disabled
         >
-          🎁 Gift 05
-        </button>
-
-        <button
-          class="gift-button locked"
-          id="gift6"
-          type="button"
-          disabled
-        >
-          🎁 Gift 06
-        </button>
-
-        <button
-          class="gift-button locked"
-          id="gift7"
-          type="button"
-          disabled
-        >
-          🎁 Gift 07
-        </button>
-
-        <button
-          class="gift-button locked"
-          id="gift8"
-          type="button"
-          disabled
-        >
-          🎁 Gift 08
+          Continue
         </button>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ==============================
-       GIFT MESSAGE
-       ============================== -->
+    <!-- ========================================
+         BIRTHDAY MESSAGE — PAGE 02
+         ======================================== -->
 
-  <section
-    id="scene-gift-message"
-    class="game-scene"
-    data-scene="gift-message"
-    hidden
-  >
+    <section
+      id="scene-message-two"
+      class="game-scene message-scene"
+      data-scene="message-two"
+      hidden
+    >
 
-    <div class="scene-content">
+      <div class="scene-content">
 
-      <p
-        id="giftNumber"
-        class="gift-number"
-      >
-        Gift
-      </p>
+        <div class="birthday-letter">
 
-      <h2 id="giftTitle">
-        A little something for you.
-      </h2>
+          <p>
+            as you get older, learning how to stand on your own becomes important.
+            learn how to make your own decisions,
+            take responsibility when you're wrong,
+            know when to say no,
+            and know when something isn't good for you anymore.
+            you don't always have to explain yourself to everyone.
+            sometimes you just need to know what's right for you
+            and have the courage to follow it.
+          </p>
 
-      <div
-        id="giftMessage"
-        class="gift-message"
-      ></div>
+          <p>
+            and don't think being strong means you can't be tired or confused.
+            you're allowed to have bad days.
+            you're allowed to feel lost sometimes.
+            you're allowed to take a break when things become too much.
+            being strong doesn't mean pretending everything is okay.
+            sometimes being strong is simply getting yourself back up
+            and continuing after a difficult day.
+          </p>
 
-      <button
-        id="closeGiftButton"
-        type="button"
-      >
-        Close Gift
-      </button>
+          <p>
+            life really does have different seasons.
+            sometimes things will be good,
+            sometimes things will be difficult,
+            and sometimes nothing will seem to make sense.
+            but none of those moments last forever.
+            you'll grow,
+            things will change,
+            and you'll understand some things later
+            that you can't understand right now.
+          </p>
 
-    </div>
+          <p>
+            so my chihuahua, take your time.
+            don't rush yourself just because you think you should already know what you're doing.
+            learn things properly,
+            make mistakes,
+            try again,
+            work for what you want,
+            and don't be afraid to start over when something isn't right.
+          </p>
 
-  </section>
+          <p>
+            there are still so many things you haven't experienced yet.
+            there are places you haven't seen,
+            things you haven't learned,
+            and parts of yourself you haven't discovered yet.
+            you don't need to know exactly where everything is going.
+            just keep moving and keep becoming better in your own way.
+          </p>
 
+          <p>
+            when life gets difficult,
+            don't forget that one bad day is just one bad day.
+            one mistake is just one mistake.
+            one failure doesn't decide what your whole life is going to be.
+          </p>
 
-  <!-- ==============================
-       BIRTHDAY MESSAGE — PAGE 01
-       ============================== -->
+          <p>
+            i hope you grow into someone who is strong but still kind,
+            independent but still knows when to listen,
+            confident but still humble,
+            and someone who can look back at herself
+            and know that she didn't give up when things got hard.
+          </p>
 
-  <section
-    id="scene-message-one"
-    class="game-scene message-scene"
-    data-scene="message-one"
-    hidden
-  >
+        </div>
 
-    <div class="scene-content">
-
-      <p class="scene-label">
-        A FEW WORDS FROM ME
-      </p>
-
-      <h2>
-        Happy Birthday, Stella Halim
-      </h2>
-
-      <h3>
-        My Chihuahua
-      </h3>
-
-      <div class="birthday-letter">
-
-        <p>
-          you're 20 now, and i just want to leave you with some words for this new part of your life.
-          getting older means there are more things to think about, more decisions to make,
-          and sometimes you just have to figure things out on your own.
-          life doesn't always give you a clear answer, and that's okay.
-        </p>
-
-        <p>
-          i hope you don't put too much pressure on yourself to have everything figured out already.
-          you're still learning.
-          you're still finding out what you like, what you don't like, what you want,
-          and what kind of person you want to become.
-          there's nothing wrong with changing your mind along the way.
-          life isn't something you have to understand all at once.
-        </p>
-
-        <p>
-          you're going to make mistakes, and some of them might hurt.
-          some decisions won't turn out the way you expected,
-          and sometimes you'll work hard for something and still not get it.
-          when that happens, don't let it make you think you're not good enough.
-          take the lesson, accept what happened, and keep going.
-          you don't have to be perfect to move forward.
-        </p>
-
-        <p>
-          there will also be times when you look at other people and feel like they're already ahead of you.
-          maybe they have a better job, more money, a clearer future,
-          or they seem like they already know what they're doing.
-          don't let that make you feel like you're behind.
-          everyone has their own timing,
-          and honestly, most people are still figuring things out too.
-          you don't have to compete with anyone.
-          just focus on building your own life.
-        </p>
-
-      </div>
-
-      <button
-        id="messagePageOneButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       BIRTHDAY MESSAGE — PAGE 02
-       ============================== -->
-
-  <section
-    id="scene-message-two"
-    class="game-scene message-scene"
-    data-scene="message-two"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <div class="birthday-letter">
-
-        <p>
-          as you get older, learning how to stand on your own becomes important.
-          learn how to make your own decisions,
-          take responsibility when you're wrong,
-          know when to say no,
-          and know when something isn't good for you anymore.
-          you don't always have to explain yourself to everyone.
-          sometimes you just need to know what's right for you
-          and have the courage to follow it.
-        </p>
-
-        <p>
-          and don't think being strong means you can't be tired or confused.
-          you're allowed to have bad days.
-          you're allowed to feel lost sometimes.
-          you're allowed to take a break when things become too much.
-          being strong doesn't mean pretending everything is okay.
-          sometimes being strong is simply getting yourself back up
-          and continuing after a difficult day.
-        </p>
-
-        <p>
-          life really does have different seasons.
-          sometimes things will be good,
-          sometimes things will be difficult,
-          and sometimes nothing will seem to make sense.
-          but none of those moments last forever.
-          you'll grow,
-          things will change,
-          and you'll understand some things later
-          that you can't understand right now.
-        </p>
-
-        <p>
-          so my chihuahua, take your time.
-          don't rush yourself just because you think you should already know what you're doing.
-          learn things properly,
-          make mistakes,
-          try again,
-          work for what you want,
-          and don't be afraid to start over when something isn't right.
-        </p>
-
-        <p>
-          there are still so many things you haven't experienced yet.
-          there are places you haven't seen,
-          things you haven't learned,
-          and parts of yourself you haven't discovered yet.
-          you don't need to know exactly where everything is going.
-          just keep moving and keep becoming better in your own way.
-        </p>
-
-        <p>
-          when life gets difficult,
-          don't forget that one bad day is just one bad day.
-          one mistake is just one mistake.
-          one failure doesn't decide what your whole life is going to be.
-        </p>
-
-        <p>
-          i hope you grow into someone who is strong but still kind,
-          independent but still knows when to listen,
-          confident but still humble,
-          and someone who can look back at herself
-          and know that she didn't give up when things got hard.
-        </p>
-
-      </div>
-
-      <button
-        id="messagePageTwoButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       BIBLE VERSE
-       ============================== -->
-
-  <section
-    id="scene-bible-verse"
-    class="game-scene"
-    data-scene="bible-verse"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <p class="scene-label">
-        ONE LAST THING
-      </p>
-
-      <h2>
-        Ecclesiastes 3:1
-      </h2>
-
-      <blockquote>
-        To everything there is a season,
-        and a time to every purpose under the heaven.
-      </blockquote>
-
-      <p>
-        Take your time.
-        Life has different seasons.
-      </p>
-
-      <button
-        id="bibleVerseContinueButton"
-        type="button"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==============================
-       FINAL SCENE
-       ============================== -->
-
-  <section
-    id="scene-final"
-    class="game-scene"
-    data-scene="final"
-    hidden
-  >
-
-    <div class="scene-content">
-
-      <div class="final-photo-frame">
-
-        <img
-          id="finalPhoto"
-          src="assets/stella-photo-1.jpg"
-          alt="Stella"
+        <button
+          id="messagePageTwoButton"
+          type="button"
         >
+          Continue
+        </button>
 
       </div>
 
-      <p class="final-date">
-        8 August 2026
-      </p>
-
-      <h1>
-        Happy Birthday, Stella.
-      </h1>
-
-      <p class="final-age">
-        20 years old.
-      </p>
-
-      <p class="final-message">
-        Take care of yourself, Chihuahua.
-      </p>
-
-      <p class="final-message">
-        Keep going.
-        Keep learning.
-        Keep becoming yourself.
-      </p>
-
-      <p class="final-message">
-        i love you 2in1, and it's always be.
-      </p>
-
-      <p class="final-signature">
-        from me
-      </p>
-
-    </div>
-
-  </section>
+    </section>
 
 
-</main>
+    <!-- ========================================
+         BIBLE VERSE
+         ======================================== -->
+
+    <section
+      id="scene-bible-verse"
+      class="game-scene"
+      data-scene="bible-verse"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <p class="scene-label">
+          ONE LAST THING
+        </p>
+
+        <h2>
+          Ecclesiastes 3:1
+        </h2>
+
+        <blockquote>
+          To everything there is a season,
+          and a time to every purpose under the heaven.
+        </blockquote>
+
+        <p>
+          Take your time.
+          Life has different seasons.
+        </p>
+
+        <button
+          id="bibleVerseContinueButton"
+          type="button"
+        >
+          Continue
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         FINAL SCENE
+         ======================================== -->
+
+    <section
+      id="scene-final"
+      class="game-scene"
+      data-scene="final"
+      hidden
+    >
+
+      <div class="scene-content">
+
+        <div class="final-photo-frame">
+
+          <img
+            id="finalPhoto"
+            src="assets/stella-photo-1.jpg"
+            alt="Stella"
+          >
+
+        </div>
+
+        <p class="final-date">
+          8 August 2026
+        </p>
+
+        <h1>
+          Happy Birthday, Stella.
+        </h1>
+
+        <p class="final-age">
+          20 years old.
+        </p>
+
+        <p class="final-message">
+          Take care of yourself, Chihuahua.
+        </p>
+
+        <p class="final-message">
+          Keep going.
+          Keep learning.
+          Keep becoming yourself.
+        </p>
+
+        <p class="final-message">
+          i love you 2in1, and it's always be.
+        </p>
+
+        <p class="final-signature">
+          — from me
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+</body>
+</html>
